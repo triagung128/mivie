@@ -1,0 +1,29 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "poster_path": "/path.jpg",
+      "popularity": 2.3,
+      "id": 1,
+      "backdrop_path": "/path.jpg",
+      "vote_average": 8.0,
+      "overview": "Overview",
+      "first_air_date": "2022-10-10",
+      "origin_country": [
+          "en", 
+          "id"
+      ],
+      "genre_ids": [
+          1,
+          2,
+          3
+      ],
+      "original_language": "Original Language",
+      "vote_count": 230,
+      "name": "Name",
+      "original_name": "Original Name"
+    }
+  ],
+  "total_results": 192,
+  "total_pages": 10
+}
