@@ -1,7 +1,8 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/common/utils.dart';
+import 'package:ditonton/presentation/pages/movies/movie_detail_page.dart';
 import 'package:ditonton/presentation/provider/movies/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
+import 'package:ditonton/presentation/widgets/card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +52,18 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = data.watchlistMovies[index];
-                  return MovieCard(movie);
+                  return CardList(
+                    title: movie.title ?? '-',
+                    overview: movie.overview ?? '-',
+                    posterPath: '${movie.posterPath}',
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        MovieDetailPage.ROUTE_NAME,
+                        arguments: movie.id,
+                      );
+                    },
+                  );
                 },
                 itemCount: data.watchlistMovies.length,
               );

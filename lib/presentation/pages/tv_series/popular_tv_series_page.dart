@@ -1,35 +1,34 @@
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/pages/movies/movie_detail_page.dart';
-import 'package:ditonton/presentation/provider/movies/popular_movies_notifier.dart';
+import 'package:ditonton/presentation/provider/tv_series/popular_tv_series_notifier.dart';
 import 'package:ditonton/presentation/widgets/card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PopularMoviesPage extends StatefulWidget {
-  static const ROUTE_NAME = '/popular-movie';
+class PopularTvSeriesPage extends StatefulWidget {
+  static const ROUTE_NAME = '/popular-tv-series';
 
   @override
-  _PopularMoviesPageState createState() => _PopularMoviesPageState();
+  _PopularTvSeriesPageState createState() => _PopularTvSeriesPageState();
 }
 
-class _PopularMoviesPageState extends State<PopularMoviesPage> {
+class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
-        Provider.of<PopularMoviesNotifier>(context, listen: false)
-            .fetchPopularMovies());
+        Provider.of<PopularTvSeriesNotifier>(context, listen: false)
+            .fetchPopularTvSeries());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular Movies'),
+        title: Text('Popular TV Series'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularMoviesNotifier>(
+        child: Consumer<PopularTvSeriesNotifier>(
           builder: (context, data, child) {
             if (data.state == RequestState.Loading) {
               return Center(
@@ -38,21 +37,21 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
             } else if (data.state == RequestState.Loaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = data.movies[index];
+                  final tvSeries = data.tvSeries[index];
                   return CardList(
-                    title: movie.title ?? '-',
-                    overview: movie.overview ?? '-',
-                    posterPath: '${movie.posterPath}',
+                    title: tvSeries.name,
+                    overview: tvSeries.overview,
+                    posterPath: '${tvSeries.posterPath}',
                     onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        MovieDetailPage.ROUTE_NAME,
-                        arguments: movie.id,
-                      );
+                      // Navigator.pushNamed(
+                      //   context,
+                      //   MovieDetailPage.ROUTE_NAME,
+                      //   arguments: movie.id,
+                      // );
                     },
                   );
                 },
-                itemCount: data.movies.length,
+                itemCount: data.tvSeries.length,
               );
             } else {
               return Center(

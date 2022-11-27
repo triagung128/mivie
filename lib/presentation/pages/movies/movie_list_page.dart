@@ -1,23 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/presentation/pages/movies/about_page.dart';
 import 'package:ditonton/presentation/pages/movies/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/movies/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/movies/search_page.dart';
 import 'package:ditonton/presentation/pages/movies/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/pages/movies/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movies/movie_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeMoviePage extends StatefulWidget {
+class MovieListPage extends StatefulWidget {
   @override
-  _HomeMoviePageState createState() => _HomeMoviePageState();
+  _MovieListPageState createState() => _MovieListPageState();
 }
 
-class _HomeMoviePageState extends State<HomeMoviePage> {
+class _MovieListPageState extends State<MovieListPage> {
   @override
   void initState() {
     super.initState();
@@ -31,42 +29,8 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: Column(
-          children: [
-            UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/circle-g.png'),
-              ),
-              accountName: Text('Ditonton'),
-              accountEmail: Text('ditonton@dicoding.com'),
-            ),
-            ListTile(
-              leading: Icon(Icons.movie),
-              title: Text('Movies'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.save_alt),
-              title: Text('Watchlist'),
-              onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
-              },
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
-              },
-              leading: Icon(Icons.info_outline),
-              title: Text('About'),
-            ),
-          ],
-        ),
-      ),
       appBar: AppBar(
-        title: Text('Ditonton'),
+        title: Text('Movies'),
         actions: [
           IconButton(
             onPressed: () {

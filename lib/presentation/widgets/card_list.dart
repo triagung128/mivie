@@ -1,26 +1,26 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/presentation/pages/movies/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 
-class MovieCard extends StatelessWidget {
-  final Movie movie;
+class CardList extends StatelessWidget {
+  final String title;
+  final String overview;
+  final String posterPath;
+  final Function() onTap;
 
-  MovieCard(this.movie);
+  CardList({
+    required this.title,
+    required this.overview,
+    required this.posterPath,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(
-            context,
-            MovieDetailPage.ROUTE_NAME,
-            arguments: movie.id,
-          );
-        },
+        onTap: onTap,
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
@@ -35,14 +35,14 @@ class MovieCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movie.title ?? '-',
+                      title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
                     SizedBox(height: 16),
                     Text(
-                      movie.overview ?? '-',
+                      overview,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -57,7 +57,7 @@ class MovieCard extends StatelessWidget {
               ),
               child: ClipRRect(
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: '$BASE_IMAGE_URL$posterPath',
                   width: 80,
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),
