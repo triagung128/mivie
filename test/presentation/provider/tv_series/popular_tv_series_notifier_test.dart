@@ -8,7 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'popular_tv_series_test.mocks.dart';
+import 'popular_tv_series_notifier_test.mocks.dart';
 
 @GenerateMocks([GetPopularTvSeries])
 void main() {
