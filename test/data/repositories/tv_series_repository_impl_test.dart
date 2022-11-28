@@ -23,37 +23,37 @@ void main() {
   });
 
   final tTvSeriesModel = TvSeriesModel(
-    posterPath: '/vC324sdfcS313vh9QXwijLIHPJp.jpg',
-    popularity: 47.432451,
-    id: 31917,
-    backdropPath: '/rQGBjWNveVeF8f2PGRtS85w9o9r.jpg',
-    voteAverage: 5.04,
+    posterPath: '/jIhL6mlT7AblhbHJgEoiBIOUVl1.jpg',
+    popularity: 29.780826,
+    id: 1399,
+    backdropPath: '/mUkuc2wyV9dHLG0D0Loaw5pO2s8.jpg',
+    voteAverage: 7.91,
     overview:
-        'Based on the Pretty Little Liars series of young adult novels by Sara Shepard, the series follows the lives of four girls — Spencer, Hanna, Aria, and Emily — whose clique falls apart after the disappearance of their queen bee, Alison. One year later, they begin receiving messages from someone using the name \"A\" who threatens to expose their secrets — including long-hidden ones they thought only Alison knew.',
-    firstAirDate: '2010-06-08',
+        'Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night\'s Watch, is all that stands between the realms of men and icy horrors beyond.',
+    firstAirDate: '2011-04-17',
     originCountry: ['US'],
-    genreIds: [18, 9648],
+    genreIds: [10765, 10759, 18],
     originalLanguage: 'en',
-    voteCount: 133,
-    name: 'Pretty Little Liars',
-    originalName: 'Pretty Little Liars',
+    voteCount: 1172,
+    name: 'Game of Thrones',
+    originalName: 'Game of Thrones',
   );
 
   final tTvSeries = TvSeries(
-    posterPath: '/vC324sdfcS313vh9QXwijLIHPJp.jpg',
-    popularity: 47.432451,
-    id: 31917,
-    backdropPath: '/rQGBjWNveVeF8f2PGRtS85w9o9r.jpg',
-    voteAverage: 5.04,
+    posterPath: '/jIhL6mlT7AblhbHJgEoiBIOUVl1.jpg',
+    popularity: 29.780826,
+    id: 1399,
+    backdropPath: '/mUkuc2wyV9dHLG0D0Loaw5pO2s8.jpg',
+    voteAverage: 7.91,
     overview:
-        'Based on the Pretty Little Liars series of young adult novels by Sara Shepard, the series follows the lives of four girls — Spencer, Hanna, Aria, and Emily — whose clique falls apart after the disappearance of their queen bee, Alison. One year later, they begin receiving messages from someone using the name \"A\" who threatens to expose their secrets — including long-hidden ones they thought only Alison knew.',
-    firstAirDate: '2010-06-08',
+        'Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night\'s Watch, is all that stands between the realms of men and icy horrors beyond.',
+    firstAirDate: '2011-04-17',
     originCountry: ['US'],
-    genreIds: [18, 9648],
+    genreIds: [10765, 10759, 18],
     originalLanguage: 'en',
-    voteCount: 133,
-    name: 'Pretty Little Liars',
-    originalName: 'Pretty Little Liars',
+    voteCount: 1172,
+    name: 'Game of Thrones',
+    originalName: 'Game of Thrones',
   );
 
   final tTvSeriesModelList = <TvSeriesModel>[tTvSeriesModel];
@@ -191,6 +191,47 @@ void main() {
         result,
         equals(Left(ConnectionFailure('Failed to connect to the network'))),
       );
+    });
+  });
+
+  group('Search TV Series', () {
+    final tQuery = 'game of thrones';
+
+    test('should return tv series list when call to data source is successful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.searchTvSeries(tQuery))
+          .thenAnswer((_) async => tTvSeriesModelList);
+      // act
+      final result = await repository.searchTvSeries(tQuery);
+      // assert
+      /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, tTvSeriesList);
+    });
+
+    test('should return ServerFailure when call to data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.searchTvSeries(tQuery))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.searchTvSeries(tQuery);
+      // assert
+      expect(result, Left(ServerFailure('')));
+    });
+
+    test(
+        'should return ConnectionFailure when device is not connected to the internet',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.searchTvSeries(tQuery))
+          .thenThrow(SocketException('Failed to connect to the network'));
+      // act
+      final result = await repository.searchTvSeries(tQuery);
+      // assert
+      expect(
+          result, Left(ConnectionFailure('Failed to connect to the network')));
     });
   });
 }

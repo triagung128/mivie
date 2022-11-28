@@ -6,4 +6,5 @@ abstract class TvSeriesRepository {
   Future<Either<Failure, List<TvSeries>>> getNowPlayingTvSeries();
   Future<Either<Failure, List<TvSeries>>> getPopularTvSeries();
   Future<Either<Failure, List<TvSeries>>> getTopRatedTvSeries();
+  Future<Either<Failure, List<TvSeries>>> searchTvSeries(String query);
 }
