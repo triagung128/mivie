@@ -3,9 +3,15 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
+import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/data/models/season_model.dart';
+import 'package:ditonton/data/models/tv_series_detail_model.dart';
 import 'package:ditonton/data/models/tv_series_model.dart';
 import 'package:ditonton/data/repositories/tv_series_repository_impl.dart';
+import 'package:ditonton/domain/entities/genre.dart';
+import 'package:ditonton/domain/entities/season.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
+import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -232,6 +238,160 @@ void main() {
       // assert
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+  });
+
+  group('Get TV Series Detail', () {
+    final tId = 1;
+    final tTvSeriesResponse = TvSeriesDetailResponse(
+      backdropPath: 'backdropPath',
+      firstAirDate: '2022-10-10',
+      genres: [GenreModel(id: 1, name: 'Drama')],
+      homepage: 'https://google.com',
+      id: 1,
+      inProduction: false,
+      languages: ['en'],
+      lastAirDate: '2022-10-10',
+      name: 'name',
+      numberOfEpisodes: 12,
+      numberOfSeasons: 6,
+      originCountry: ['US'],
+      originalLanguage: 'originalLanguage',
+      originalName: 'originalName',
+      overview: 'overview',
+      popularity: 369.0,
+      posterPath: 'posterPath',
+      seasons: [
+        SeasonModel(
+          airDate: '2022-10-10',
+          episodeCount: 15,
+          id: 1,
+          name: 'name',
+          overview: 'overview',
+          posterPath: 'posterPath',
+          seasonNumber: 10,
+        ),
+      ],
+      status: 'status',
+      tagline: 'tagline',
+      type: 'type',
+      voteAverage: 8.3,
+      voteCount: 1500,
+    );
+
+    final testTvSeriesDetail = TvSeriesDetail(
+      backdropPath: 'backdropPath',
+      firstAirDate: '2022-10-10',
+      genres: [Genre(id: 1, name: 'Drama')],
+      id: 1,
+      lastAirDate: '2022-10-10',
+      name: 'name',
+      numberOfEpisodes: 12,
+      numberOfSeasons: 3,
+      overview: 'overview',
+      posterPath: 'posterPath',
+      seasons: [
+        Season(
+          airDate: '2022-10-10',
+          episodeCount: 15,
+          id: 1,
+          name: 'name',
+          overview: 'overview',
+          posterPath: 'posterPath',
+          seasonNumber: 10,
+        ),
+      ],
+      status: 'status',
+      tagline: 'tagline',
+      type: 'type',
+      voteAverage: 8.3,
+      voteCount: 1200,
+    );
+
+    test(
+        'should return TV Series data when the call to remote data source is successful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTvSeriesDetail(tId))
+          .thenAnswer((_) async => tTvSeriesResponse);
+      // act
+      final result = await repository.getTvSeriesDetail(tId);
+      // assert
+      verify(mockRemoteDataSource.getTvSeriesDetail(tId));
+      expect(result, equals(Right(testTvSeriesDetail)));
+    });
+
+    test(
+        'should return Server Failure when the call to remote data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTvSeriesDetail(tId))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.getTvSeriesDetail(tId);
+      // assert
+      verify(mockRemoteDataSource.getTvSeriesDetail(tId));
+      expect(result, equals(Left(ServerFailure(''))));
+    });
+
+    test(
+        'should return connection failure when the device is not connected to internet',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTvSeriesDetail(tId))
+          .thenThrow(SocketException('Failed to connect to the network'));
+      // act
+      final result = await repository.getTvSeriesDetail(tId);
+      // assert
+      verify(mockRemoteDataSource.getTvSeriesDetail(tId));
+      expect(result,
+          equals(Left(ConnectionFailure('Failed to connect to the network'))));
+    });
+  });
+
+  group('Get TV Series Recommendations', () {
+    final tTvSeriesList = <TvSeriesModel>[];
+    final tId = 1;
+
+    test('should return data (tv series list) when the call is successful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTvSeriesRecommendations(tId))
+          .thenAnswer((_) async => tTvSeriesList);
+      // act
+      final result = await repository.getTvSeriesRecommendations(tId);
+      // assert
+      verify(mockRemoteDataSource.getTvSeriesRecommendations(tId));
+      /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, equals(tTvSeriesList));
+    });
+
+    test(
+        'should return server failure when call to remote data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTvSeriesRecommendations(tId))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.getTvSeriesRecommendations(tId);
+      // assertbuild runner
+      verify(mockRemoteDataSource.getTvSeriesRecommendations(tId));
+      expect(result, equals(Left(ServerFailure(''))));
+    });
+
+    test(
+        'should return connection failure when the device is not connected to the internet',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTvSeriesRecommendations(tId))
+          .thenThrow(SocketException('Failed to connect to the network'));
+      // act
+      final result = await repository.getTvSeriesRecommendations(tId);
+      // assert
+      verify(mockRemoteDataSource.getTvSeriesRecommendations(tId));
+      expect(result,
+          equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
   });
 }

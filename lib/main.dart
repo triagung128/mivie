@@ -12,6 +12,7 @@ import 'package:ditonton/presentation/pages/tv_series/now_playing_tv_series_page
 import 'package:ditonton/presentation/pages/tv_series/popular_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/search_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/top_rated_tv_series_page.dart';
+import 'package:ditonton/presentation/pages/tv_series/tv_series_detail_page.dart';
 import 'package:ditonton/presentation/provider/movies/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movies/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movies/movie_search_notifier.dart';
@@ -21,9 +22,9 @@ import 'package:ditonton/presentation/provider/movies/watchlist_movie_notifier.d
 import 'package:ditonton/presentation/provider/tv_series/now_playing_tv_series_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/popular_tv_series_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/top_rated_tv_series_notifier.dart';
+import 'package:ditonton/presentation/provider/tv_series/tv_series_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/tv_series_list_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series/tv_series_search_notifier.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
@@ -71,6 +72,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesSearchNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvSeriesDetailNotifier>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -110,6 +114,12 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => TopRatedTvSeriesPage());
             case SearchTvSeriesPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => SearchTvSeriesPage());
+            case TvSeriesDetailPage.ROUTE_NAME:
+              final id = settings.arguments as int;
+              return MaterialPageRoute(
+                builder: (_) => TvSeriesDetailPage(id: id),
+                settings: settings,
+              );
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
             default:

@@ -1,4 +1,5 @@
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/pages/tv_series/tv_series_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_series/popular_tv_series_notifier.dart';
 import 'package:ditonton/presentation/widgets/card_list.dart';
 import 'package:flutter/material.dart';
@@ -43,11 +44,11 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
                     overview: tvSeries.overview,
                     posterPath: '${tvSeries.posterPath}',
                     onTap: () {
-                      // Navigator.pushNamed(
-                      //   context,
-                      //   MovieDetailPage.ROUTE_NAME,
-                      //   arguments: movie.id,
-                      // );
+                      Navigator.pushNamed(
+                        context,
+                        TvSeriesDetailPage.ROUTE_NAME,
+                        arguments: tvSeries.id,
+                      );
                     },
                   );
                 },
