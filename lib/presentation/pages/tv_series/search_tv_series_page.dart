@@ -51,8 +51,8 @@ class SearchTvSeriesPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final tvSeries = data.searchResult[index];
                         return CardList(
-                          title: tvSeries.name,
-                          overview: tvSeries.overview,
+                          title: tvSeries.name ?? '-',
+                          overview: tvSeries.overview ?? '-',
                           posterPath: '${tvSeries.posterPath}',
                           onTap: () {
                             Navigator.pushNamed(

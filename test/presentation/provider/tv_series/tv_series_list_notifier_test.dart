@@ -10,6 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../dummy_data/tv_series/dummy_objects.dart';
 import 'tv_series_list_notifier_test.mocks.dart';
 
 @GenerateMocks([GetNowPlayingTvSeries, GetPopularTvSeries, GetTopRatedTvSeries])
@@ -33,22 +34,6 @@ void main() {
         listenerCallCount += 1;
       });
   });
-
-  final tTvSeries = TvSeries(
-    posterPath: 'posterPath',
-    popularity: 2.3,
-    id: 1,
-    backdropPath: 'backdropPath',
-    voteAverage: 8.1,
-    overview: 'overview',
-    firstAirDate: 'firstAirDate',
-    originCountry: ['en', 'id'],
-    genreIds: [1, 2, 3],
-    originalLanguage: 'originalLanguage',
-    voteCount: 123,
-    name: 'name',
-    originalName: 'originalName',
-  );
 
   final tTvSeriesList = <TvSeries>[tTvSeries];
 

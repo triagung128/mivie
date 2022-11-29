@@ -26,6 +26,8 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
     Future.microtask(() {
       Provider.of<TvSeriesDetailNotifier>(context, listen: false)
           .fetchTvSeriesDetail(widget.id);
+      Provider.of<TvSeriesDetailNotifier>(context, listen: false)
+          .loadWatchlistStatus(widget.id);
     });
   }
 
@@ -41,7 +43,11 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
           } else if (provider.tvSeriesState == RequestState.Loaded) {
             final tvSeries = provider.tvSeries;
             return SafeArea(
-              child: DetailContent(tvSeries, provider.tvSeriesRecommendations),
+              child: DetailContent(
+                tvSeries,
+                provider.tvSeriesRecommendations,
+                provider.isAddedToWatchlist,
+              ),
             );
           } else {
             return Text(provider.message);
@@ -55,8 +61,13 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
 class DetailContent extends StatelessWidget {
   final TvSeriesDetail tvSeries;
   final List<TvSeries> recommendations;
+  final bool isAddedWatchlist;
 
-  DetailContent(this.tvSeries, this.recommendations);
+  DetailContent(
+    this.tvSeries,
+    this.recommendations,
+    this.isAddedWatchlist,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +108,53 @@ class DetailContent extends StatelessWidget {
                             Text(
                               tvSeries.name,
                               style: kHeading5,
+                            ),
+                            ElevatedButton(
+                              onPressed: () async {
+                                if (!isAddedWatchlist) {
+                                  await Provider.of<TvSeriesDetailNotifier>(
+                                          context,
+                                          listen: false)
+                                      .addWatchlist(tvSeries);
+                                } else {
+                                  await Provider.of<TvSeriesDetailNotifier>(
+                                          context,
+                                          listen: false)
+                                      .removeFromWatchlist(tvSeries);
+                                }
+
+                                final message =
+                                    Provider.of<TvSeriesDetailNotifier>(context,
+                                            listen: false)
+                                        .watchlistMessage;
+
+                                if (message ==
+                                        TvSeriesDetailNotifier
+                                            .watchlistAddSuccessMessage ||
+                                    message ==
+                                        TvSeriesDetailNotifier
+                                            .watchlistRemoveSuccessMessage) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text(message)));
+                                } else {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          content: Text(message),
+                                        );
+                                      });
+                                }
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  isAddedWatchlist
+                                      ? Icon(Icons.check)
+                                      : Icon(Icons.add),
+                                  Text('Watchlist'),
+                                ],
+                              ),
                             ),
                             Text(
                               _showGenres(tvSeries.genres),

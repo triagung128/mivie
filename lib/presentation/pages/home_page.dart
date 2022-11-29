@@ -1,6 +1,7 @@
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/movies/movie_list_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/tv_series_list_page.dart';
+import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,6 +24,10 @@ class _HomePageState extends State<HomePage> {
       label: 'TV Series',
     ),
     BottomNavigationBarItem(
+      icon: Icon(Icons.remove_red_eye),
+      label: 'Watchlist',
+    ),
+    BottomNavigationBarItem(
       icon: Icon(Icons.info_outline),
       label: 'About',
     ),
@@ -31,6 +36,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _listWidget = [
     MovieListPage(),
     TvSeriesListPage(),
+    WatchlistPage(),
     AboutPage(),
   ];
 

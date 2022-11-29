@@ -23,7 +23,7 @@ class MovieDetail extends Equatable {
   final int id;
   final String originalTitle;
   final String overview;
-  final String posterPath;
+  final String? posterPath;
   final String releaseDate;
   final int runtime;
   final String title;

@@ -40,8 +40,8 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
                 itemBuilder: (context, index) {
                   final tvSeries = data.tvSeries[index];
                   return CardList(
-                    title: tvSeries.name,
-                    overview: tvSeries.overview,
+                    title: tvSeries.name ?? '-',
+                    overview: tvSeries.overview ?? '-',
                     posterPath: '${tvSeries.posterPath}',
                     onTap: () {
                       Navigator.pushNamed(

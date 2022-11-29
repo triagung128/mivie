@@ -14,6 +14,12 @@ import 'package:ditonton/domain/usecases/tv_series/get_tv_series_detail.dart'
     as _i4;
 import 'package:ditonton/domain/usecases/tv_series/get_tv_series_recommendations.dart'
     as _i8;
+import 'package:ditonton/domain/usecases/tv_series/get_watchlist_status_tv_series.dart'
+    as _i10;
+import 'package:ditonton/domain/usecases/tv_series/remove_watchlist_tv_series.dart'
+    as _i12;
+import 'package:ditonton/domain/usecases/tv_series/save_watchlist_tv_series.dart'
+    as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -85,4 +91,75 @@ class MockGetTvSeriesRecommendations extends _i1.Mock
                       _FakeEither_1<_i6.Failure, List<_i9.TvSeries>>(
                           this, Invocation.method(#execute, [id]))))
           as _i5.Future<_i3.Either<_i6.Failure, List<_i9.TvSeries>>>);
+}
+
+/// A class which mocks [GetWatchListStatusTvSeries].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetWatchListStatusTvSeries extends _i1.Mock
+    implements _i10.GetWatchListStatusTvSeries {
+  MockGetWatchListStatusTvSeries() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.TvSeriesRepository get repository => (super.noSuchMethod(
+          Invocation.getter(#repository),
+          returnValue:
+              _FakeTvSeriesRepository_0(this, Invocation.getter(#repository)))
+      as _i2.TvSeriesRepository);
+  @override
+  _i5.Future<bool> execute(int? id) =>
+      (super.noSuchMethod(Invocation.method(#execute, [id]),
+          returnValue: _i5.Future<bool>.value(false)) as _i5.Future<bool>);
+}
+
+/// A class which mocks [SaveWatchlistTvSeries].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSaveWatchlistTvSeries extends _i1.Mock
+    implements _i11.SaveWatchlistTvSeries {
+  MockSaveWatchlistTvSeries() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.TvSeriesRepository get repository => (super.noSuchMethod(
+          Invocation.getter(#repository),
+          returnValue:
+              _FakeTvSeriesRepository_0(this, Invocation.getter(#repository)))
+      as _i2.TvSeriesRepository);
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, String>> execute(
+          _i7.TvSeriesDetail? tvSeries) =>
+      (super.noSuchMethod(Invocation.method(#execute, [tvSeries]),
+              returnValue: _i5.Future<_i3.Either<_i6.Failure, String>>.value(
+                  _FakeEither_1<_i6.Failure, String>(
+                      this, Invocation.method(#execute, [tvSeries]))))
+          as _i5.Future<_i3.Either<_i6.Failure, String>>);
+}
+
+/// A class which mocks [RemoveWatchlistTvSeries].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRemoveWatchlistTvSeries extends _i1.Mock
+    implements _i12.RemoveWatchlistTvSeries {
+  MockRemoveWatchlistTvSeries() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.TvSeriesRepository get repository => (super.noSuchMethod(
+          Invocation.getter(#repository),
+          returnValue:
+              _FakeTvSeriesRepository_0(this, Invocation.getter(#repository)))
+      as _i2.TvSeriesRepository);
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, String>> execute(
+          _i7.TvSeriesDetail? tvSeries) =>
+      (super.noSuchMethod(Invocation.method(#execute, [tvSeries]),
+              returnValue: _i5.Future<_i3.Either<_i6.Failure, String>>.value(
+                  _FakeEither_1<_i6.Failure, String>(
+                      this, Invocation.method(#execute, [tvSeries]))))
+          as _i5.Future<_i3.Either<_i6.Failure, String>>);
 }
