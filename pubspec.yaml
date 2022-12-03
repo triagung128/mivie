@@ -34,10 +34,10 @@ dependencies:
     path: about
   core:
     path: core
-  search:
-    path: search
   tv_series:
     path: tv_series
+  movies:
+    path: movies
 
 dev_dependencies:
   flutter_test:

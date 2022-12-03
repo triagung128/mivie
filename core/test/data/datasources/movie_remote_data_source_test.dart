@@ -36,7 +36,7 @@ void main() {
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/movies/now_playing.json'), 200));
       // act
-      final result = await dataSource.getNowPlayingMovies();
+      final result = await dataSource.getNowPlaying();
       // assert
       expect(result, equals(tMovieList));
     });
@@ -49,7 +49,7 @@ void main() {
               .get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = dataSource.getNowPlayingMovies();
+      final call = dataSource.getNowPlaying();
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });
@@ -67,7 +67,7 @@ void main() {
           .thenAnswer((_) async =>
               http.Response(readJson('dummy_data/movies/popular.json'), 200));
       // act
-      final result = await dataSource.getPopularMovies();
+      final result = await dataSource.getPopular();
       // assert
       expect(result, tMovieList);
     });
@@ -79,7 +79,7 @@ void main() {
       when(mockHttpClient.get(Uri.parse('$BASE_URL/movie/popular?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = dataSource.getPopularMovies();
+      final call = dataSource.getPopular();
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });
@@ -96,7 +96,7 @@ void main() {
           .thenAnswer((_) async =>
               http.Response(readJson('dummy_data/movies/top_rated.json'), 200));
       // act
-      final result = await dataSource.getTopRatedMovies();
+      final result = await dataSource.getTopRated();
       // assert
       expect(result, tMovieList);
     });
@@ -107,7 +107,7 @@ void main() {
       when(mockHttpClient.get(Uri.parse('$BASE_URL/movie/top_rated?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = dataSource.getTopRatedMovies();
+      final call = dataSource.getTopRated();
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });
@@ -124,7 +124,7 @@ void main() {
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/movies/movie_detail.json'), 200));
       // act
-      final result = await dataSource.getMovieDetail(tId);
+      final result = await dataSource.getDetail(tId);
       // assert
       expect(result, equals(tMovieDetail));
     });
@@ -135,7 +135,7 @@ void main() {
       when(mockHttpClient.get(Uri.parse('$BASE_URL/movie/$tId?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = dataSource.getMovieDetail(tId);
+      final call = dataSource.getDetail(tId);
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });
@@ -155,7 +155,7 @@ void main() {
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/movies/movie_recommendations.json'), 200));
       // act
-      final result = await dataSource.getMovieRecommendations(tId);
+      final result = await dataSource.getRecommendation(tId);
       // assert
       expect(result, equals(tMovieList));
     });
@@ -167,7 +167,7 @@ void main() {
               .get(Uri.parse('$BASE_URL/movie/$tId/recommendations?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = dataSource.getMovieRecommendations(tId);
+      final call = dataSource.getRecommendation(tId);
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });
@@ -186,7 +186,7 @@ void main() {
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/movies/search_spiderman_movie.json'), 200));
       // act
-      final result = await dataSource.searchMovies(tQuery);
+      final result = await dataSource.search(tQuery);
       // assert
       expect(result, tSearchResult);
     });
@@ -198,7 +198,7 @@ void main() {
               .get(Uri.parse('$BASE_URL/search/movie?$API_KEY&query=$tQuery')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = dataSource.searchMovies(tQuery);
+      final call = dataSource.search(tQuery);
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });

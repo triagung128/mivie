@@ -1,5 +1,5 @@
-import 'package:core/presentation/pages/movies/watchlist_movies_page.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/presentation/pages/watchlist_movies_page.dart';
 import 'package:tv_series/presentation/pages/watchlist_tv_series_page.dart';
 
 class WatchlistPage extends StatefulWidget {

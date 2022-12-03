@@ -12,6 +12,8 @@ dependencies:
     sdk: flutter
   about:
     path: ../about
+  movies:
+    path: ../movies
   tv_series:
     path: ../tv_series
   google_fonts: ^3.0.1

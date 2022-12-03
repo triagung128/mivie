@@ -1,7 +1,7 @@
 import 'package:about/about.dart';
-import 'package:core/presentation/pages/movies/movie_list_page.dart';
 import 'package:core/presentation/pages/watchlist_page.dart';
 import 'package:flutter/material.dart';
+import 'package:movies/presentation/pages/movie_list_page.dart';
 import 'package:tv_series/presentation/pages/tv_series_list_page.dart';
 
 class HomePage extends StatefulWidget {

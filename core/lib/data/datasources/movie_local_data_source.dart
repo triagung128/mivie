@@ -5,8 +5,8 @@ import 'package:core/data/models/movie_table.dart';
 abstract class MovieLocalDataSource {
   Future<String> insertWatchlist(MovieTable movie);
   Future<String> removeWatchlist(MovieTable movie);
-  Future<MovieTable?> getMovieById(int id);
-  Future<List<MovieTable>> getWatchlistMovies();
+  Future<MovieTable?> getWatchlistById(int id);
+  Future<List<MovieTable>> getWatchlist();
 }
 
 class MovieLocalDataSourceImpl implements MovieLocalDataSource {
@@ -35,7 +35,7 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   }
 
   @override
-  Future<MovieTable?> getMovieById(int id) async {
+  Future<MovieTable?> getWatchlistById(int id) async {
     final result = await databaseHelper.getMovieById(id);
     if (result != null) {
       return MovieTable.fromMap(result);
@@ -45,7 +45,7 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   }
 
   @override
-  Future<List<MovieTable>> getWatchlistMovies() async {
+  Future<List<MovieTable>> getWatchlist() async {
     final result = await databaseHelper.getWatchlistMovies();
     return result.map((data) => MovieTable.fromMap(data)).toList();
   }
