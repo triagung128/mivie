@@ -31,7 +31,7 @@ class _MovieListPageState extends State<MovieListPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SEARCH_MOVIES_ROUTE);
+              Navigator.pushNamed(context, searchMoviesRoute);
             },
             icon: const Icon(Icons.search),
           )
@@ -49,11 +49,11 @@ class _MovieListPageState extends State<MovieListPage> {
               ),
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.nowPlayingState;
-                if (state == RequestState.Loading) {
+                if (state == RequestState.loading) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
+                } else if (state == RequestState.loaded) {
                   return MovieList(data.nowPlayingMovies);
                 } else {
                   return const Text('Failed');
@@ -61,15 +61,15 @@ class _MovieListPageState extends State<MovieListPage> {
               }),
               _buildSubHeading(
                 title: 'Popular',
-                onTap: () => Navigator.pushNamed(context, POPULAR_MOVIES_ROUTE),
+                onTap: () => Navigator.pushNamed(context, popularMoviesRoute),
               ),
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.popularMoviesState;
-                if (state == RequestState.Loading) {
+                if (state == RequestState.loading) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
+                } else if (state == RequestState.loaded) {
                   return MovieList(data.popularMovies);
                 } else {
                   return const Text('Failed');
@@ -77,16 +77,15 @@ class _MovieListPageState extends State<MovieListPage> {
               }),
               _buildSubHeading(
                 title: 'Top Rated',
-                onTap: () =>
-                    Navigator.pushNamed(context, TOP_RATED_MOVIES_ROUTE),
+                onTap: () => Navigator.pushNamed(context, topRatedMoviesRoute),
               ),
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.topRatedMoviesState;
-                if (state == RequestState.Loading) {
+                if (state == RequestState.loading) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state == RequestState.Loaded) {
+                } else if (state == RequestState.loaded) {
                   return MovieList(data.topRatedMovies);
                 } else {
                   return const Text('Failed');
@@ -143,14 +142,14 @@ class MovieList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  MOVIE_DETAIL_ROUTE,
+                  movieDetailRoute,
                   arguments: movie.id,
                 );
               },
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: '$baseImageUrl${movie.posterPath}',
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),

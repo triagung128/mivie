@@ -34,10 +34,10 @@ class _HomePageState extends State<HomePage> {
   ];
 
   final List<Widget> _listWidget = [
-    MovieListPage(),
-    TvSeriesListPage(),
-    WatchlistPage(),
-    AboutPage(),
+    const MovieListPage(),
+    const TvSeriesListPage(),
+    const WatchlistPage(),
+    const AboutPage(),
   ];
 
   void _onBottomNavTapped(int index) {

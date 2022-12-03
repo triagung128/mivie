@@ -44,7 +44,7 @@ class _NowPlayingTvSeriesPageState extends State<NowPlayingTvSeriesPage> {
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        TV_SERIES_DETAIL_ROUTE,
+                        tvSeriesDetailRoute,
                         arguments: tvSeries.id,
                       );
                     },

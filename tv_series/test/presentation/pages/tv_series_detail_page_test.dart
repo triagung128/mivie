@@ -82,7 +82,7 @@ void main() {
       'Watchlist button should display add icon when tv series not added to watchlist',
       (WidgetTester tester) async {
     when(() => mockDetailTvSeriesBloc.state)
-        .thenReturn(DetailTvSeriesHasData(tTvSeriesDetail));
+        .thenReturn(const DetailTvSeriesHasData(tTvSeriesDetail));
     when(() => mockRecommendationTvSeriesBloc.state)
         .thenReturn(const RecommendationTvSeriesHasData(<TvSeries>[]));
     when(() => mockWatchlistStatusTvSeriesBloc.state).thenReturn(
@@ -101,7 +101,7 @@ void main() {
       'Watchlist button should dispay check icon when tv series is added to wathclist',
       (WidgetTester tester) async {
     when(() => mockDetailTvSeriesBloc.state)
-        .thenReturn(DetailTvSeriesHasData(tTvSeriesDetail));
+        .thenReturn(const DetailTvSeriesHasData(tTvSeriesDetail));
     when(() => mockRecommendationTvSeriesBloc.state)
         .thenReturn(const RecommendationTvSeriesHasData(<TvSeries>[]));
     when(() => mockWatchlistStatusTvSeriesBloc.state).thenReturn(
@@ -120,7 +120,7 @@ void main() {
       'Watchlist button should display Snackbar when added to watchlist',
       (WidgetTester tester) async {
     when(() => mockDetailTvSeriesBloc.state)
-        .thenReturn(DetailTvSeriesHasData(tTvSeriesDetail));
+        .thenReturn(const DetailTvSeriesHasData(tTvSeriesDetail));
     when(() => mockRecommendationTvSeriesBloc.state)
         .thenReturn(const RecommendationTvSeriesHasData(<TvSeries>[]));
 
@@ -166,7 +166,7 @@ void main() {
       'Watchlist button should display AlertDialog when add to watchlist failed',
       (WidgetTester tester) async {
     when(() => mockDetailTvSeriesBloc.state)
-        .thenReturn(DetailTvSeriesHasData(tTvSeriesDetail));
+        .thenReturn(const DetailTvSeriesHasData(tTvSeriesDetail));
     when(() => mockRecommendationTvSeriesBloc.state)
         .thenReturn(const RecommendationTvSeriesHasData(<TvSeries>[]));
 

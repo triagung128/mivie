@@ -47,7 +47,7 @@ void main() {
     'Should emit [Loading, Error] when get popular tv series is unsuccessful',
     build: () {
       when(mockGetPopularTvSeries.execute())
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return popularTvSeriesBloc;
     },
     act: (bloc) => bloc.add(FetchPopularTvSeries()),

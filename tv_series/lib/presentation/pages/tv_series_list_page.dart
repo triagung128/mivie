@@ -33,7 +33,7 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SEARCH_TV_SERIES_ROUTE);
+              Navigator.pushNamed(context, searchTvSeriesRoute);
             },
             icon: const Icon(Icons.search),
           )
@@ -48,7 +48,7 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
               _buildSubHeading(
                 title: 'Now Playing',
                 onTap: () {
-                  Navigator.pushNamed(context, NOW_PLAYING_TV_SERIES_ROUTE);
+                  Navigator.pushNamed(context, nowPlayingTvSeriesRoute);
                 },
               ),
               BlocBuilder<NowPlayingTvSeriesBloc, NowPlayingTvSeriesState>(
@@ -67,7 +67,7 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
               _buildSubHeading(
                 title: 'Popular',
                 onTap: () {
-                  Navigator.pushNamed(context, POPULAR_TV_SERIES_ROUTE);
+                  Navigator.pushNamed(context, popularTvSeriesRoute);
                 },
               ),
               BlocBuilder<PopularTvSeriesBloc, PopularTvSeriesState>(
@@ -86,7 +86,7 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
               _buildSubHeading(
                 title: 'Top Rated',
                 onTap: () {
-                  Navigator.pushNamed(context, TOP_RATED_TV_SERIES_ROUTE);
+                  Navigator.pushNamed(context, topRatedTvSeriesRoute);
                 },
               ),
               BlocBuilder<TopRatedTvSeriesBloc, TopRatedTvSeriesState>(
@@ -153,14 +153,14 @@ class TvSeriesList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  TV_SERIES_DETAIL_ROUTE,
+                  tvSeriesDetailRoute,
                   arguments: item.id,
                 );
               },
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${item.posterPath}',
+                  imageUrl: '$baseImageUrl${item.posterPath}',
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),

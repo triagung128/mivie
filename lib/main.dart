@@ -94,35 +94,35 @@ class MyApp extends StatelessWidget {
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
-            case POPULAR_MOVIES_ROUTE:
+            case popularMoviesRoute:
               return MaterialPageRoute(builder: (_) => PopularMoviesPage());
-            case TOP_RATED_MOVIES_ROUTE:
+            case topRatedMoviesRoute:
               return MaterialPageRoute(builder: (_) => TopRatedMoviesPage());
-            case MOVIE_DETAIL_ROUTE:
+            case movieDetailRoute:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => MovieDetailPage(id: id),
                 settings: settings,
               );
-            case SEARCH_MOVIES_ROUTE:
+            case searchMoviesRoute:
               return MaterialPageRoute(builder: (_) => SearchMoviesPage());
-            case NOW_PLAYING_TV_SERIES_ROUTE:
+            case nowPlayingTvSeriesRoute:
               return MaterialPageRoute(
                 builder: (_) => NowPlayingTvSeriesPage(),
               );
-            case POPULAR_TV_SERIES_ROUTE:
+            case popularTvSeriesRoute:
               return MaterialPageRoute(builder: (_) => PopularTvSeriesPage());
-            case TOP_RATED_TV_SERIES_ROUTE:
+            case topRatedTvSeriesRoute:
               return MaterialPageRoute(builder: (_) => TopRatedTvSeriesPage());
-            case SEARCH_TV_SERIES_ROUTE:
+            case searchTvSeriesRoute:
               return MaterialPageRoute(builder: (_) => SearchTvSeriesPage());
-            case TV_SERIES_DETAIL_ROUTE:
+            case tvSeriesDetailRoute:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => TvSeriesDetailPage(id: id),
                 settings: settings,
               );
-            case ABOUT_ROUTE:
+            case aboutRoute:
               return MaterialPageRoute(builder: (_) => AboutPage());
             default:
               return MaterialPageRoute(

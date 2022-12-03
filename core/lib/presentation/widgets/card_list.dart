@@ -8,7 +8,8 @@ class CardList extends StatelessWidget {
   final String posterPath;
   final Function() onTap;
 
-  CardList({
+  const CardList({
+    super.key,
     required this.title,
     required this.overview,
     required this.posterPath,
@@ -40,7 +41,7 @@ class CardList extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       overview,
                       maxLines: 2,
@@ -56,15 +57,15 @@ class CardList extends StatelessWidget {
                 bottom: 16,
               ),
               child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL$posterPath',
+                  imageUrl: '$baseImageUrl$posterPath',
                   width: 80,
-                  placeholder: (context, url) => Center(
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
             ),
           ],

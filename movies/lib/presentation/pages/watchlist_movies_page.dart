@@ -39,11 +39,11 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
       padding: const EdgeInsets.only(top: 16, left: 8, right: 8, bottom: 8),
       child: Consumer<WatchlistMovieNotifier>(
         builder: (context, data, child) {
-          if (data.watchlistState == RequestState.Loading) {
+          if (data.watchlistState == RequestState.loading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (data.watchlistState == RequestState.Loaded) {
+          } else if (data.watchlistState == RequestState.loaded) {
             return ListView.builder(
               itemBuilder: (context, index) {
                 final movie = data.watchlistMovies[index];
@@ -54,7 +54,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
                   onTap: () {
                     Navigator.pushNamed(
                       context,
-                      MOVIE_DETAIL_ROUTE,
+                      movieDetailRoute,
                       arguments: movie.id,
                     );
                   },

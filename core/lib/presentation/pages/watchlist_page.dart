@@ -3,8 +3,10 @@ import 'package:movies/presentation/pages/watchlist_movies_page.dart';
 import 'package:tv_series/presentation/pages/watchlist_tv_series_page.dart';
 
 class WatchlistPage extends StatefulWidget {
+  const WatchlistPage({super.key});
+
   @override
-  _WatchlistPageState createState() => _WatchlistPageState();
+  State<WatchlistPage> createState() => _WatchlistPageState();
 }
 
 class _WatchlistPageState extends State<WatchlistPage>
@@ -22,22 +24,22 @@ class _WatchlistPageState extends State<WatchlistPage>
   }
 
   final List<Widget> _listTabs = [
-    Text('Movies'),
-    Text('TV Series'),
+    const Text('Movies'),
+    const Text('TV Series'),
   ];
 
   final List<Widget> _listWidget = [
-    WatchlistMoviesPage(),
-    WatchlistTvSeriesPage(),
+    const WatchlistMoviesPage(),
+    const WatchlistTvSeriesPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Watchlist'),
+        title: const Text('Watchlist'),
         bottom: TabBar(
-          labelPadding: EdgeInsets.all(16),
+          labelPadding: const EdgeInsets.all(16),
           controller: _tabController,
           indicatorColor: Colors.white,
           tabs: _listTabs,

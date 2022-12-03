@@ -44,7 +44,7 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        TV_SERIES_DETAIL_ROUTE,
+                        tvSeriesDetailRoute,
                         arguments: tvSeries.id,
                       );
                     },

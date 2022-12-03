@@ -3,10 +3,10 @@ import 'package:core/domain/entities/genre.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/domain/entities/movie_detail.dart';
 
-final testMovie = Movie(
+const testMovie = Movie(
   adult: false,
   backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
-  genreIds: const [14, 28],
+  genreIds: [14, 28],
   id: 557,
   originalTitle: 'Spider-Man',
   overview:
@@ -22,7 +22,7 @@ final testMovie = Movie(
 
 final testMovieList = [testMovie];
 
-final testMovieDetail = MovieDetail(
+const testMovieDetail = MovieDetail(
   adult: false,
   backdropPath: 'backdropPath',
   genres: [Genre(id: 1, name: 'Action')],
@@ -37,14 +37,14 @@ final testMovieDetail = MovieDetail(
   voteCount: 1,
 );
 
-final testWatchlistMovie = Movie.watchlist(
+const testWatchlistMovie = Movie.watchlist(
   id: 1,
   title: 'title',
   posterPath: 'posterPath',
   overview: 'overview',
 );
 
-final testMovieTable = MovieTable(
+const testMovieTable = MovieTable(
   id: 1,
   title: 'title',
   posterPath: 'posterPath',

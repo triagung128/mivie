@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Movie extends Equatable {
-  Movie({
+  const Movie({
     required this.adult,
     required this.backdropPath,
     required this.genreIds,
@@ -17,7 +17,7 @@ class Movie extends Equatable {
     required this.voteCount,
   });
 
-  Movie.watchlist({
+  const Movie.watchlist({
     required this.id,
     required this.overview,
     required this.posterPath,

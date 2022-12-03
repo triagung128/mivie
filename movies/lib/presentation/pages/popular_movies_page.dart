@@ -30,11 +30,11 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
         padding: const EdgeInsets.all(8.0),
         child: Consumer<PopularMoviesNotifier>(
           builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
+            if (data.state == RequestState.loading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (data.state == RequestState.loaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = data.movies[index];
@@ -45,7 +45,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        MOVIE_DETAIL_ROUTE,
+                        movieDetailRoute,
                         arguments: movie.id,
                       );
                     },

@@ -49,7 +49,7 @@ void main() {
     'Should emit [Loading, Error] when get recommendations tv series is unsuccessful',
     build: () {
       when(mockGetRecommendationTvSeries.execute(tId))
-          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return recommendationTvSeriesBloc;
     },
     act: (bloc) => bloc.add(const FetchRecommendationTvSeries(tId)),

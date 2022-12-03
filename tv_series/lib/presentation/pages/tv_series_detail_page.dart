@@ -264,7 +264,7 @@ class DetailContent extends StatelessWidget {
                                             onTap: () =>
                                                 Navigator.pushReplacementNamed(
                                               context,
-                                              TV_SERIES_DETAIL_ROUTE,
+                                              tvSeriesDetailRoute,
                                               arguments: movie.id,
                                             ),
                                             child: ClipRRect(

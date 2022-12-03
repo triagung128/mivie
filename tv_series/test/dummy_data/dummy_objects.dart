@@ -8,7 +8,7 @@ import 'package:core/domain/entities/season.dart';
 import 'package:core/domain/entities/tv_series.dart';
 import 'package:core/domain/entities/tv_series_detail.dart';
 
-final tTvSeriesModel = TvSeriesModel(
+const tTvSeriesModel = TvSeriesModel(
   posterPath: '/jIhL6mlT7AblhbHJgEoiBIOUVl1.jpg',
   popularity: 29.780826,
   id: 1399,
@@ -17,15 +17,15 @@ final tTvSeriesModel = TvSeriesModel(
   overview:
       'Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night\'s Watch, is all that stands between the realms of men and icy horrors beyond.',
   firstAirDate: '2011-04-17',
-  originCountry: const ['US'],
-  genreIds: const [10765, 10759, 18],
+  originCountry: ['US'],
+  genreIds: [10765, 10759, 18],
   originalLanguage: 'en',
   voteCount: 1172,
   name: 'Game of Thrones',
   originalName: 'Game of Thrones',
 );
 
-final tTvSeries = TvSeries(
+const tTvSeries = TvSeries(
   posterPath: '/jIhL6mlT7AblhbHJgEoiBIOUVl1.jpg',
   popularity: 29.780826,
   id: 1399,
@@ -34,27 +34,27 @@ final tTvSeries = TvSeries(
   overview:
       'Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night\'s Watch, is all that stands between the realms of men and icy horrors beyond.',
   firstAirDate: '2011-04-17',
-  originCountry: const ['US'],
-  genreIds: const [10765, 10759, 18],
+  originCountry: ['US'],
+  genreIds: [10765, 10759, 18],
   originalLanguage: 'en',
   voteCount: 1172,
   name: 'Game of Thrones',
   originalName: 'Game of Thrones',
 );
 
-final tTvSeriesResponse = TvSeriesDetailResponse(
+const tTvSeriesResponse = TvSeriesDetailResponse(
   backdropPath: 'backdropPath',
   firstAirDate: '2022-10-10',
   genres: [GenreModel(id: 1, name: 'Drama')],
   homepage: 'https://google.com',
   id: 1,
   inProduction: false,
-  languages: const ['en'],
+  languages: ['en'],
   lastAirDate: '2022-10-10',
   name: 'name',
   numberOfEpisodes: 12,
   numberOfSeasons: 6,
-  originCountry: const ['US'],
+  originCountry: ['US'],
   originalLanguage: 'originalLanguage',
   originalName: 'originalName',
   overview: 'overview',
@@ -78,7 +78,7 @@ final tTvSeriesResponse = TvSeriesDetailResponse(
   voteCount: 1200,
 );
 
-final tTvSeriesDetail = TvSeriesDetail(
+const tTvSeriesDetail = TvSeriesDetail(
   backdropPath: 'backdropPath',
   firstAirDate: '2022-10-10',
   genres: [Genre(id: 1, name: 'Drama')],
@@ -107,21 +107,14 @@ final tTvSeriesDetail = TvSeriesDetail(
   voteCount: 1200,
 );
 
-final tTvSeriesTable = TvSeriesTable(
+const tTvSeriesTable = TvSeriesTable(
   id: 1,
   name: 'name',
   posterPath: 'posterPath',
   overview: 'overview',
 );
 
-final tTvSeriesMap = {
-  'id': 1,
-  'overview': 'overview',
-  'posterPath': 'posterPath',
-  'name': 'name',
-};
-
-final tWatchlistTvSeries = TvSeries.watchlist(
+const tWatchlistTvSeries = TvSeries.watchlist(
   id: 1,
   name: 'name',
   posterPath: 'posterPath',
