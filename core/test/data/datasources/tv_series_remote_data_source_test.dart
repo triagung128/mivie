@@ -8,13 +8,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 
+import '../../utils/test_constants.dart';
 import '../../helpers/test_helper.mocks.dart';
 import '../../json_reader.dart';
 
 void main() {
-  const API_KEY = 'api_key=3597c3452c08c649357f82941742287f';
-  const BASE_URL = 'https://api.themoviedb.org/3';
-
   late TvSeriesRemoteDataSourceImpl dataSource;
   late MockHttpClient mockHttpClient;
 
