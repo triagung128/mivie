@@ -5,9 +5,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
+import 'package:core/core.dart' as _i5;
 import 'package:core/domain/entities/movie.dart' as _i6;
 import 'package:core/domain/usecases/movies/get_watchlist_movies.dart' as _i3;
-import 'package:core/utils/failure.dart' as _i5;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 

@@ -7,12 +7,12 @@ import 'package:core/data/models/tv_series_response.dart';
 import 'package:http/http.dart' as http;
 
 abstract class TvSeriesRemoteDataSource {
-  Future<List<TvSeriesModel>> getNowPlayingTvSeries();
-  Future<List<TvSeriesModel>> getPopularTvSeries();
-  Future<List<TvSeriesModel>> getTopRatedTvSeries();
-  Future<List<TvSeriesModel>> searchTvSeries(String query);
-  Future<TvSeriesDetailResponse> getTvSeriesDetail(int id);
-  Future<List<TvSeriesModel>> getTvSeriesRecommendations(int id);
+  Future<List<TvSeriesModel>> getNowPlaying();
+  Future<List<TvSeriesModel>> getPopular();
+  Future<List<TvSeriesModel>> getTopRated();
+  Future<List<TvSeriesModel>> search(String query);
+  Future<TvSeriesDetailResponse> getDetail(int id);
+  Future<List<TvSeriesModel>> getRecommendation(int id);
 }
 
 class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
@@ -24,7 +24,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   TvSeriesRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<List<TvSeriesModel>> getNowPlayingTvSeries() async {
+  Future<List<TvSeriesModel>> getNowPlaying() async {
     final response =
         await client.get(Uri.parse('$BASE_URL/tv/on_the_air?$API_KEY'));
 
@@ -36,7 +36,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   }
 
   @override
-  Future<List<TvSeriesModel>> getPopularTvSeries() async {
+  Future<List<TvSeriesModel>> getPopular() async {
     final response =
         await client.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY'));
 
@@ -48,7 +48,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   }
 
   @override
-  Future<List<TvSeriesModel>> getTopRatedTvSeries() async {
+  Future<List<TvSeriesModel>> getTopRated() async {
     final response =
         await client.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY'));
 
@@ -60,7 +60,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   }
 
   @override
-  Future<List<TvSeriesModel>> searchTvSeries(String query) async {
+  Future<List<TvSeriesModel>> search(String query) async {
     final response = await client
         .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$query'));
 
@@ -72,7 +72,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   }
 
   @override
-  Future<TvSeriesDetailResponse> getTvSeriesDetail(int id) async {
+  Future<TvSeriesDetailResponse> getDetail(int id) async {
     final response = await client.get(Uri.parse('$BASE_URL/tv/$id?$API_KEY'));
 
     if (response.statusCode == 200) {
@@ -83,7 +83,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   }
 
   @override
-  Future<List<TvSeriesModel>> getTvSeriesRecommendations(int id) async {
+  Future<List<TvSeriesModel>> getRecommendation(int id) async {
     final response = await client
         .get(Uri.parse('$BASE_URL/tv/$id/recommendations?$API_KEY'));
 

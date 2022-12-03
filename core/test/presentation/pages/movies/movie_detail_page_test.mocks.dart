@@ -6,6 +6,7 @@
 import 'dart:async' as _i11;
 import 'dart:ui' as _i12;
 
+import 'package:core/core.dart' as _i9;
 import 'package:core/domain/entities/movie.dart' as _i10;
 import 'package:core/domain/entities/movie_detail.dart' as _i7;
 import 'package:core/domain/usecases/movies/get_movie_detail.dart' as _i2;
@@ -16,7 +17,6 @@ import 'package:core/domain/usecases/movies/remove_watchlist.dart' as _i6;
 import 'package:core/domain/usecases/movies/save_watchlist.dart' as _i5;
 import 'package:core/presentation/provider/movies/movie_detail_notifier.dart'
     as _i8;
-import 'package:core/utils/state_enum.dart' as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

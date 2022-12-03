@@ -5,8 +5,8 @@ import 'package:core/data/models/tv_series_table.dart';
 abstract class TvSeriesLocalDataSource {
   Future<String> insertWatchlist(TvSeriesTable tvSeries);
   Future<String> removeWatchlist(TvSeriesTable tvSeries);
-  Future<TvSeriesTable?> getTvSeriesById(int id);
-  Future<List<TvSeriesTable>> getWatchlistTvSeries();
+  Future<TvSeriesTable?> getWatchlistById(int id);
+  Future<List<TvSeriesTable>> getWatchlist();
 }
 
 class TvSeriesLocalDataSourceImpl implements TvSeriesLocalDataSource {
@@ -35,8 +35,8 @@ class TvSeriesLocalDataSourceImpl implements TvSeriesLocalDataSource {
   }
 
   @override
-  Future<TvSeriesTable?> getTvSeriesById(int id) async {
-    final result = await databaseHelper.getTvSeriesById(id);
+  Future<TvSeriesTable?> getWatchlistById(int id) async {
+    final result = await databaseHelper.getWatchlistTvSeriesById(id);
     if (result != null) {
       return TvSeriesTable.fromMap(result);
     } else {
@@ -45,7 +45,7 @@ class TvSeriesLocalDataSourceImpl implements TvSeriesLocalDataSource {
   }
 
   @override
-  Future<List<TvSeriesTable>> getWatchlistTvSeries() async {
+  Future<List<TvSeriesTable>> getWatchlist() async {
     final result = await databaseHelper.getWatchlistTvSeries();
     return result.map((data) => TvSeriesTable.fromMap(data)).toList();
   }

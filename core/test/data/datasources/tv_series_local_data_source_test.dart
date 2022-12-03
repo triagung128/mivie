@@ -17,7 +17,7 @@ void main() {
     );
   });
 
-  group('save watchlist', () {
+  group('Save Watchlist TV Series', () {
     test('should return success message when insert to database is success',
         () async {
       // arrange
@@ -41,7 +41,7 @@ void main() {
     });
   });
 
-  group('remove watchlist', () {
+  group('Remove Watchlist TV Series', () {
     test('should return success message when remove from database is success',
         () async {
       // arrange
@@ -65,37 +65,37 @@ void main() {
     });
   });
 
-  group('Get TV Series Detail By Id', () {
+  group('Get Watchlist TV Series By Id', () {
     final tId = 1;
 
     test('should return TV Series Detail Table when data is found', () async {
       // arrange
-      when(mockDatabaseHelper.getTvSeriesById(tId))
+      when(mockDatabaseHelper.getWatchlistTvSeriesById(tId))
           .thenAnswer((_) async => tTvSeriesMap);
       // act
-      final result = await dataSource.getTvSeriesById(tId);
+      final result = await dataSource.getWatchlistById(tId);
       // assert
       expect(result, tTvSeriesTable);
     });
 
     test('should return null when data is not found', () async {
       // arrange
-      when(mockDatabaseHelper.getTvSeriesById(tId))
+      when(mockDatabaseHelper.getWatchlistTvSeriesById(tId))
           .thenAnswer((_) async => null);
       // act
-      final result = await dataSource.getTvSeriesById(tId);
+      final result = await dataSource.getWatchlistById(tId);
       // assert
       expect(result, null);
     });
   });
 
-  group('get watchlist tv series', () {
+  group('Get Watchlist TV Series', () {
     test('should return list of TvSeriesTable from database', () async {
       // arrange
       when(mockDatabaseHelper.getWatchlistTvSeries())
           .thenAnswer((_) async => [tTvSeriesMap]);
       // act
-      final result = await dataSource.getWatchlistTvSeries();
+      final result = await dataSource.getWatchlist();
       // assert
       expect(result, [tTvSeriesTable]);
     });

@@ -23,7 +23,7 @@ void main() {
     dataSource = TvSeriesRemoteDataSourceImpl(client: mockHttpClient);
   });
 
-  group('get Now Playing TV Series', () {
+  group('Get Now Playing TV Series', () {
     final tTvSeriesList = TvSeriesResponse.fromJson(
             json.decode(readJson('dummy_data/tv_series/now_playing.json')))
         .tvSeriesList;
@@ -35,7 +35,7 @@ void main() {
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/tv_series/now_playing.json'), 200));
       // act
-      final result = await dataSource.getNowPlayingTvSeries();
+      final result = await dataSource.getNowPlaying();
       // assert
       expect(result, equals(tTvSeriesList));
     });
@@ -47,13 +47,13 @@ void main() {
       when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/on_the_air?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = dataSource.getNowPlayingTvSeries();
+      final call = dataSource.getNowPlaying();
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });
   });
 
-  group('get Popular TV Series', () {
+  group('Get Popular TV Series', () {
     final tTvSeriesList = TvSeriesResponse.fromJson(
             json.decode(readJson('dummy_data/tv_series/popular.json')))
         .tvSeriesList;
@@ -65,7 +65,7 @@ void main() {
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/tv_series/popular.json'), 200));
       // act
-      final result = await dataSource.getPopularTvSeries();
+      final result = await dataSource.getPopular();
       // assert
       expect(result, equals(tTvSeriesList));
     });
@@ -77,13 +77,13 @@ void main() {
       when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = dataSource.getPopularTvSeries();
+      final call = dataSource.getPopular();
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });
   });
 
-  group('get Top Rated TV Series', () {
+  group('Get Top Rated TV Series', () {
     final tTvSeriesList = TvSeriesResponse.fromJson(
             json.decode(readJson('dummy_data/tv_series/top_rated.json')))
         .tvSeriesList;
@@ -95,7 +95,7 @@ void main() {
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/tv_series/top_rated.json'), 200));
       // act
-      final result = await dataSource.getTopRatedTvSeries();
+      final result = await dataSource.getTopRated();
       // assert
       expect(result, equals(tTvSeriesList));
     });
@@ -107,13 +107,13 @@ void main() {
       when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = dataSource.getTopRatedTvSeries();
+      final call = dataSource.getTopRated();
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });
   });
 
-  group('search tv series', () {
+  group('Search TV Series', () {
     final tSearchResult = TvSeriesResponse.fromJson(json.decode(
       readJson('dummy_data/tv_series/search_example_tv_series.json'),
     )).tvSeriesList;
@@ -122,17 +122,15 @@ void main() {
     test('should return list of tv series when response code is 200', () async {
       // arrange
       when(
-        mockHttpClient.get(
-          Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$tQuery'),
-        ),
+        mockHttpClient
+            .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$tQuery')),
       ).thenAnswer(
         (_) async => http.Response(
-          readJson('dummy_data/tv_series/search_example_tv_series.json'),
-          200,
-        ),
+            readJson('dummy_data/tv_series/search_example_tv_series.json'),
+            200),
       );
       // act
-      final result = await dataSource.searchTvSeries(tQuery);
+      final result = await dataSource.search(tQuery);
       // assert
       expect(result, tSearchResult);
     });
@@ -144,13 +142,13 @@ void main() {
               .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$tQuery')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = dataSource.searchTvSeries(tQuery);
+      final call = dataSource.search(tQuery);
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });
   });
 
-  group('get tv series detail', () {
+  group('Get TV Series Detail', () {
     final tId = 1;
     final tTvSeriesDetail = TvSeriesDetailResponse.fromJson(
         json.decode(readJson('dummy_data/tv_series/tv_series_detail.json')));
@@ -162,7 +160,7 @@ void main() {
           .thenAnswer((_) async => http.Response(
               readJson('dummy_data/tv_series/tv_series_detail.json'), 200));
       // act
-      final result = await dataSource.getTvSeriesDetail(tId);
+      final result = await dataSource.getDetail(tId);
       // assert
       expect(result, equals(tTvSeriesDetail));
     });
@@ -173,13 +171,13 @@ void main() {
       when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = dataSource.getTvSeriesDetail(tId);
+      final call = dataSource.getDetail(tId);
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });
   });
 
-  group('get tv series recommendations', () {
+  group('Get TV Series Recommendations', () {
     final tMovieList = TvSeriesResponse.fromJson(json.decode(
             readJson('dummy_data/tv_series/tv_series_recommendations.json')))
         .tvSeriesList;
@@ -194,7 +192,7 @@ void main() {
               readJson('dummy_data/tv_series/tv_series_recommendations.json'),
               200));
       // act
-      final result = await dataSource.getTvSeriesRecommendations(tId);
+      final result = await dataSource.getRecommendation(tId);
       // assert
       expect(result, equals(tMovieList));
     });
@@ -206,7 +204,7 @@ void main() {
               .get(Uri.parse('$BASE_URL/tv/$tId/recommendations?$API_KEY')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = dataSource.getTvSeriesRecommendations(tId);
+      final call = dataSource.getRecommendation(tId);
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });

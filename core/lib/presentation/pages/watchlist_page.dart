@@ -1,6 +1,6 @@
 import 'package:core/presentation/pages/movies/watchlist_movies_page.dart';
-import 'package:core/presentation/pages/tv_series/watchlist_tv_series_page.dart';
 import 'package:flutter/material.dart';
+import 'package:tv_series/presentation/pages/watchlist_tv_series_page.dart';
 
 class WatchlistPage extends StatefulWidget {
   @override

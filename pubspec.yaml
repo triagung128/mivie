@@ -29,12 +29,15 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get_it: ^7.1.3
+  http: ^0.13.5
   about:
     path: about
   core:
     path: core
   search:
     path: search
+  tv_series:
+    path: tv_series
 
 dev_dependencies:
   flutter_test:
