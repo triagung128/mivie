@@ -14,7 +14,6 @@ dependencies:
   core:
     path: ../core
   dartz: ^0.10.1
-  provider: ^6.0.4
   flutter_bloc: ^8.1.1
   equatable: ^2.0.5
   cached_network_image: ^3.2.3

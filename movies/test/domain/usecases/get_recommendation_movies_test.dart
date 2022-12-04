@@ -7,12 +7,12 @@ import 'package:movies/domain/usecases/get_recommendation_movies.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetMovieRecommendations usecase;
+  late GetRecommendationMovies usecase;
   late MockMovieRepository mockMovieRepository;
 
   setUp(() {
     mockMovieRepository = MockMovieRepository();
-    usecase = GetMovieRecommendations(mockMovieRepository);
+    usecase = GetRecommendationMovies(mockMovieRepository);
   });
 
   const tId = 1;

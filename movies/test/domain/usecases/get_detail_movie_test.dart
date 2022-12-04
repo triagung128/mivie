@@ -7,12 +7,12 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
 
 void main() {
-  late GetMovieDetail usecase;
+  late GetDetailMovie usecase;
   late MockMovieRepository mockMovieRepository;
 
   setUp(() {
     mockMovieRepository = MockMovieRepository();
-    usecase = GetMovieDetail(mockMovieRepository);
+    usecase = GetDetailMovie(mockMovieRepository);
   });
 
   const tId = 1;
