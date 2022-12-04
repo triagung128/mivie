@@ -27,6 +27,8 @@ class TvSeriesRepositoryImpl extends TvSeriesRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('Certificated Not Valid:\n${e.message}'));
     }
   }
 
@@ -39,6 +41,8 @@ class TvSeriesRepositoryImpl extends TvSeriesRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('Certificated Not Valid:\n${e.message}'));
     }
   }
 
@@ -51,6 +55,8 @@ class TvSeriesRepositoryImpl extends TvSeriesRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('Certificated Not Valid:\n${e.message}'));
     }
   }
 
@@ -63,6 +69,8 @@ class TvSeriesRepositoryImpl extends TvSeriesRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('Certificated Not Valid:\n${e.message}'));
     }
   }
 
@@ -75,6 +83,8 @@ class TvSeriesRepositoryImpl extends TvSeriesRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('Certificated Not Valid:\n${e.message}'));
     }
   }
 
@@ -129,6 +139,8 @@ class TvSeriesRepositoryImpl extends TvSeriesRepository {
       return const Left(ServerFailure(''));
     } on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('Certificated Not Valid:\n${e.message}'));
     }
   }
 }
