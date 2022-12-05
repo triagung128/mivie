@@ -11,7 +11,7 @@ class SearchTvSeriesBloc
     extends Bloc<SearchTvSeriesEvent, SearchTvSeriesState> {
   final SearchTvSeries _searchTvSeries;
 
-  SearchTvSeriesBloc(this._searchTvSeries) : super(SearchTvSeriesEmpty()) {
+  SearchTvSeriesBloc(this._searchTvSeries) : super(SearchTvSeriesInitial()) {
     on<SearchTvSeriesOnQueryChanged>((event, emit) async {
       final query = event.query;
 
@@ -23,7 +23,11 @@ class SearchTvSeriesBloc
           emit(SearchTvSeriesError(failure.message));
         },
         (data) {
-          emit(SearchTvSeriesHasData(data));
+          if (data.isEmpty) {
+            emit(SearchTvSeriesEmpty());
+          } else {
+            emit(SearchTvSeriesHasData(data));
+          }
         },
       );
     }, transformer: debounce(const Duration(milliseconds: 500)));

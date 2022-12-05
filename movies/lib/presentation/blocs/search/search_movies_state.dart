@@ -7,6 +7,8 @@ abstract class SearchMoviesState extends Equatable {
   List<Object?> get props => [];
 }
 
+class SearchMoviesInitial extends SearchMoviesState {}
+
 class SearchMoviesEmpty extends SearchMoviesState {}
 
 class SearchMoviesLoading extends SearchMoviesState {}

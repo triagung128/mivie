@@ -7,6 +7,8 @@ abstract class SearchTvSeriesState extends Equatable {
   List<Object?> get props => [];
 }
 
+class SearchTvSeriesInitial extends SearchTvSeriesState {}
+
 class SearchTvSeriesEmpty extends SearchTvSeriesState {}
 
 class SearchTvSeriesLoading extends SearchTvSeriesState {}
