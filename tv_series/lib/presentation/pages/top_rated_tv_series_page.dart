@@ -1,8 +1,7 @@
-import 'package:core/core.dart';
-import 'package:core/presentation/widgets/card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/presentation/blocs/top_rated/top_rated_tv_series_bloc.dart';
+import 'package:tv_series/presentation/widgets/tv_series_card_list.dart';
 
 class TopRatedTvSeriesPage extends StatefulWidget {
   const TopRatedTvSeriesPage({super.key});
@@ -28,27 +27,16 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: BlocBuilder<TopRatedTvSeriesBloc, TopRatedTvSeriesState>(
-          builder: (context, state) {
+          builder: (_, state) {
             if (state is TopRatedTvSeriesLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (state is TopRatedTvSeriesHasData) {
               return ListView.builder(
-                itemBuilder: (context, index) {
+                itemBuilder: (_, index) {
                   final tvSeries = state.result[index];
-                  return CardList(
-                    title: tvSeries.name ?? '-',
-                    overview: tvSeries.overview ?? '-',
-                    posterPath: '${tvSeries.posterPath}',
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        tvSeriesDetailRoute,
-                        arguments: tvSeries.id,
-                      );
-                    },
-                  );
+                  return TvSeriesCardList(tvSeries: tvSeries);
                 },
                 itemCount: state.result.length,
               );

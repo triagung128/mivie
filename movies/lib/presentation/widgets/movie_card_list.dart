@@ -1,19 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
+import 'package:core/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 
-class CardList extends StatelessWidget {
-  final String title;
-  final String overview;
-  final String posterPath;
-  final Function() onTap;
+class MovieCardList extends StatelessWidget {
+  final Movie movie;
 
-  const CardList({
+  const MovieCardList({
     super.key,
-    required this.title,
-    required this.overview,
-    required this.posterPath,
-    required this.onTap,
+    required this.movie,
   });
 
   @override
@@ -21,7 +16,11 @@ class CardList extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
-        onTap: onTap,
+        onTap: () => Navigator.pushNamed(
+          context,
+          movieDetailRoute,
+          arguments: movie.id,
+        ),
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
@@ -36,14 +35,14 @@ class CardList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                      movie.title ?? '-',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      overview,
+                      movie.overview ?? '-',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -59,12 +58,12 @@ class CardList extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(8)),
                 child: CachedNetworkImage(
-                  imageUrl: '$baseImageUrl$posterPath',
+                  imageUrl: '$baseImageUrl${movie.posterPath}',
                   width: 80,
-                  placeholder: (context, url) => const Center(
+                  placeholder: (_, __) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  errorWidget: (_, __, ___) => const Icon(Icons.error),
                 ),
               ),
             ),

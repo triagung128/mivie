@@ -1,8 +1,8 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/widgets/card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/presentation/blocs/search/search_movies_bloc.dart';
+import 'package:movies/presentation/widgets/movie_card_list.dart';
 
 class SearchMoviesPage extends StatelessWidget {
   const SearchMoviesPage({super.key});
@@ -37,7 +37,7 @@ class SearchMoviesPage extends StatelessWidget {
               style: kHeading6,
             ),
             BlocBuilder<SearchMoviesBloc, SearchMoviesState>(
-              builder: (context, state) {
+              builder: (_, state) {
                 if (state is SearchMoviesLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),
@@ -47,20 +47,9 @@ class SearchMoviesPage extends StatelessWidget {
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
+                      itemBuilder: (_, index) {
                         final movie = result[index];
-                        return CardList(
-                          title: movie.title ?? '-',
-                          overview: movie.overview ?? '-',
-                          posterPath: '${movie.posterPath}',
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              movieDetailRoute,
-                              arguments: movie.id,
-                            );
-                          },
-                        );
+                        return MovieCardList(movie: movie);
                       },
                       itemCount: result.length,
                     ),

@@ -1,8 +1,8 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/widgets/card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/presentation/blocs/watchlist/watchlist_movies_bloc.dart';
+import 'package:movies/presentation/widgets/movie_card_list.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
   const WatchlistMoviesPage({super.key});
@@ -45,18 +45,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
             return ListView.builder(
               itemBuilder: (context, index) {
                 final movie = state.result[index];
-                return CardList(
-                  title: movie.title ?? '-',
-                  overview: movie.overview ?? '-',
-                  posterPath: '${movie.posterPath}',
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      movieDetailRoute,
-                      arguments: movie.id,
-                    );
-                  },
-                );
+                return MovieCardList(movie: movie);
               },
               itemCount: state.result.length,
             );

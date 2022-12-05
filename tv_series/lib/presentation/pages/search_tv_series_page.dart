@@ -1,8 +1,8 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/widgets/card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/presentation/blocs/search/search_tv_series_bloc.dart';
+import 'package:tv_series/presentation/widgets/tv_series_card_list.dart';
 
 class SearchTvSeriesPage extends StatelessWidget {
   const SearchTvSeriesPage({super.key});
@@ -37,7 +37,7 @@ class SearchTvSeriesPage extends StatelessWidget {
               style: kHeading6,
             ),
             BlocBuilder<SearchTvSeriesBloc, SearchTvSeriesState>(
-              builder: (context, state) {
+              builder: (_, state) {
                 if (state is SearchTvSeriesLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),
@@ -49,18 +49,7 @@ class SearchTvSeriesPage extends StatelessWidget {
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
                         final tvSeries = result[index];
-                        return CardList(
-                          title: tvSeries.name ?? '-',
-                          overview: tvSeries.overview ?? '-',
-                          posterPath: '${tvSeries.posterPath}',
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              tvSeriesDetailRoute,
-                              arguments: tvSeries.id,
-                            );
-                          },
-                        );
+                        return TvSeriesCardList(tvSeries: tvSeries);
                       },
                       itemCount: result.length,
                     ),

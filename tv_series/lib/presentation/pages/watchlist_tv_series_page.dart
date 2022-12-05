@@ -1,8 +1,8 @@
 import 'package:core/core.dart';
-import 'package:core/presentation/widgets/card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/presentation/blocs/watchlist/watchlist_tv_series_bloc.dart';
+import 'package:tv_series/presentation/widgets/tv_series_card_list.dart';
 
 class WatchlistTvSeriesPage extends StatefulWidget {
   const WatchlistTvSeriesPage({super.key});
@@ -36,7 +36,7 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
     return Padding(
       padding: const EdgeInsets.only(top: 16, left: 8, right: 8, bottom: 8),
       child: BlocBuilder<WatchlistTvSeriesBloc, WatchlistTvSeriesState>(
-        builder: (context, state) {
+        builder: (_, state) {
           if (state is WatchlistTvSeriesLoading) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -49,18 +49,7 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
             return ListView.builder(
               itemBuilder: (context, index) {
                 final tvSeries = state.result[index];
-                return CardList(
-                  title: tvSeries.name ?? '-',
-                  overview: tvSeries.overview ?? '-',
-                  posterPath: '${tvSeries.posterPath}',
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      tvSeriesDetailRoute,
-                      arguments: tvSeries.id,
-                    );
-                  },
-                );
+                return TvSeriesCardList(tvSeries: tvSeries);
               },
               itemCount: state.result.length,
             );
