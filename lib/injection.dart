@@ -131,5 +131,5 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => HttpSSLPinning());
+  locator.registerLazySingleton(() => HttpSSLPinning.client);
 }
