@@ -29,6 +29,7 @@ class SearchMoviesPage extends StatelessWidget {
                 },
                 decoration: const InputDecoration(
                   hintText: 'Search title',
+                  contentPadding: EdgeInsets.all(14),
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16)),

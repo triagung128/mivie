@@ -30,6 +30,7 @@ class SearchTvSeriesPage extends StatelessWidget {
                 decoration: const InputDecoration(
                   hintText: 'Search title',
                   prefixIcon: Icon(Icons.search),
+                  contentPadding: EdgeInsets.all(14),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
