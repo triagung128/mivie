@@ -22,6 +22,7 @@ dependencies:
   sqflite: ^2.0.0+3
   cached_network_image: ^3.1.0
   http: ^0.13.5
+  firebase_crashlytics: ^3.0.6
 
 dev_dependencies:
   flutter_test:

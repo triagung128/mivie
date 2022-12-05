@@ -19,6 +19,7 @@ dependencies:
   cached_network_image: ^3.2.3
   flutter_rating_bar: ^4.0.1
   rxdart: ^0.27.7
+  firebase_crashlytics: ^3.0.6
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,9 @@
 import 'package:about/about.dart';
 import 'package:core/core.dart';
 import 'package:core/presentation/pages/home_page.dart';
+import 'package:ditonton/firebase_options.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/presentation/blocs/detail/detail_movie_bloc.dart';
@@ -31,8 +33,15 @@ import 'package:tv_series/presentation/pages/tv_series_detail_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await HttpSSLPinning.init();
+
   di.init();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(MyApp());
 }
 
