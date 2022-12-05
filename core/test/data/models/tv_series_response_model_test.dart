@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import '../../json_reader.dart';
 
 void main() {
-  final tTvSeriesModel = TvSeriesModel(
+  const tTvSeriesModel = TvSeriesModel(
     posterPath: '/path.jpg',
     popularity: 2.3,
     id: 1,
@@ -23,7 +23,7 @@ void main() {
     originalName: 'Original Name',
   );
 
-  final tTvSeriesResponseModel =
+  const tTvSeriesResponseModel =
       TvSeriesResponse(tvSeriesList: <TvSeriesModel>[tTvSeriesModel]);
 
   group('fromJson', () {

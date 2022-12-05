@@ -3,7 +3,7 @@ import 'package:core/domain/entities/tv_series.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final tTvSeriesModel = TvSeriesModel(
+  const tTvSeriesModel = TvSeriesModel(
     posterPath: 'posterPath',
     popularity: 2.3,
     id: 1,
@@ -19,7 +19,7 @@ void main() {
     originalName: 'originalName',
   );
 
-  final tTvSeries = TvSeries(
+  const tTvSeries = TvSeries(
     posterPath: 'posterPath',
     popularity: 2.3,
     id: 1,

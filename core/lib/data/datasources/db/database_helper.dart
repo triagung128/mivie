@@ -15,9 +15,7 @@ class DatabaseHelper {
   static Database? _database;
 
   Future<Database?> get database async {
-    if (_database == null) {
-      _database = await _initDb();
-    }
+    _database ??= await _initDb();
     return _database;
   }
 
@@ -95,7 +93,7 @@ class DatabaseHelper {
     }
   }
 
-  Future<Map<String, dynamic>?> getTvSeriesById(int id) async {
+  Future<Map<String, dynamic>?> getWatchlistTvSeriesById(int id) async {
     final db = await database;
     final results = await db!.query(
       _tblWatchlistTvSeries,

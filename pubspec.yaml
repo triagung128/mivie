@@ -29,16 +29,25 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get_it: ^7.1.3
+  http: ^0.13.5
+  firebase_core: ^2.3.0
+  firebase_crashlytics: ^3.0.6
   about:
     path: about
   core:
     path: core
-  search:
-    path: search
+  tv_series:
+    path: tv_series
+  movies:
+    path: movies
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: ^5.3.2
+  mocktail: ^0.3.0
+  build_runner: ^2.0.4
+  bloc_test: ^9.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -54,6 +63,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - certificates/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

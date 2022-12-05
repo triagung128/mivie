@@ -64,14 +64,14 @@ void main() {
   });
 
   group('Get Movie Detail By Id', () {
-    final tId = 1;
+    const tId = 1;
 
     test('should return Movie Detail Table when data is found', () async {
       // arrange
       when(mockDatabaseHelper.getMovieById(tId))
           .thenAnswer((_) async => testMovieMap);
       // act
-      final result = await dataSource.getMovieById(tId);
+      final result = await dataSource.getWatchlistById(tId);
       // assert
       expect(result, testMovieTable);
     });
@@ -80,7 +80,7 @@ void main() {
       // arrange
       when(mockDatabaseHelper.getMovieById(tId)).thenAnswer((_) async => null);
       // act
-      final result = await dataSource.getMovieById(tId);
+      final result = await dataSource.getWatchlistById(tId);
       // assert
       expect(result, null);
     });
@@ -92,7 +92,7 @@ void main() {
       when(mockDatabaseHelper.getWatchlistMovies())
           .thenAnswer((_) async => [testMovieMap]);
       // act
-      final result = await dataSource.getWatchlistMovies();
+      final result = await dataSource.getWatchlist();
       // assert
       expect(result, [testMovieTable]);
     });
