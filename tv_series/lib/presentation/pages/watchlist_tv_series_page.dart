@@ -42,8 +42,16 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
               child: CircularProgressIndicator(),
             );
           } else if (state is WatchlistTvSeriesEmpty) {
-            return const Center(
-              child: Text('Empty Watchlist'),
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(
+                  Icons.visibility_off,
+                  size: 32,
+                ),
+                SizedBox(height: 2),
+                Text('Empty Watchlist'),
+              ],
             );
           } else if (state is WatchlistTvSeriesHasData) {
             return ListView.builder(

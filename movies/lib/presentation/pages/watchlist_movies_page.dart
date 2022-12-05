@@ -50,8 +50,16 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
               itemCount: state.result.length,
             );
           } else if (state is WatchlistMoviesEmpty) {
-            return const Center(
-              child: Text('Empty data'),
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(
+                  Icons.visibility_off,
+                  size: 32,
+                ),
+                SizedBox(height: 2),
+                Text('Empty Watchlist'),
+              ],
             );
           } else if (state is WatchlistMoviesError) {
             return Center(
