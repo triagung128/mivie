@@ -1,4 +1,5 @@
 import 'package:about/about.dart';
+import 'package:core/core.dart';
 import 'package:core/presentation/pages/watchlist_page.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/presentation/pages/movie_list_page.dart';
@@ -51,6 +52,8 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _listWidget[_bottomNavIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: kMikadoYellow,
         currentIndex: _bottomNavIndex,
         items: _bottomNavBarItems,
         onTap: _onBottomNavTapped,
