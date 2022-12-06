@@ -22,12 +22,14 @@ import 'package:tv_series/presentation/blocs/now_playing/now_playing_tv_series_b
 import 'package:tv_series/presentation/blocs/popular/popular_tv_series_bloc.dart';
 import 'package:tv_series/presentation/blocs/recommendation/recommendation_tv_series_bloc.dart';
 import 'package:tv_series/presentation/blocs/search/search_tv_series_bloc.dart';
+import 'package:tv_series/presentation/blocs/season_detail/season_detail_bloc.dart';
 import 'package:tv_series/presentation/blocs/top_rated/top_rated_tv_series_bloc.dart';
 import 'package:tv_series/presentation/blocs/watchlist/watchlist_tv_series_bloc.dart';
 import 'package:tv_series/presentation/blocs/watchlist_status/watchlist_status_tv_series_bloc.dart';
 import 'package:tv_series/presentation/pages/now_playing_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/popular_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/search_tv_series_page.dart';
+import 'package:tv_series/presentation/pages/season_detail_page.dart';
 import 'package:tv_series/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/tv_series_detail_page.dart';
 
@@ -92,6 +94,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<SearchTvSeriesBloc>(),
         ),
+        BlocProvider(
+          create: (_) => di.locator<SeasonDetailBloc>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -131,6 +136,15 @@ class MyApp extends StatelessWidget {
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => TvSeriesDetailPage(id: id),
+                settings: settings,
+              );
+            case seasonDetailRoute:
+              final args = settings.arguments as Map;
+              return MaterialPageRoute(
+                builder: (_) => SeasonDetailPage(
+                  id: args['id'],
+                  seasonNumber: args['seasonNumber'],
+                ),
                 settings: settings,
               );
             case aboutRoute:
