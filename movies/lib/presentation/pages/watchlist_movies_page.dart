@@ -56,16 +56,18 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
                 child: Text(state.message),
               );
             } else {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(
-                    Icons.visibility_off,
-                    size: 32,
-                  ),
-                  SizedBox(height: 2),
-                  Text('Empty Watchlist'),
-                ],
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.visibility_off,
+                      size: 32,
+                    ),
+                    SizedBox(height: 2),
+                    Text('Empty Watchlist'),
+                  ],
+                ),
               );
             }
           },
