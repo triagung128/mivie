@@ -43,6 +43,21 @@ void main() {
   );
 
   blocTest<WatchlistMoviesBloc, WatchlistMoviesState>(
+    'Should emit [Loading, Empty] when data is empty',
+    build: () {
+      when(mockGetWatchlistMovies.execute())
+          .thenAnswer((_) async => const Right([]));
+      return watchlistMoviesBloc;
+    },
+    act: (bloc) => bloc.add(FetchWatchlistMovies()),
+    expect: () => [
+      WatchlistMoviesLoading(),
+      WatchlistMoviesEmpty(),
+    ],
+    verify: (bloc) => verify(mockGetWatchlistMovies.execute()),
+  );
+
+  blocTest<WatchlistMoviesBloc, WatchlistMoviesState>(
     'Should emit [Loading, Error] when get watchlist tv series is unsuccessful',
     build: () {
       when(mockGetWatchlistMovies.execute()).thenAnswer(

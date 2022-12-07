@@ -22,7 +22,7 @@ void main() {
   });
 
   test('initial state should be empty', () {
-    expect(searchTvSeriesBloc.state, SearchTvSeriesEmpty());
+    expect(searchTvSeriesBloc.state, SearchTvSeriesInitial());
   });
 
   final tTvSeriesList = <TvSeries>[tTvSeries];
@@ -40,6 +40,22 @@ void main() {
     expect: () => [
       SearchTvSeriesLoading(),
       SearchTvSeriesHasData(tTvSeriesList),
+    ],
+    verify: (bloc) => verify(mockSearchTvSeries.execute(tQuery)),
+  );
+
+  blocTest<SearchTvSeriesBloc, SearchTvSeriesState>(
+    'Should emit [Loading, Empty] when data is empty',
+    build: () {
+      when(mockSearchTvSeries.execute(tQuery))
+          .thenAnswer((_) async => const Right([]));
+      return searchTvSeriesBloc;
+    },
+    act: (bloc) => bloc.add(const SearchTvSeriesOnQueryChanged(tQuery)),
+    wait: const Duration(milliseconds: 500),
+    expect: () => [
+      SearchTvSeriesLoading(),
+      SearchTvSeriesEmpty(),
     ],
     verify: (bloc) => verify(mockSearchTvSeries.execute(tQuery)),
   );

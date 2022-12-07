@@ -46,6 +46,22 @@ void main() {
   );
 
   blocTest<RecommendationTvSeriesBloc, RecommendationTvSeriesState>(
+    'Should emit [Loading, Empty] when data is empty',
+    build: () {
+      when(mockGetRecommendationTvSeries.execute(tId))
+          .thenAnswer((_) async => const Right([]));
+      return recommendationTvSeriesBloc;
+    },
+    act: (bloc) => bloc.add(const FetchRecommendationTvSeries(tId)),
+    wait: const Duration(milliseconds: 100),
+    expect: () => [
+      RecommendationTvSeriesLoading(),
+      RecommendationTvSeriesEmpty(),
+    ],
+    verify: (bloc) => verify(mockGetRecommendationTvSeries.execute(tId)),
+  );
+
+  blocTest<RecommendationTvSeriesBloc, RecommendationTvSeriesState>(
     'Should emit [Loading, Error] when get recommendations tv series is unsuccessful',
     build: () {
       when(mockGetRecommendationTvSeries.execute(tId))

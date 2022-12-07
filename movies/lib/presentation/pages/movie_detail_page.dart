@@ -240,13 +240,10 @@ class DetailContent extends StatelessWidget {
                                     ),
                                   );
                                 } else if (recommendationsState ==
-                                    RequestState.empty) {
-                                  return const Text('No Recommendations');
-                                } else if (recommendationsState ==
                                     RequestState.error) {
                                   return Text(state.message);
                                 } else {
-                                  return Container();
+                                  return const Text('No Recommendations');
                                 }
                               },
                             ),

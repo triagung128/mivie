@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:core/data/datasources/tv_series_remote_data_source.dart';
+import 'package:core/data/models/season_detail_model.dart';
 import 'package:core/data/models/tv_series_detail_model.dart';
 import 'package:core/data/models/tv_series_response.dart';
 import 'package:core/utils/exception.dart';
@@ -203,6 +204,37 @@ void main() {
           .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
       final call = dataSource.getRecommendation(tId);
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
+  });
+
+  group('Get Season Detail', () {
+    const tId = 1;
+    const tSeasonNumber = 1;
+    final tSeasonDetail = SeasonDetailResponse.fromJson(
+        json.decode(readJson('dummy_data/tv_series/season_detail.json')));
+
+    test('should return season detail when the response code is 200', () async {
+      // arrange
+      when(mockHttpClient
+              .get(Uri.parse('$baseUrl/tv/$tId/season/$tSeasonNumber?$apiKey')))
+          .thenAnswer((_) async => http.Response(
+              readJson('dummy_data/tv_series/season_detail.json'), 200));
+      // act
+      final result = await dataSource.getSeasonDetail(tId, tSeasonNumber);
+      // assert
+      expect(result, equals(tSeasonDetail));
+    });
+
+    test('should throw Server Exception when the response code is 404 or other',
+        () async {
+      // arrange
+      when(mockHttpClient
+              .get(Uri.parse('$baseUrl/tv/$tId/season/$tSeasonNumber?$apiKey')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+      // act
+      final call = dataSource.getSeasonDetail(tId, tSeasonNumber);
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
     });

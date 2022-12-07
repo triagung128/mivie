@@ -86,7 +86,7 @@ class TvSeriesDetailResponse extends Equatable {
   Map<String, dynamic> toJson() => {
         "backdrop_path": backdropPath,
         "first_air_date": firstAirDate,
-        "genres": List<GenreModel>.from(genres.map((x) => x.toJson())),
+        "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "homepage": homepage,
         "id": id,
         "in_production": inProduction,
@@ -101,7 +101,7 @@ class TvSeriesDetailResponse extends Equatable {
         "overview": overview,
         "popularity": popularity,
         "poster_path": posterPath,
-        "seasons": List<SeasonModel>.from(seasons.map((x) => x.toJson())),
+        "seasons": List<dynamic>.from(seasons.map((x) => x.toJson())),
         "status": status,
         "tagline": tagline,
         "type": type,

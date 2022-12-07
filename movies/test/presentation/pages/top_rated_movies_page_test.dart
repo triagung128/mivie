@@ -1,11 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:core/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:movies/presentation/blocs/top_rated/top_rated_movies_bloc.dart';
 import 'package:movies/presentation/pages/top_rated_movies_page.dart';
+
+import '../../dummy_data/dummy_objects.dart';
 
 class MockTopRatedMoviesBloc
     extends MockBloc<TopRatedMoviesEvent, TopRatedMoviesState>
@@ -53,7 +54,7 @@ void main() {
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
     when(() => mockTopRatedMoviesBloc.state)
-        .thenReturn(TopRatedMoviesHasData(const <Movie>[]));
+        .thenReturn(TopRatedMoviesHasData(const [testMovie]));
 
     final listViewFinder = find.byType(ListView);
 

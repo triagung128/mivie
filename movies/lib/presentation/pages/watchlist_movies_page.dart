@@ -33,43 +33,43 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16, left: 8, right: 8, bottom: 8),
-      child: BlocBuilder<WatchlistMoviesBloc, WatchlistMoviesState>(
-        builder: (_, state) {
-          if (state is WatchlistMoviesLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is WatchlistMoviesHasData) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                final movie = state.result[index];
-                return MovieCardList(movie: movie);
-              },
-              itemCount: state.result.length,
-            );
-          } else if (state is WatchlistMoviesEmpty) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(
-                  Icons.visibility_off,
-                  size: 32,
-                ),
-                SizedBox(height: 2),
-                Text('Empty Watchlist'),
-              ],
-            );
-          } else if (state is WatchlistMoviesError) {
-            return Center(
-              key: const Key('error_message'),
-              child: Text(state.message),
-            );
-          } else {
-            return Container();
-          }
-        },
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 16, left: 8, right: 8, bottom: 8),
+        child: BlocBuilder<WatchlistMoviesBloc, WatchlistMoviesState>(
+          builder: (_, state) {
+            if (state is WatchlistMoviesLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is WatchlistMoviesHasData) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final movie = state.result[index];
+                  return MovieCardList(movie: movie);
+                },
+                itemCount: state.result.length,
+              );
+            } else if (state is WatchlistMoviesError) {
+              return Center(
+                key: const Key('error_message'),
+                child: Text(state.message),
+              );
+            } else {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(
+                    Icons.visibility_off,
+                    size: 32,
+                  ),
+                  SizedBox(height: 2),
+                  Text('Empty Watchlist'),
+                ],
+              );
+            }
+          },
+        ),
       ),
     );
   }

@@ -105,6 +105,37 @@ void main() {
     );
 
     blocTest<DetailMovieBloc, DetailMovieState>(
+      'Shoud emit [DetailMovieLoading, DetailMovieLoaded, RecommendationEmpty] when get recommendation movies empty',
+      build: () {
+        when(mockGetDetailMovie.execute(tId))
+            .thenAnswer((_) async => const Right(testMovieDetail));
+        when(mockGetRecommendationMovies.execute(tId))
+            .thenAnswer((_) async => const Right([]));
+        return detailMovieBloc;
+      },
+      act: (bloc) => bloc.add(FetchDetailMovie(tId)),
+      expect: () => [
+        DetailMovieState.initial().copyWith(
+          movieDetailState: RequestState.loading,
+        ),
+        DetailMovieState.initial().copyWith(
+          movieRecommendationsState: RequestState.loading,
+          movieDetailState: RequestState.loaded,
+          movieDetail: testMovieDetail,
+        ),
+        DetailMovieState.initial().copyWith(
+          movieDetailState: RequestState.loaded,
+          movieDetail: testMovieDetail,
+          movieRecommendationsState: RequestState.empty,
+        ),
+      ],
+      verify: (_) {
+        verify(mockGetDetailMovie.execute(tId));
+        verify(mockGetRecommendationMovies.execute(tId));
+      },
+    );
+
+    blocTest<DetailMovieBloc, DetailMovieState>(
       'Shoud emit [DetailMovieLoading, RecomendationLoading, DetailMovieLoaded, RecommendationError] when get recommendation movies failed',
       build: () {
         when(mockGetDetailMovie.execute(tId))

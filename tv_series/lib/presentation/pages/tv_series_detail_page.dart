@@ -218,7 +218,16 @@ class DetailContent extends StatelessWidget {
                                     child: CircularProgressIndicator(),
                                   );
                                 } else if (state
-                                    is RecommendationTvSeriesEmpty) {
+                                    is RecommendationTvSeriesHasData) {
+                                  return TvSeriesRecommendationList(
+                                    tvSeriesList: state.result,
+                                  );
+                                } else if (state
+                                    is RecommendationTvSeriesError) {
+                                  return Center(
+                                    child: Text(state.message),
+                                  );
+                                } else {
                                   return Container(
                                     decoration: BoxDecoration(
                                       color: Colors.grey[800],
@@ -237,18 +246,6 @@ class DetailContent extends StatelessWidget {
                                       ),
                                     ),
                                   );
-                                } else if (state
-                                    is RecommendationTvSeriesHasData) {
-                                  return TvSeriesRecommendationList(
-                                    tvSeriesList: state.result,
-                                  );
-                                } else if (state
-                                    is RecommendationTvSeriesError) {
-                                  return Center(
-                                    child: Text(state.message),
-                                  );
-                                } else {
-                                  return Container();
                                 }
                               },
                             ),

@@ -40,17 +40,15 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
                 },
                 itemCount: state.result.length,
               );
-            } else if (state is PopularMoviesEmpty) {
-              return const Center(
-                child: Text('Empty data'),
-              );
             } else if (state is PopularMoviesError) {
               return Center(
                 key: const Key('error_message'),
                 child: Text(state.message),
               );
             } else {
-              return Container();
+              return const Center(
+                child: Text('Empty data'),
+              );
             }
           },
         ),

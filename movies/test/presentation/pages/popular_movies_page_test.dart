@@ -1,11 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:core/domain/entities/movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:movies/presentation/blocs/popular/popular_movies_bloc.dart';
 import 'package:movies/presentation/pages/popular_movies_page.dart';
+
+import '../../dummy_data/dummy_objects.dart';
 
 class MockPopularMoviesBloc
     extends MockBloc<PopularMoviesEvent, PopularMoviesState>
@@ -52,7 +53,7 @@ void main() {
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
     when(() => mockPopularMoviesBloc.state)
-        .thenReturn(PopularMoviesHasData(const <Movie>[]));
+        .thenReturn(PopularMoviesHasData(const [testMovie]));
 
     final listViewFinder = find.byType(ListView);
 
