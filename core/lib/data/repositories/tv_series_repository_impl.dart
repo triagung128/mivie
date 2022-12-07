@@ -4,6 +4,7 @@ import 'package:core/core.dart';
 import 'package:core/data/datasources/tv_series_local_data_source.dart';
 import 'package:core/data/datasources/tv_series_remote_data_source.dart';
 import 'package:core/data/models/tv_series_table.dart';
+import 'package:core/domain/entities/season_detail.dart';
 import 'package:core/domain/entities/tv_series.dart';
 import 'package:core/domain/entities/tv_series_detail.dart';
 import 'package:core/domain/repositories/tv_series_repository.dart';
@@ -135,6 +136,23 @@ class TvSeriesRepositoryImpl extends TvSeriesRepository {
     try {
       final result = await remoteDataSource.search(query);
       return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return const Left(ServerFailure(''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('Certificated Not Valid:\n${e.message}'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SeasonDetail>> getSeasonDetail(
+    int id,
+    int seasonNumber,
+  ) async {
+    try {
+      final result = await remoteDataSource.getSeasonDetail(id, seasonNumber);
+      return Right(result.toEntity());
     } on ServerException {
       return const Left(ServerFailure(''));
     } on SocketException {

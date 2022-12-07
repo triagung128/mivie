@@ -33,45 +33,42 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16, left: 8, right: 8, bottom: 8),
-      child: BlocBuilder<WatchlistTvSeriesBloc, WatchlistTvSeriesState>(
-        builder: (_, state) {
-          if (state is WatchlistTvSeriesLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is WatchlistTvSeriesEmpty) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(
-                  Icons.visibility_off,
-                  size: 32,
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 16, left: 8, right: 8, bottom: 8),
+        child: BlocBuilder<WatchlistTvSeriesBloc, WatchlistTvSeriesState>(
+          builder: (_, state) {
+            if (state is WatchlistTvSeriesLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is WatchlistTvSeriesHasData) {
+              return ListView.builder(
+                itemBuilder: (context, index) {
+                  final tvSeries = state.result[index];
+                  return TvSeriesCardList(tvSeries: tvSeries);
+                },
+                itemCount: state.result.length,
+              );
+            } else if (state is WatchlistTvSeriesError) {
+              return Center(
+                key: const Key('error_message'),
+                child: Text(state.message),
+              );
+            } else {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.visibility_off, size: 32),
+                    SizedBox(height: 2),
+                    Text('Empty Watchlist'),
+                  ],
                 ),
-                SizedBox(height: 2),
-                Text('Empty Watchlist'),
-              ],
-            );
-          } else if (state is WatchlistTvSeriesHasData) {
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                final tvSeries = state.result[index];
-                return TvSeriesCardList(tvSeries: tvSeries);
-              },
-              itemCount: state.result.length,
-            );
-          } else if (state is WatchlistTvSeriesError) {
-            return Center(
-              key: const Key('error_message'),
-              child: Text(state.message),
-            );
-          } else {
-            return const Center(
-              child: Text('Error Get Watchlist TV Series'),
-            );
-          }
-        },
+              );
+            }
+          },
+        ),
       ),
     );
   }

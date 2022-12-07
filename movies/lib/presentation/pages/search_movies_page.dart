@@ -78,6 +78,7 @@ class SearchMoviesPage extends StatelessWidget {
                   } else if (state is SearchMoviesError) {
                     return Expanded(
                       child: Center(
+                        key: const Key('error_message'),
                         child: Text(state.message),
                       ),
                     );

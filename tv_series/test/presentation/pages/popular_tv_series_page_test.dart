@@ -1,11 +1,12 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:core/domain/entities/tv_series.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:tv_series/presentation/blocs/popular/popular_tv_series_bloc.dart';
 import 'package:tv_series/presentation/pages/popular_tv_series_page.dart';
+
+import '../../dummy_data/dummy_objects.dart';
 
 class MockPopularTvSeriesBloc
     extends MockBloc<PopularTvSeriesEvent, PopularTvSeriesState>
@@ -53,7 +54,7 @@ void main() {
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
     when(() => mockPopularTvSeriesBloc.state)
-        .thenReturn(const PopularTvSeriesHasData(<TvSeries>[]));
+        .thenReturn(const PopularTvSeriesHasData([tTvSeries]));
 
     final listViewFinder = find.byType(ListView);
 

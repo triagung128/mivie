@@ -150,6 +150,7 @@ class TvSeriesList extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.all(8),
             child: InkWell(
+              key: const Key('tvSeriesItem'),
               onTap: () {
                 Navigator.pushNamed(
                   context,

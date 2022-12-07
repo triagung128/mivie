@@ -44,6 +44,22 @@ void main() {
   );
 
   blocTest<NowPlayingMoviesBloc, NowPlayingMoviesState>(
+    'Should emit [Loading, Empty] when data is empty',
+    build: () {
+      when(mockGetNowPlayingMovies.execute())
+          .thenAnswer((_) async => const Right([]));
+      return nowPlayingMoviesBloc;
+    },
+    act: (bloc) => bloc.add(FetchNowPlayingMovies()),
+    wait: const Duration(milliseconds: 100),
+    expect: () => [
+      NowPlayingMoviesLoading(),
+      NowPlayingMoviesEmpty(),
+    ],
+    verify: (bloc) => verify(mockGetNowPlayingMovies.execute()),
+  );
+
+  blocTest<NowPlayingMoviesBloc, NowPlayingMoviesState>(
     'Should emit [Loading, Error] when get now playing movies is unsuccessful',
     build: () {
       when(mockGetNowPlayingMovies.execute())

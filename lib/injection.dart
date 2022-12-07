@@ -29,6 +29,7 @@ import 'package:tv_series/domain/usecases/get_detail_tv_series.dart';
 import 'package:tv_series/domain/usecases/get_now_playing_tv_series.dart';
 import 'package:tv_series/domain/usecases/get_popular_tv_series.dart';
 import 'package:tv_series/domain/usecases/get_recommendation_tv_series.dart';
+import 'package:tv_series/domain/usecases/get_season_detail.dart';
 import 'package:tv_series/domain/usecases/get_top_rated_tv_series.dart';
 import 'package:tv_series/domain/usecases/get_watchlist_status_tv_series.dart';
 import 'package:tv_series/domain/usecases/get_watchlist_tv_series.dart';
@@ -40,6 +41,7 @@ import 'package:tv_series/presentation/blocs/now_playing/now_playing_tv_series_b
 import 'package:tv_series/presentation/blocs/popular/popular_tv_series_bloc.dart';
 import 'package:tv_series/presentation/blocs/recommendation/recommendation_tv_series_bloc.dart';
 import 'package:tv_series/presentation/blocs/search/search_tv_series_bloc.dart';
+import 'package:tv_series/presentation/blocs/season_detail/season_detail_bloc.dart';
 import 'package:tv_series/presentation/blocs/top_rated/top_rated_tv_series_bloc.dart';
 import 'package:tv_series/presentation/blocs/watchlist/watchlist_tv_series_bloc.dart';
 import 'package:tv_series/presentation/blocs/watchlist_status/watchlist_status_tv_series_bloc.dart';
@@ -68,6 +70,7 @@ void init() {
   locator.registerFactory(() => PopularTvSeriesBloc(locator()));
   locator.registerFactory(() => TopRatedTvSeriesBloc(locator()));
   locator.registerFactory(() => DetailTvSeriesBloc(locator()));
+  locator.registerFactory(() => SeasonDetailBloc(locator()));
   locator.registerFactory(() => RecommendationTvSeriesBloc(locator()));
   locator.registerFactory(
     () => WatchlistStatusTvSeriesBloc(
@@ -97,6 +100,7 @@ void init() {
   locator.registerLazySingleton(() => GetTopRatedTvSeries(locator()));
   locator.registerLazySingleton(() => SearchTvSeries(locator()));
   locator.registerLazySingleton(() => GetDetailTvSeries(locator()));
+  locator.registerLazySingleton(() => GetSeasonDetail(locator()));
   locator.registerLazySingleton(() => GetRecommendationTvSeries(locator()));
   locator.registerLazySingleton(() => GetWatchListStatusTvSeries(locator()));
   locator.registerLazySingleton(() => SaveWatchlistTvSeries(locator()));

@@ -140,6 +140,7 @@ class DetailContent extends StatelessWidget {
                                   newState.message != '',
                               builder: (context, state) {
                                 return ElevatedButton(
+                                  key: const Key('watchlistButton'),
                                   onPressed: () async {
                                     if (!state.isAddedToWatchlist) {
                                       context
@@ -201,7 +202,10 @@ class DetailContent extends StatelessWidget {
                               'Seasons',
                               style: kHeading6,
                             ),
-                            TvSeriesSeasonList(seasons: tvSeriesDetail.seasons),
+                            TvSeriesSeasonList(
+                              tvId: tvSeriesDetail.id,
+                              seasons: tvSeriesDetail.seasons,
+                            ),
                             const SizedBox(height: 16),
                             Text(
                               'Recommendations',
@@ -215,7 +219,16 @@ class DetailContent extends StatelessWidget {
                                     child: CircularProgressIndicator(),
                                   );
                                 } else if (state
-                                    is RecommendationTvSeriesEmpty) {
+                                    is RecommendationTvSeriesHasData) {
+                                  return TvSeriesRecommendationList(
+                                    tvSeriesList: state.result,
+                                  );
+                                } else if (state
+                                    is RecommendationTvSeriesError) {
+                                  return Center(
+                                    child: Text(state.message),
+                                  );
+                                } else {
                                   return Container(
                                     decoration: BoxDecoration(
                                       color: Colors.grey[800],
@@ -234,18 +247,6 @@ class DetailContent extends StatelessWidget {
                                       ),
                                     ),
                                   );
-                                } else if (state
-                                    is RecommendationTvSeriesHasData) {
-                                  return TvSeriesRecommendationList(
-                                    tvSeriesList: state.result,
-                                  );
-                                } else if (state
-                                    is RecommendationTvSeriesError) {
-                                  return Center(
-                                    child: Text(state.message),
-                                  );
-                                } else {
-                                  return Container();
                                 }
                               },
                             ),
@@ -276,6 +277,7 @@ class DetailContent extends StatelessWidget {
             backgroundColor: kRichBlack,
             foregroundColor: Colors.white,
             child: IconButton(
+              key: const Key('iconBack'),
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
@@ -347,9 +349,14 @@ class TvSeriesRecommendationList extends StatelessWidget {
 }
 
 class TvSeriesSeasonList extends StatelessWidget {
+  final int tvId;
   final List<Season> seasons;
 
-  const TvSeriesSeasonList({required this.seasons, super.key});
+  const TvSeriesSeasonList({
+    required this.tvId,
+    required this.seasons,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -362,11 +369,14 @@ class TvSeriesSeasonList extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(4.0),
             child: InkWell(
-              // onTap: () => Navigator.pushReplacementNamed(
-              //   context,
-              //   tvSeriesDetailRoute,
-              //   arguments: season.id,
-              // ),
+              onTap: () => Navigator.pushNamed(
+                context,
+                seasonDetailRoute,
+                arguments: {
+                  'id': tvId,
+                  'seasonNumber': season.seasonNumber,
+                },
+              ),
               child: Container(
                 width: 100,
                 decoration: BoxDecoration(
@@ -380,7 +390,9 @@ class TvSeriesSeasonList extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: CachedNetworkImage(
-                          imageUrl: '$baseImageUrl${season.posterPath}',
+                          imageUrl: season.posterPath != null
+                              ? '$baseImageUrl${season.posterPath}'
+                              : 'https://i.ibb.co/TWLKGMY/No-Image-Available.jpg',
                           width: 100,
                           fit: BoxFit.cover,
                           placeholder: (_, __) {

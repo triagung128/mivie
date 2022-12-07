@@ -25,7 +25,10 @@ class _WatchlistPageState extends State<WatchlistPage>
 
   final List<Widget> _listTabs = [
     const Text('Movies'),
-    const Text('TV Series'),
+    const Text(
+      'TV Series',
+      key: Key('tabTvSeriesWatchlist'),
+    ),
   ];
 
   final List<Widget> _listWidget = [

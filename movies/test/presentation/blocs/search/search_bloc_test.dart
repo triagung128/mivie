@@ -22,7 +22,7 @@ void main() {
   });
 
   test('initial state should be empty', () {
-    expect(searchMoviesBloc.state, SearchMoviesEmpty());
+    expect(searchMoviesBloc.state, SearchMoviesInitial());
   });
 
   final tMovieList = <Movie>[testMovie];
@@ -40,6 +40,22 @@ void main() {
     expect: () => [
       SearchMoviesLoading(),
       SearchMoviesHasData(tMovieList),
+    ],
+    verify: (bloc) => verify(mockSearchMovies.execute(tQuery)),
+  );
+
+  blocTest<SearchMoviesBloc, SearchMoviesState>(
+    'Should emit [Loading, Empty] when data is empty',
+    build: () {
+      when(mockSearchMovies.execute(tQuery))
+          .thenAnswer((_) async => const Right([]));
+      return searchMoviesBloc;
+    },
+    act: (bloc) => bloc.add(const SearchMoviesOnQueryChanged(tQuery)),
+    wait: const Duration(milliseconds: 500),
+    expect: () => [
+      SearchMoviesLoading(),
+      SearchMoviesEmpty(),
     ],
     verify: (bloc) => verify(mockSearchMovies.execute(tQuery)),
   );

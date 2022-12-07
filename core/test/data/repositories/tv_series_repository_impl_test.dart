@@ -71,6 +71,20 @@ void main() {
             const Left(ConnectionFailure('Failed to connect to the network'))),
       );
     });
+
+    test(
+        'should return common failure when the call to remote data source is certificate verify failed',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getNowPlaying())
+          .thenThrow(const TlsException());
+      // act
+      final result = await repository.getNowPlaying();
+      // assert
+      verify(mockRemoteDataSource.getNowPlaying());
+      expect(result,
+          equals(const Left(CommonFailure('Certificated Not Valid:\n'))));
+    });
   });
 
   group('Get Popular TV Series', () {
@@ -115,6 +129,19 @@ void main() {
         equals(
             const Left(ConnectionFailure('Failed to connect to the network'))),
       );
+    });
+
+    test(
+        'should return common failure when the call to remote data source is certificate verify failed',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getPopular()).thenThrow(const TlsException());
+      // act
+      final result = await repository.getPopular();
+      // assert
+      verify(mockRemoteDataSource.getPopular());
+      expect(result,
+          equals(const Left(CommonFailure('Certificated Not Valid:\n'))));
     });
   });
 
@@ -161,6 +188,19 @@ void main() {
             const Left(ConnectionFailure('Failed to connect to the network'))),
       );
     });
+
+    test(
+        'should return common failure when the call to remote data source is ceritificate verify failed',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTopRated()).thenThrow(const TlsException());
+      // act
+      final result = await repository.getTopRated();
+      // assert
+      verify(mockRemoteDataSource.getTopRated());
+      expect(result,
+          equals(const Left(CommonFailure('Certificated Not Valid:\n'))));
+    });
   });
 
   group('Get Search TV Series', () {
@@ -200,6 +240,17 @@ void main() {
       // assert
       expect(result,
           const Left(ConnectionFailure('Failed to connect to the network')));
+    });
+
+    test(
+        'should return CommonFailure when call to data source is certificate verify failed',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.search(tQuery)).thenThrow(const TlsException());
+      // act
+      final result = await repository.search(tQuery);
+      // assert
+      expect(result, const Left(CommonFailure('Certificated Not Valid:\n')));
     });
   });
 
@@ -245,6 +296,19 @@ void main() {
           result,
           equals(const Left(
               ConnectionFailure('Failed to connect to the network'))));
+    });
+
+    test(
+        'should return common failure when the call to remote data source is certificate verify failed',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getDetail(tId)).thenThrow(const TlsException());
+      // act
+      final result = await repository.getDetail(tId);
+      // assert
+      verify(mockRemoteDataSource.getDetail(tId));
+      expect(result,
+          equals(const Left(CommonFailure('Certificated Not Valid:\n'))));
     });
   });
 
@@ -293,6 +357,20 @@ void main() {
           result,
           equals(const Left(
               ConnectionFailure('Failed to connect to the network'))));
+    });
+
+    test(
+        'should return common failure when call to remote data source is certificate verify failed',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getRecommendation(tId))
+          .thenThrow(const TlsException());
+      // act
+      final result = await repository.getRecommendation(tId);
+      // assertbuild runner
+      verify(mockRemoteDataSource.getRecommendation(tId));
+      expect(result,
+          equals(const Left(CommonFailure('Certificated Not Valid:\n'))));
     });
   });
 
@@ -363,6 +441,76 @@ void main() {
       // assert
       final resultList = result.getOrElse(() => []);
       expect(resultList, [tWatchlistTvSeries]);
+    });
+
+    test('should return database failure when get data unsuccessful', () async {
+      // arrange
+      when(mockLocalDataSource.getWatchlist())
+          .thenThrow(DatabaseException('Failed to remove watchlist'));
+      // act
+      final result = await repository.getWatchlist();
+      // assert
+      expect(result, const Left(DatabaseFailure('Failed to remove watchlist')));
+    });
+  });
+
+  group('Get Detail Season', () {
+    const tId = 1;
+    const tSeasonNumber = 1;
+
+    test(
+        'should return Season data when the call to remote data source is successful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getSeasonDetail(tId, tSeasonNumber))
+          .thenAnswer((_) async => tSeasonDetailResponse);
+      // act
+      final result = await repository.getSeasonDetail(tId, tSeasonNumber);
+      // assert
+      verify(mockRemoteDataSource.getSeasonDetail(tId, tSeasonNumber));
+      expect(result, equals(const Right(tSeasonDetail)));
+    });
+
+    test(
+        'should return Server Failure when the call to remote data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getDetail(tId)).thenThrow(ServerException());
+      // act
+      final result = await repository.getDetail(tId);
+      // assert
+      verify(mockRemoteDataSource.getDetail(tId));
+      expect(result, equals(const Left(ServerFailure(''))));
+    });
+
+    test(
+        'should return connection failure when the device is not connected to internet',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getSeasonDetail(tId, tSeasonNumber))
+          .thenThrow(const SocketException('Failed to connect to the network'));
+      // act
+      final result = await repository.getSeasonDetail(tId, tSeasonNumber);
+      // assert
+      verify(mockRemoteDataSource.getSeasonDetail(tId, tSeasonNumber));
+      expect(
+          result,
+          equals(const Left(
+              ConnectionFailure('Failed to connect to the network'))));
+    });
+
+    test(
+        'should return common failure when the call to remote data source is certificate verify failed',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getSeasonDetail(tId, tSeasonNumber))
+          .thenThrow(const TlsException());
+      // act
+      final result = await repository.getSeasonDetail(tId, tSeasonNumber);
+      // assert
+      verify(mockRemoteDataSource.getSeasonDetail(tId, tSeasonNumber));
+      expect(result,
+          equals(const Left(CommonFailure('Certificated Not Valid:\n'))));
     });
   });
 }

@@ -44,6 +44,22 @@ void main() {
   );
 
   blocTest<PopularMoviesBloc, PopularMoviesState>(
+    'Should emit [Loading, Empty] when data is empty',
+    build: () {
+      when(mockGetPopularMovies.execute())
+          .thenAnswer((_) async => const Right([]));
+      return popularMoviesBloc;
+    },
+    act: (bloc) => bloc.add(FetchPopularMovies()),
+    wait: const Duration(milliseconds: 100),
+    expect: () => [
+      PopularMoviesLoading(),
+      PopularMoviesEmpty(),
+    ],
+    verify: (bloc) => verify(mockGetPopularMovies.execute()),
+  );
+
+  blocTest<PopularMoviesBloc, PopularMoviesState>(
     'Should emit [Loading, Error] when get popular movies is unsuccessful',
     build: () {
       when(mockGetPopularMovies.execute())

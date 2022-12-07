@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:core/core.dart';
+import 'package:core/data/models/season_detail_model.dart';
 import 'package:core/data/models/tv_series_detail_model.dart';
 import 'package:core/data/models/tv_series_model.dart';
 import 'package:core/data/models/tv_series_response.dart';
@@ -13,6 +14,7 @@ abstract class TvSeriesRemoteDataSource {
   Future<List<TvSeriesModel>> search(String query);
   Future<TvSeriesDetailResponse> getDetail(int id);
   Future<List<TvSeriesModel>> getRecommendation(int id);
+  Future<SeasonDetailResponse> getSeasonDetail(int id, int seasonNumber);
 }
 
 class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
@@ -85,6 +87,18 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<SeasonDetailResponse> getSeasonDetail(int id, int seasonNumber) async {
+    final response = await client
+        .get(Uri.parse('$baseUrl/tv/$id/season/$seasonNumber?$apiKey'));
+
+    if (response.statusCode == 200) {
+      return SeasonDetailResponse.fromJson(json.decode(response.body));
     } else {
       throw ServerException();
     }

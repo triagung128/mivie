@@ -56,19 +56,23 @@ void main() {
     final watchlistButtonIcon = find.byIcon(Icons.add);
 
     await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: tId)));
+    await tester.pump();
+
+    await tester.tap(find.byType(ElevatedButton));
+    await tester.pump();
 
     expect(watchlistButtonIcon, findsOneWidget);
   });
 
   testWidgets(
-      'Watchlist button should dispay check icon when movie is added to wathclist',
+      'Watchlist button should display check icon when movie is added to wathclist',
       (WidgetTester tester) async {
     when(() => mockDetailMovieBloc.state).thenReturn(
       DetailMovieState.initial().copyWith(
         movieDetailState: RequestState.loaded,
         movieDetail: testMovieDetail,
         movieRecommendationsState: RequestState.loaded,
-        movieRecommendations: <Movie>[],
+        movieRecommendations: [testMovie],
         isAddedToWatchlist: true,
       ),
     );
@@ -76,6 +80,10 @@ void main() {
     final watchlistButtonIcon = find.byIcon(Icons.check);
 
     await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: tId)));
+    await tester.pump();
+
+    await tester.tap(find.byType(ElevatedButton));
+    await tester.pump();
 
     expect(watchlistButtonIcon, findsOneWidget);
   });
@@ -89,7 +97,7 @@ void main() {
           isAddedToWatchlist: false,
         ),
         DetailMovieState.initial().copyWith(
-          isAddedToWatchlist: true,
+          isAddedToWatchlist: false,
           watchlistMessage: 'Added to Watchlist',
         ),
       ]),
@@ -138,5 +146,64 @@ void main() {
 
     expect(alertDialog, findsOneWidget);
     expect(textMessage, findsOneWidget);
+  });
+
+  testWidgets(
+      'Movie detail page should display error text when no internet network',
+      (WidgetTester tester) async {
+    when(() => mockDetailMovieBloc.state).thenReturn(
+      DetailMovieState.initial().copyWith(
+        movieDetailState: RequestState.error,
+        message: 'Failed to connect to the network',
+      ),
+    );
+
+    final textErrorBarFinder = find.text('Failed to connect to the network');
+
+    await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
+    await tester.pump();
+
+    expect(textErrorBarFinder, findsOneWidget);
+  });
+
+  testWidgets(
+      'Recommendations Movies should display error text when data is empty',
+      (WidgetTester tester) async {
+    when(() => mockDetailMovieBloc.state).thenReturn(
+      DetailMovieState.initial().copyWith(
+        movieDetailState: RequestState.loaded,
+        movieDetail: testMovieDetail,
+        movieRecommendationsState: RequestState.empty,
+        isAddedToWatchlist: false,
+      ),
+    );
+
+    final textErrorBarFinder = find.text('No Recommendations');
+
+    await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
+    await tester.pump();
+
+    expect(textErrorBarFinder, findsOneWidget);
+  });
+
+  testWidgets(
+      'Recommendations Movies should display error text when get data is unsuccesful',
+      (WidgetTester tester) async {
+    when(() => mockDetailMovieBloc.state).thenReturn(
+      DetailMovieState.initial().copyWith(
+        movieDetailState: RequestState.loaded,
+        movieDetail: testMovieDetail,
+        movieRecommendationsState: RequestState.error,
+        message: 'Error',
+        isAddedToWatchlist: false,
+      ),
+    );
+
+    final textErrorBarFinder = find.text('Error');
+
+    await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: 1)));
+    await tester.pump();
+
+    expect(textErrorBarFinder, findsOneWidget);
   });
 }

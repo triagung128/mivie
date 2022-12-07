@@ -1,0 +1,80 @@
+{
+    "air_date": "2007-11-15",
+    "episodes": [
+      {
+        "air_date": "2007-11-15",
+        "episode_number": 1,
+        "id": 256902,
+        "name": "Episode One",
+        "overview": "In the first episode we get to meet the estate agents and find out about Danny's unique approach to the business. Today Danny's clients are a couple who aren't what they seem on face value and Danny picks up on this.",
+        "production_code": "",
+        "runtime": 60,
+        "season_number": 1,
+        "show_id": 3624,
+        "still_path": null,
+        "vote_average": 0.0,
+        "vote_count": 0,
+        "crew": [
+          {
+            "department": "Directing",
+            "job": "Director",
+            "credit_id": "5257539c19c29531db119af1",
+            "adult": false,
+            "gender": 1,
+            "id": 1234395,
+            "known_for_department": "Directing",
+            "name": "Cilla Ware",
+            "original_name": "Cilla Ware",
+            "popularity": 1.614,
+            "profile_path": null
+          }
+        ],
+        "guest_stars": [
+          {
+            "character": "",
+            "credit_id": "574b38dbc3a3683561000379",
+            "order": 1,
+            "adult": false,
+            "gender": 1,
+            "id": 7063,
+            "known_for_department": "Acting",
+            "name": "Nina Sosanya",
+            "original_name": "Nina Sosanya",
+            "popularity": 6.429,
+            "profile_path": "/nKqRWTF8hCsyjiSRCNMyShbmvrg.jpg"
+          },
+          {
+            "character": "",
+            "credit_id": "574b39109251412d29001a24",
+            "order": 3,
+            "adult": false,
+            "gender": 2,
+            "id": 984,
+            "known_for_department": "Acting",
+            "name": "Nicholas Rowe",
+            "original_name": "Nicholas Rowe",
+            "popularity": 9.179,
+            "profile_path": "/mAR7cSZO9V9v0fFlDxiKDfvHlkQ.jpg"
+          },
+          {
+            "character": "",
+            "credit_id": "574b394e925141362d001c8e",
+            "order": 7,
+            "adult": false,
+            "gender": 2,
+            "id": 176201,
+            "known_for_department": "Acting",
+            "name": "Grant Masters",
+            "original_name": "Grant Masters",
+            "popularity": 1.799,
+            "profile_path": "/gtk4vSQzXNb0f8qSZPp6t9vUcSJ.jpg"
+          }
+        ]
+      }
+    ],
+    "name": "Season 1",
+    "overview": "",
+    "id": 10938,
+    "poster_path": null,
+    "season_number": 1
+  }

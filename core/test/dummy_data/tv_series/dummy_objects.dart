@@ -1,10 +1,14 @@
+import 'package:core/data/models/episode_model.dart';
 import 'package:core/data/models/genre_model.dart';
+import 'package:core/data/models/season_detail_model.dart';
 import 'package:core/data/models/season_model.dart';
 import 'package:core/data/models/tv_series_detail_model.dart';
 import 'package:core/data/models/tv_series_model.dart';
 import 'package:core/data/models/tv_series_table.dart';
+import 'package:core/domain/entities/episode.dart';
 import 'package:core/domain/entities/genre.dart';
 import 'package:core/domain/entities/season.dart';
+import 'package:core/domain/entities/season_detail.dart';
 import 'package:core/domain/entities/tv_series.dart';
 import 'package:core/domain/entities/tv_series_detail.dart';
 
@@ -126,4 +130,50 @@ const tWatchlistTvSeries = TvSeries.watchlist(
   name: 'name',
   posterPath: 'posterPath',
   overview: 'overview',
+);
+
+const tSeasonDetailResponse = SeasonDetailResponse(
+  id: 1,
+  airDate: '2020-10-10',
+  episodes: [
+    EpisodeModel(
+      airDate: '2020-10-10',
+      episodeNumber: 1,
+      id: 1,
+      name: 'name',
+      overview: 'overview',
+      productionCode: 'productionCode',
+      seasonNumber: 1,
+      stillPath: 'stillPath',
+      voteAverage: 8.3,
+      voteCount: 1500,
+    )
+  ],
+  name: 'name',
+  overview: 'overview',
+  posterPath: 'posterPath',
+  seasonNumber: 1,
+);
+
+const tSeasonDetail = SeasonDetail(
+  id: 1,
+  airDate: '2020-10-10',
+  episodes: [
+    Episode(
+      airDate: '2020-10-10',
+      episodeNumber: 1,
+      id: 1,
+      name: 'name',
+      overview: 'overview',
+      productionCode: 'productionCode',
+      seasonNumber: 1,
+      stillPath: 'stillPath',
+      voteAverage: 8.3,
+      voteCount: 1500,
+    )
+  ],
+  name: 'name',
+  overview: 'overview',
+  posterPath: 'posterPath',
+  seasonNumber: 1,
 );

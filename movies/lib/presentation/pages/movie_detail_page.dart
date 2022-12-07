@@ -134,6 +134,7 @@ class DetailContent extends StatelessWidget {
                               style: kHeading5,
                             ),
                             ElevatedButton(
+                              key: const Key('watchlistButton'),
                               onPressed: () {
                                 if (!isAddedWatchlist) {
                                   context
@@ -240,13 +241,10 @@ class DetailContent extends StatelessWidget {
                                     ),
                                   );
                                 } else if (recommendationsState ==
-                                    RequestState.empty) {
-                                  return const Text('No Recommendations');
-                                } else if (recommendationsState ==
                                     RequestState.error) {
                                   return Text(state.message);
                                 } else {
-                                  return Container();
+                                  return const Text('No Recommendations');
                                 }
                               },
                             ),
@@ -277,6 +275,7 @@ class DetailContent extends StatelessWidget {
             backgroundColor: kRichBlack,
             foregroundColor: Colors.white,
             child: IconButton(
+              key: const Key('iconBack'),
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
