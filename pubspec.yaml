@@ -33,13 +33,13 @@ dependencies:
   firebase_core: ^2.3.0
   firebase_crashlytics: ^3.0.6
   about:
-    path: about
+    path: packages/about
   core:
-    path: core
+    path: packages/core
   tv_series:
-    path: tv_series
+    path: packages/tv_series
   movies:
-    path: movies
+    path: packages/movies
 
 dev_dependencies:
   flutter_test:
