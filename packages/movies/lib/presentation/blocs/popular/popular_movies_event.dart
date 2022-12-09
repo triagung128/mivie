@@ -1,10 +1,12 @@
 part of 'popular_movies_bloc.dart';
 
 abstract class PopularMoviesEvent extends Equatable {
-  // coverage:ignore-start
-  @override
-  List<Object?> get props => [];
-  // coverage:ignore-end
+  const PopularMoviesEvent();
 }
 
-class FetchPopularMovies extends PopularMoviesEvent {}
+class FetchPopularMovies extends PopularMoviesEvent {
+  const FetchPopularMovies();
+
+  @override
+  List<Object> get props => [];
+}

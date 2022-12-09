@@ -41,7 +41,10 @@ void main() {
       SearchMoviesLoading(),
       SearchMoviesHasData(tMovieList),
     ],
-    verify: (bloc) => verify(mockSearchMovies.execute(tQuery)),
+    verify: (_) => [
+      verify(mockSearchMovies.execute(tQuery)),
+      const SearchMoviesOnQueryChanged(tQuery).props,
+    ],
   );
 
   blocTest<SearchMoviesBloc, SearchMoviesState>(
@@ -57,7 +60,10 @@ void main() {
       SearchMoviesLoading(),
       SearchMoviesEmpty(),
     ],
-    verify: (bloc) => verify(mockSearchMovies.execute(tQuery)),
+    verify: (_) => [
+      verify(mockSearchMovies.execute(tQuery)),
+      const SearchMoviesOnQueryChanged(tQuery).props,
+    ],
   );
 
   blocTest<SearchMoviesBloc, SearchMoviesState>(
@@ -73,8 +79,9 @@ void main() {
       SearchMoviesLoading(),
       const SearchMoviesError('Server Failure'),
     ],
-    verify: (bloc) {
-      verify(mockSearchMovies.execute(tQuery));
-    },
+    verify: (_) => [
+      verify(mockSearchMovies.execute(tQuery)),
+      const SearchMoviesOnQueryChanged(tQuery).props,
+    ],
   );
 }

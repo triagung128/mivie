@@ -42,7 +42,10 @@ void main() {
       RecommendationTvSeriesLoading(),
       RecommendationTvSeriesHasData(tTvSeriesList),
     ],
-    verify: (bloc) => verify(mockGetRecommendationTvSeries.execute(tId)),
+    verify: (bloc) => [
+      verify(mockGetRecommendationTvSeries.execute(tId)),
+      const FetchRecommendationTvSeries(tId).props,
+    ],
   );
 
   blocTest<RecommendationTvSeriesBloc, RecommendationTvSeriesState>(
@@ -58,7 +61,10 @@ void main() {
       RecommendationTvSeriesLoading(),
       RecommendationTvSeriesEmpty(),
     ],
-    verify: (bloc) => verify(mockGetRecommendationTvSeries.execute(tId)),
+    verify: (_) => [
+      verify(mockGetRecommendationTvSeries.execute(tId)),
+      const FetchRecommendationTvSeries(tId).props,
+    ],
   );
 
   blocTest<RecommendationTvSeriesBloc, RecommendationTvSeriesState>(
@@ -73,6 +79,9 @@ void main() {
       RecommendationTvSeriesLoading(),
       const RecommendationTvSeriesError('Server Failure'),
     ],
-    verify: (bloc) => verify(mockGetRecommendationTvSeries.execute(tId)),
+    verify: (_) => [
+      verify(mockGetRecommendationTvSeries.execute(tId)),
+      const FetchRecommendationTvSeries(tId).props,
+    ],
   );
 }

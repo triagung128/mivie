@@ -34,13 +34,16 @@ void main() {
           .thenAnswer((_) async => Right(tMoviesList));
       return topRatedMoviesBloc;
     },
-    act: (bloc) => bloc.add(FetchTopRatedMovies()),
+    act: (bloc) => bloc.add(const FetchTopRatedMovies()),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       TopRatedMoviesLoading(),
       TopRatedMoviesHasData(tMoviesList),
     ],
-    verify: (bloc) => verify(mockGetTopRatedMovies.execute()),
+    verify: (_) => [
+      verify(mockGetTopRatedMovies.execute()),
+      const FetchTopRatedMovies().props,
+    ],
   );
 
   blocTest<TopRatedMoviesBloc, TopRatedMoviesState>(
@@ -50,13 +53,16 @@ void main() {
           .thenAnswer((_) async => const Right([]));
       return topRatedMoviesBloc;
     },
-    act: (bloc) => bloc.add(FetchTopRatedMovies()),
+    act: (bloc) => bloc.add(const FetchTopRatedMovies()),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       TopRatedMoviesLoading(),
       TopRatedMoviesEmpty(),
     ],
-    verify: (bloc) => verify(mockGetTopRatedMovies.execute()),
+    verify: (_) => [
+      verify(mockGetTopRatedMovies.execute()),
+      const FetchTopRatedMovies().props,
+    ],
   );
 
   blocTest<TopRatedMoviesBloc, TopRatedMoviesState>(
@@ -66,11 +72,14 @@ void main() {
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return topRatedMoviesBloc;
     },
-    act: (bloc) => bloc.add(FetchTopRatedMovies()),
+    act: (bloc) => bloc.add(const FetchTopRatedMovies()),
     expect: () => [
       TopRatedMoviesLoading(),
       TopRatedMoviesError('Server Failure'),
     ],
-    verify: (bloc) => verify(mockGetTopRatedMovies.execute()),
+    verify: (_) => [
+      verify(mockGetTopRatedMovies.execute()),
+      const FetchTopRatedMovies().props,
+    ],
   );
 }

@@ -19,9 +19,11 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      context.read<NowPlayingTvSeriesBloc>().add(FetchNowPlayingTvSeries());
-      context.read<PopularTvSeriesBloc>().add(FetchPopularTvSeries());
-      context.read<TopRatedTvSeriesBloc>().add(FetchTopRatedTvSeries());
+      context
+          .read<NowPlayingTvSeriesBloc>()
+          .add(const FetchNowPlayingTvSeries());
+      context.read<PopularTvSeriesBloc>().add(const FetchPopularTvSeries());
+      context.read<TopRatedTvSeriesBloc>().add(const FetchTopRatedTvSeries());
     });
   }
 

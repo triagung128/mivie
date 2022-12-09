@@ -34,13 +34,16 @@ void main() {
           .thenAnswer((_) async => Right(tMovieList));
       return nowPlayingMoviesBloc;
     },
-    act: (bloc) => bloc.add(FetchNowPlayingMovies()),
+    act: (bloc) => bloc.add(const FetchNowPlayingMovies()),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       NowPlayingMoviesLoading(),
       NowPlayingMoviesHasData(tMovieList),
     ],
-    verify: (bloc) => verify(mockGetNowPlayingMovies.execute()),
+    verify: (_) => [
+      verify(mockGetNowPlayingMovies.execute()),
+      const FetchNowPlayingMovies().props,
+    ],
   );
 
   blocTest<NowPlayingMoviesBloc, NowPlayingMoviesState>(
@@ -50,13 +53,16 @@ void main() {
           .thenAnswer((_) async => const Right([]));
       return nowPlayingMoviesBloc;
     },
-    act: (bloc) => bloc.add(FetchNowPlayingMovies()),
+    act: (bloc) => bloc.add(const FetchNowPlayingMovies()),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       NowPlayingMoviesLoading(),
       NowPlayingMoviesEmpty(),
     ],
-    verify: (bloc) => verify(mockGetNowPlayingMovies.execute()),
+    verify: (_) => [
+      verify(mockGetNowPlayingMovies.execute()),
+      const FetchNowPlayingMovies().props,
+    ],
   );
 
   blocTest<NowPlayingMoviesBloc, NowPlayingMoviesState>(
@@ -66,11 +72,14 @@ void main() {
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return nowPlayingMoviesBloc;
     },
-    act: (bloc) => bloc.add(FetchNowPlayingMovies()),
+    act: (bloc) => bloc.add(const FetchNowPlayingMovies()),
     expect: () => [
       NowPlayingMoviesLoading(),
       NowPlayingMoviesError('Server Failure'),
     ],
-    verify: (bloc) => verify(mockGetNowPlayingMovies.execute()),
+    verify: (_) => [
+      verify(mockGetNowPlayingMovies.execute()),
+      const FetchNowPlayingMovies().props,
+    ],
   );
 }

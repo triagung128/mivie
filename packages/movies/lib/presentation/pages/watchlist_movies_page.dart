@@ -16,8 +16,8 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => context.read<WatchlistMoviesBloc>().add(FetchWatchlistMovies()));
+    Future.microtask(() =>
+        context.read<WatchlistMoviesBloc>().add(const FetchWatchlistMovies()));
   }
 
   @override
@@ -28,7 +28,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
 
   @override
   void didPopNext() {
-    context.read<WatchlistMoviesBloc>().add(FetchWatchlistMovies());
+    context.read<WatchlistMoviesBloc>().add(const FetchWatchlistMovies());
   }
 
   @override

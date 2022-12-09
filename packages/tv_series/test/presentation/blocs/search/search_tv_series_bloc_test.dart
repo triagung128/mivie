@@ -41,7 +41,10 @@ void main() {
       SearchTvSeriesLoading(),
       SearchTvSeriesHasData(tTvSeriesList),
     ],
-    verify: (bloc) => verify(mockSearchTvSeries.execute(tQuery)),
+    verify: (_) => [
+      verify(mockSearchTvSeries.execute(tQuery)),
+      const SearchTvSeriesOnQueryChanged(tQuery).props,
+    ],
   );
 
   blocTest<SearchTvSeriesBloc, SearchTvSeriesState>(
@@ -57,7 +60,10 @@ void main() {
       SearchTvSeriesLoading(),
       SearchTvSeriesEmpty(),
     ],
-    verify: (bloc) => verify(mockSearchTvSeries.execute(tQuery)),
+    verify: (_) => [
+      verify(mockSearchTvSeries.execute(tQuery)),
+      const SearchTvSeriesOnQueryChanged(tQuery).props,
+    ],
   );
 
   blocTest<SearchTvSeriesBloc, SearchTvSeriesState>(
@@ -73,8 +79,9 @@ void main() {
       SearchTvSeriesLoading(),
       const SearchTvSeriesError('Server Failure'),
     ],
-    verify: (bloc) {
-      verify(mockSearchTvSeries.execute(tQuery));
-    },
+    verify: (_) => [
+      verify(mockSearchTvSeries.execute(tQuery)),
+      const SearchTvSeriesOnQueryChanged(tQuery).props,
+    ],
   );
 }

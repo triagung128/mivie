@@ -34,12 +34,15 @@ void main() {
           .thenAnswer((_) async => Right(tWatchlistMoviesList));
       return watchlistMoviesBloc;
     },
-    act: (bloc) => bloc.add(FetchWatchlistMovies()),
+    act: (bloc) => bloc.add(const FetchWatchlistMovies()),
     expect: () => [
       WatchlistMoviesLoading(),
       WatchlistMoviesHasData(tWatchlistMoviesList),
     ],
-    verify: (bloc) => verify(mockGetWatchlistMovies.execute()),
+    verify: (_) => [
+      verify(mockGetWatchlistMovies.execute()),
+      const FetchWatchlistMovies().props,
+    ],
   );
 
   blocTest<WatchlistMoviesBloc, WatchlistMoviesState>(
@@ -49,12 +52,15 @@ void main() {
           .thenAnswer((_) async => const Right([]));
       return watchlistMoviesBloc;
     },
-    act: (bloc) => bloc.add(FetchWatchlistMovies()),
+    act: (bloc) => bloc.add(const FetchWatchlistMovies()),
     expect: () => [
       WatchlistMoviesLoading(),
       WatchlistMoviesEmpty(),
     ],
-    verify: (bloc) => verify(mockGetWatchlistMovies.execute()),
+    verify: (_) => [
+      verify(mockGetWatchlistMovies.execute()),
+      const FetchWatchlistMovies().props,
+    ],
   );
 
   blocTest<WatchlistMoviesBloc, WatchlistMoviesState>(
@@ -64,11 +70,14 @@ void main() {
           (_) async => const Left(DatabaseFailure('Database Failure')));
       return watchlistMoviesBloc;
     },
-    act: (bloc) => bloc.add(FetchWatchlistMovies()),
+    act: (bloc) => bloc.add(const FetchWatchlistMovies()),
     expect: () => [
       WatchlistMoviesLoading(),
       WatchlistMoviesError('Database Failure'),
     ],
-    verify: (bloc) => verify(mockGetWatchlistMovies.execute()),
+    verify: (_) => [
+      verify(mockGetWatchlistMovies.execute()),
+      const FetchWatchlistMovies().props,
+    ],
   );
 }

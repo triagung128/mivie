@@ -38,7 +38,10 @@ void main() {
       DetailTvSeriesLoading(),
       const DetailTvSeriesHasData(tTvSeriesDetail),
     ],
-    verify: (bloc) => verify(mockGetDetailTvSeries.execute(tId)),
+    verify: (_) => [
+      verify(mockGetDetailTvSeries.execute(tId)),
+      const FetchDetailTvSeries(tId).props,
+    ],
   );
 
   blocTest<DetailTvSeriesBloc, DetailTvSeriesState>(
@@ -53,6 +56,9 @@ void main() {
       DetailTvSeriesLoading(),
       const DetailTvSeriesError('Server Failure'),
     ],
-    verify: (bloc) => verify(mockGetDetailTvSeries.execute(tId)),
+    verify: (_) => [
+      verify(mockGetDetailTvSeries.execute(tId)),
+      const FetchDetailTvSeries(tId).props,
+    ],
   );
 }

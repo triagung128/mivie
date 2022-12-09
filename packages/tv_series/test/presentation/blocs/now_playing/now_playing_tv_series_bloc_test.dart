@@ -34,13 +34,16 @@ void main() {
           .thenAnswer((_) async => Right(tTvSeriesList));
       return nowPlayingTvSeriesBloc;
     },
-    act: (bloc) => bloc.add(FetchNowPlayingTvSeries()),
+    act: (bloc) => bloc.add(const FetchNowPlayingTvSeries()),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       NowPlayingTvSeriesLoading(),
       NowPlayingTvSeriesHasData(tTvSeriesList),
     ],
-    verify: (bloc) => verify(mockGetNowPlayingTvSeries.execute()),
+    verify: (_) => [
+      verify(mockGetNowPlayingTvSeries.execute()),
+      const FetchNowPlayingTvSeries().props,
+    ],
   );
 
   blocTest<NowPlayingTvSeriesBloc, NowPlayingTvSeriesState>(
@@ -50,11 +53,14 @@ void main() {
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return nowPlayingTvSeriesBloc;
     },
-    act: (bloc) => bloc.add(FetchNowPlayingTvSeries()),
+    act: (bloc) => bloc.add(const FetchNowPlayingTvSeries()),
     expect: () => [
       NowPlayingTvSeriesLoading(),
       const NowPlayingTvSeriesError('Server Failure'),
     ],
-    verify: (bloc) => verify(mockGetNowPlayingTvSeries.execute()),
+    verify: (_) => [
+      verify(mockGetNowPlayingTvSeries.execute()),
+      const FetchNowPlayingTvSeries().props,
+    ],
   );
 }

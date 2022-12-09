@@ -1,10 +1,12 @@
 part of 'now_playing_movies_bloc.dart';
 
 abstract class NowPlayingMoviesEvent extends Equatable {
-  // coverage:ignore-start
-  @override
-  List<Object?> get props => [];
-  // coverage:ignore-end
+  const NowPlayingMoviesEvent();
 }
 
-class FetchNowPlayingMovies extends NowPlayingMoviesEvent {}
+class FetchNowPlayingMovies extends NowPlayingMoviesEvent {
+  const FetchNowPlayingMovies();
+
+  @override
+  List<Object> get props => [];
+}

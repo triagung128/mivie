@@ -42,7 +42,10 @@ void main() {
       SeasonDetailLoading(),
       const SeasonDetailHasData(tSeasonDetail),
     ],
-    verify: (bloc) => verify(mockGetSeasonDetail.execute(tId, tSeasonNumber)),
+    verify: (bloc) => [
+      verify(mockGetSeasonDetail.execute(tId, tSeasonNumber)),
+      const FetchSeasonDetail(id: tId, seasonNumber: tSeasonNumber).props,
+    ],
   );
 
   blocTest<SeasonDetailBloc, SeasonDetailState>(
@@ -60,6 +63,9 @@ void main() {
       SeasonDetailLoading(),
       const SeasonDetailError('Server Failure'),
     ],
-    verify: (bloc) => verify(mockGetSeasonDetail.execute(tId, tSeasonNumber)),
+    verify: (bloc) => [
+      verify(mockGetSeasonDetail.execute(tId, tSeasonNumber)),
+      const FetchSeasonDetail(id: tId, seasonNumber: tSeasonNumber).props,
+    ],
   );
 }

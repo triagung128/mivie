@@ -34,13 +34,16 @@ void main() {
           .thenAnswer((_) async => Right(tMoviesList));
       return popularMoviesBloc;
     },
-    act: (bloc) => bloc.add(FetchPopularMovies()),
+    act: (bloc) => bloc.add(const FetchPopularMovies()),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       PopularMoviesLoading(),
       PopularMoviesHasData(tMoviesList),
     ],
-    verify: (bloc) => verify(mockGetPopularMovies.execute()),
+    verify: (_) => [
+      verify(mockGetPopularMovies.execute()),
+      const FetchPopularMovies().props,
+    ],
   );
 
   blocTest<PopularMoviesBloc, PopularMoviesState>(
@@ -50,13 +53,16 @@ void main() {
           .thenAnswer((_) async => const Right([]));
       return popularMoviesBloc;
     },
-    act: (bloc) => bloc.add(FetchPopularMovies()),
+    act: (bloc) => bloc.add(const FetchPopularMovies()),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       PopularMoviesLoading(),
       PopularMoviesEmpty(),
     ],
-    verify: (bloc) => verify(mockGetPopularMovies.execute()),
+    verify: (_) => [
+      verify(mockGetPopularMovies.execute()),
+      const FetchPopularMovies().props,
+    ],
   );
 
   blocTest<PopularMoviesBloc, PopularMoviesState>(
@@ -66,11 +72,14 @@ void main() {
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return popularMoviesBloc;
     },
-    act: (bloc) => bloc.add(FetchPopularMovies()),
+    act: (bloc) => bloc.add(const FetchPopularMovies()),
     expect: () => [
       PopularMoviesLoading(),
       PopularMoviesError('Server Failure'),
     ],
-    verify: (bloc) => verify(mockGetPopularMovies.execute()),
+    verify: (_) => [
+      verify(mockGetPopularMovies.execute()),
+      const FetchPopularMovies().props,
+    ],
   );
 }

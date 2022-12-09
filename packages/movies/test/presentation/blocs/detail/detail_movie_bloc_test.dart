@@ -56,7 +56,7 @@ void main() {
             .thenAnswer((_) async => Right(testMovieList));
         return detailMovieBloc;
       },
-      act: (bloc) => bloc.add(FetchDetailMovie(tId)),
+      act: (bloc) => bloc.add(const FetchDetailMovie(tId)),
       expect: () => [
         DetailMovieState.initial().copyWith(
           movieDetailState: RequestState.loading,
@@ -76,6 +76,7 @@ void main() {
       verify: (_) {
         verify(mockGetDetailMovie.execute(tId));
         verify(mockGetRecommendationMovies.execute(tId));
+        const FetchDetailMovie(tId).props;
       },
     );
 
@@ -88,7 +89,7 @@ void main() {
             .thenAnswer((_) async => Right(testMovieList));
         return detailMovieBloc;
       },
-      act: (bloc) => bloc.add(FetchDetailMovie(tId)),
+      act: (bloc) => bloc.add(const FetchDetailMovie(tId)),
       expect: () => [
         DetailMovieState.initial().copyWith(
           movieDetailState: RequestState.loading,
@@ -101,6 +102,7 @@ void main() {
       verify: (_) {
         verify(mockGetDetailMovie.execute(tId));
         verify(mockGetRecommendationMovies.execute(tId));
+        const FetchDetailMovie(tId).props;
       },
     );
 
@@ -113,7 +115,7 @@ void main() {
             .thenAnswer((_) async => const Right([]));
         return detailMovieBloc;
       },
-      act: (bloc) => bloc.add(FetchDetailMovie(tId)),
+      act: (bloc) => bloc.add(const FetchDetailMovie(tId)),
       expect: () => [
         DetailMovieState.initial().copyWith(
           movieDetailState: RequestState.loading,
@@ -132,6 +134,7 @@ void main() {
       verify: (_) {
         verify(mockGetDetailMovie.execute(tId));
         verify(mockGetRecommendationMovies.execute(tId));
+        const FetchDetailMovie(tId).props;
       },
     );
 
@@ -144,7 +147,7 @@ void main() {
             .thenAnswer((_) async => const Left(ConnectionFailure('Failed')));
         return detailMovieBloc;
       },
-      act: (bloc) => bloc.add(FetchDetailMovie(tId)),
+      act: (bloc) => bloc.add(const FetchDetailMovie(tId)),
       expect: () => [
         DetailMovieState.initial().copyWith(
           movieDetailState: RequestState.loading,
@@ -164,6 +167,7 @@ void main() {
       verify: (_) {
         verify(mockGetDetailMovie.execute(tId));
         verify(mockGetRecommendationMovies.execute(tId));
+        const FetchDetailMovie(tId).props;
       },
     );
   });
@@ -176,11 +180,14 @@ void main() {
             .thenAnswer((_) async => true);
         return detailMovieBloc;
       },
-      act: (bloc) => bloc.add(LoadWatchlistStatusMovie(tId)),
+      act: (bloc) => bloc.add(const LoadWatchlistStatusMovie(tId)),
       expect: () => [
         DetailMovieState.initial().copyWith(isAddedToWatchlist: true),
       ],
-      verify: (_) => verify(mockGetWatchListStatusMovie.execute(tId)),
+      verify: (_) => [
+        verify(mockGetWatchListStatusMovie.execute(tId)),
+        const LoadWatchlistStatusMovie(tId).props,
+      ],
     );
 
     blocTest<DetailMovieBloc, DetailMovieState>(
@@ -190,11 +197,14 @@ void main() {
             .thenAnswer((_) async => false);
         return detailMovieBloc;
       },
-      act: (bloc) => bloc.add(LoadWatchlistStatusMovie(tId)),
+      act: (bloc) => bloc.add(const LoadWatchlistStatusMovie(tId)),
       expect: () => [
         DetailMovieState.initial().copyWith(isAddedToWatchlist: false),
       ],
-      verify: (_) => verify(mockGetWatchListStatusMovie.execute(tId)),
+      verify: (_) => [
+        verify(mockGetWatchListStatusMovie.execute(tId)),
+        const LoadWatchlistStatusMovie(tId).props,
+      ],
     );
   });
 
@@ -208,7 +218,7 @@ void main() {
             .thenAnswer((_) async => true);
         return detailMovieBloc;
       },
-      act: (bloc) => bloc.add(AddWatchlistMovie(testMovieDetail)),
+      act: (bloc) => bloc.add(const AddWatchlistMovie(testMovieDetail)),
       expect: () => [
         DetailMovieState.initial().copyWith(
           watchlistMessage: 'Added to Watchlist',
@@ -221,6 +231,7 @@ void main() {
       verify: (_) {
         verify(mockSaveWatchlistMovie.execute(testMovieDetail));
         verify(mockGetWatchListStatusMovie.execute(testMovieDetail.id));
+        const AddWatchlistMovie(testMovieDetail).props;
       },
     );
 
@@ -233,13 +244,14 @@ void main() {
             .thenAnswer((_) async => false);
         return detailMovieBloc;
       },
-      act: (bloc) => bloc.add(AddWatchlistMovie(testMovieDetail)),
+      act: (bloc) => bloc.add(const AddWatchlistMovie(testMovieDetail)),
       expect: () => [
         DetailMovieState.initial().copyWith(watchlistMessage: 'Failed'),
       ],
       verify: (_) {
         verify(mockSaveWatchlistMovie.execute(testMovieDetail));
         verify(mockGetWatchListStatusMovie.execute(testMovieDetail.id));
+        const AddWatchlistMovie(testMovieDetail).props;
       },
     );
   });
@@ -254,7 +266,7 @@ void main() {
             .thenAnswer((_) async => false);
         return detailMovieBloc;
       },
-      act: (bloc) => bloc.add(RemoveFromWatchlistMovie(testMovieDetail)),
+      act: (bloc) => bloc.add(const RemoveFromWatchlistMovie(testMovieDetail)),
       expect: () => [
         DetailMovieState.initial().copyWith(
           watchlistMessage: 'Removed from Watchlist',
@@ -264,6 +276,7 @@ void main() {
       verify: (_) {
         verify(mockRemoveWatchlistMovie.execute(testMovieDetail));
         verify(mockGetWatchListStatusMovie.execute(testMovieDetail.id));
+        const RemoveFromWatchlistMovie(testMovieDetail).props;
       },
     );
 
@@ -276,13 +289,14 @@ void main() {
             .thenAnswer((_) async => false);
         return detailMovieBloc;
       },
-      act: (bloc) => bloc.add(RemoveFromWatchlistMovie(testMovieDetail)),
+      act: (bloc) => bloc.add(const RemoveFromWatchlistMovie(testMovieDetail)),
       expect: () => [
         DetailMovieState.initial().copyWith(watchlistMessage: 'Failed'),
       ],
       verify: (_) {
         verify(mockRemoveWatchlistMovie.execute(testMovieDetail));
         verify(mockGetWatchListStatusMovie.execute(testMovieDetail.id));
+        const RemoveFromWatchlistMovie(testMovieDetail).props;
       },
     );
   });

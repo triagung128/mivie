@@ -14,8 +14,8 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => context.read<TopRatedMoviesBloc>().add(FetchTopRatedMovies()));
+    Future.microtask(() =>
+        context.read<TopRatedMoviesBloc>().add(const FetchTopRatedMovies()));
   }
 
   @override

@@ -1,10 +1,12 @@
 part of 'watchlist_movies_bloc.dart';
 
 abstract class WatchlistMoviesEvent extends Equatable {
-  // coverage:ignore-start
-  @override
-  List<Object?> get props => [];
-  // coverage:ignore-end
+  const WatchlistMoviesEvent();
 }
 
-class FetchWatchlistMovies extends WatchlistMoviesEvent {}
+class FetchWatchlistMovies extends WatchlistMoviesEvent {
+  const FetchWatchlistMovies();
+
+  @override
+  List<Object> get props => [];
+}

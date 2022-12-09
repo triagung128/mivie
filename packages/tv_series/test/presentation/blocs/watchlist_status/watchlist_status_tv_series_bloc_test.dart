@@ -47,7 +47,13 @@ void main() {
       act: (bloc) => bloc.add(const LoadWatchlistStatusTvSeries(tId)),
       expect: () => [
         const WatchlistStatusTvSeriesState(
-            isAddedToWatchlist: true, message: ''),
+          isAddedToWatchlist: true,
+          message: '',
+        ),
+      ],
+      verify: (_) => [
+        verify(mockGetWatchListStatusTvSeries.execute(tId)),
+        const LoadWatchlistStatusTvSeries(tId).props,
       ],
     );
   });
@@ -69,9 +75,10 @@ void main() {
           message: 'Added to Watchlist',
         ),
       ],
-      verify: (bloc) => [
+      verify: (_) => [
         verify(mockSaveWatchlistTvSeries.execute(tTvSeriesDetail)),
         verify(mockGetWatchListStatusTvSeries.execute(tId)),
+        const AddWatchlistTvSeries(tTvSeriesDetail).props,
       ],
     );
 
@@ -92,9 +99,10 @@ void main() {
           message: 'Failed Added to Watchlist',
         ),
       ],
-      verify: (bloc) => [
+      verify: (_) => [
         verify(mockSaveWatchlistTvSeries.execute(tTvSeriesDetail)),
         verify(mockGetWatchListStatusTvSeries.execute(tId)),
+        const AddWatchlistTvSeries(tTvSeriesDetail).props,
       ],
     );
   });
@@ -117,9 +125,10 @@ void main() {
           message: 'Removed from Watchlist',
         ),
       ],
-      verify: (bloc) => [
+      verify: (_) => [
         verify(mockRemoveWatchlistTvSeries.execute(tTvSeriesDetail)),
         verify(mockGetWatchListStatusTvSeries.execute(tId)),
+        const RemoveFromWatchlistTvSeries(tTvSeriesDetail).props,
       ],
     );
 
@@ -141,9 +150,10 @@ void main() {
           message: 'Failed Removed from Watchlist',
         ),
       ],
-      verify: (bloc) => [
+      verify: (_) => [
         verify(mockRemoveWatchlistTvSeries.execute(tTvSeriesDetail)),
         verify(mockGetWatchListStatusTvSeries.execute(tId)),
+        const RemoveFromWatchlistTvSeries(tTvSeriesDetail).props,
       ],
     );
   });
