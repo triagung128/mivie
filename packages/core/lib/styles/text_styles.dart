@@ -14,8 +14,8 @@ final TextStyle kBodyText = GoogleFonts.poppins(
 
 // text theme
 final kTextTheme = TextTheme(
-  headline5: kHeading5,
-  headline6: kHeading6,
-  subtitle1: kSubtitle,
-  bodyText2: kBodyText,
+  headlineSmall: kHeading5, //headline5
+  titleLarge: kHeading6, //headline6
+  titleMedium: kSubtitle, //subtitle1
+  bodyMedium: kBodyText, //bodyText2
 );
