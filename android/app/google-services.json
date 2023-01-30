@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:342508318368:android:678dd664e0bd6f5be4a3c5",
+        "mobilesdk_app_id": "1:342508318368:android:dd8555b7518f66efe4a3c5",
         "android_client_info": {
-          "package_name": "com.dicoding.ditonton"
+          "package_name": "com.triagung.ditontonyuk"
         }
       },
       "oauth_client": [
@@ -29,6 +29,13 @@
             {
               "client_id": "342508318368-dblcno0hlcugl2a15cju6mk15e14o1li.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "342508318368-rv9qnnn0mpkf1n9ignjail7qaeno7i4f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dicoding.ditonton"
+              }
             }
           ]
         }

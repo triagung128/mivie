@@ -1,4 +1,4 @@
-package com.dicoding.ditonton
+package com.triagung.ditontonyuk
 
 import io.flutter.embedding.android.FlutterActivity
 

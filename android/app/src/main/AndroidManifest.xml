@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dicoding.ditonton">
+    package="com.triagung.ditontonyuk">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="ditonton"
+        android:label="Ditonton Yuk"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
