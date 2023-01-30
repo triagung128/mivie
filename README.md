@@ -15,7 +15,7 @@ Aplikasi katalog film dan tv series yang merupakan hasil submission akhir kelas 
 - Watchlist Movies & TV Series
 - Season & Episode TV Series
 
-## :computer: Apply Tech Stack
+## :computer: Implementation
 - Flutter Bloc
 - TDD + Clean Architecture
 - Dependency Injection (DI)
