@@ -7,6 +7,9 @@ Aplikasi katalog film dan tv series yang merupakan hasil submission akhir kelas 
 ![Thumbnail 1](https://github.com/triagung128/ditonton-yuk/blob/master/assets/banners/1.png)
 ![Thumbnail 2](https://github.com/triagung128/ditonton-yuk/blob/master/assets/banners/2.png)
 
+## :iphone: Download Apps
+<a href='https://play.google.com/store/apps/details?id=com.triagung.ditontonyuk&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+
 ## :tada: Features App
 - Catalog List Movies & TV Series 
 - Now Playing, Popular & Top Rated
