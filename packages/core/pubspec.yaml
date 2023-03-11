@@ -16,7 +16,7 @@ dependencies:
     path: ../movies
   tv_series:
     path: ../tv_series
-  google_fonts: ^3.0.1
+  google_fonts: ^4.0.3
   equatable: ^2.0.5
   dartz: ^0.10.0
   sqflite: ^2.0.0+3
