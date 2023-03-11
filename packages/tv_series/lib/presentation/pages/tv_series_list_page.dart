@@ -56,13 +56,19 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
               BlocBuilder<NowPlayingTvSeriesBloc, NowPlayingTvSeriesState>(
                 builder: (_, state) {
                   if (state is NowPlayingTvSeriesLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   } else if (state is NowPlayingTvSeriesHasData) {
                     return TvSeriesList(state.result);
                   } else if (state is NowPlayingTvSeriesError) {
-                    return Center(child: Text(state.message));
+                    return Center(
+                      child: Text(state.message),
+                    );
                   } else {
-                    return const Center(child: Text('Failed'));
+                    return const Center(
+                      child: Text('Failed'),
+                    );
                   }
                 },
               ),
@@ -75,13 +81,19 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
               BlocBuilder<PopularTvSeriesBloc, PopularTvSeriesState>(
                 builder: (_, state) {
                   if (state is PopularTvSeriesLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   } else if (state is PopularTvSeriesHasData) {
                     return TvSeriesList(state.result);
                   } else if (state is PopularTvSeriesError) {
-                    return Center(child: Text(state.message));
+                    return Center(
+                      child: Text(state.message),
+                    );
                   } else {
-                    return const Center(child: Text('Failed'));
+                    return const Center(
+                      child: Text('Failed'),
+                    );
                   }
                 },
               ),
@@ -94,13 +106,19 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
               BlocBuilder<TopRatedTvSeriesBloc, TopRatedTvSeriesState>(
                 builder: (_, state) {
                   if (state is TopRatedTvSeriesLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
                   } else if (state is TopRatedTvSeriesHasData) {
                     return TvSeriesList(state.result);
                   } else if (state is TopRatedTvSeriesError) {
-                    return Center(child: Text(state.message));
+                    return Center(
+                      child: Text(state.message),
+                    );
                   } else {
-                    return const Center(child: Text('Failed'));
+                    return const Center(
+                      child: Text('Failed'),
+                    );
                   }
                 },
               ),

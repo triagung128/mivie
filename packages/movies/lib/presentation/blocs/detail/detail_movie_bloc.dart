@@ -51,6 +51,7 @@ class DetailMovieBloc extends Bloc<DetailMovieEvent, DetailMovieState> {
               movieRecommendationsState: RequestState.loading,
               movieDetailState: RequestState.loaded,
               movieDetail: movieDetail,
+              watchlistMessage: '',
             ),
           );
           recommendationMoviesResult.fold(

@@ -57,8 +57,14 @@ class _MovieListPageState extends State<MovieListPage> {
                     );
                   } else if (state is NowPlayingMoviesHasData) {
                     return MovieList(state.result);
+                  } else if (state is NowPlayingMoviesError) {
+                    return Center(
+                      child: Text(state.message),
+                    );
                   } else {
-                    return const Text('Failed');
+                    return const Center(
+                      child: Text('Failed'),
+                    );
                   }
                 },
               ),
@@ -74,8 +80,14 @@ class _MovieListPageState extends State<MovieListPage> {
                     );
                   } else if (state is PopularMoviesHasData) {
                     return MovieList(state.result);
+                  } else if (state is PopularMoviesError) {
+                    return Center(
+                      child: Text(state.message),
+                    );
                   } else {
-                    return const Text('Failed');
+                    return const Center(
+                      child: Text('Failed'),
+                    );
                   }
                 },
               ),
@@ -91,8 +103,14 @@ class _MovieListPageState extends State<MovieListPage> {
                     );
                   } else if (state is TopRatedMoviesHasData) {
                     return MovieList(state.result);
+                  } else if (state is TopRatedMoviesError) {
+                    return Center(
+                      child: Text(state.message),
+                    );
                   } else {
-                    return const Text('Failed');
+                    return const Center(
+                      child: Text('Failed'),
+                    );
                   }
                 },
               ),
