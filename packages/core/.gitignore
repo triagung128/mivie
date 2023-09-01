@@ -31,4 +31,4 @@ build/
 
 /coverage/html
 *.env
-/lib/env/
+/lib/env/env.g.dart
