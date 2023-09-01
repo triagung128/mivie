@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/genre.dart';
 import 'package:core/domain/entities/season.dart';
 import 'package:core/domain/entities/tv_series.dart';
 import 'package:core/domain/entities/tv_series_detail.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:tv_series/presentation/blocs/detail/detail_tv_series_bloc.dart';
@@ -21,6 +22,9 @@ class TvSeriesDetailPage extends StatefulWidget {
 }
 
 class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+
   @override
   void initState() {
     super.initState();
@@ -38,23 +42,31 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<DetailTvSeriesBloc, DetailTvSeriesState>(
-        builder: (_, state) {
-          if (state is DetailTvSeriesLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is DetailTvSeriesHasData) {
-            return SafeArea(child: DetailContent(state.result));
-          } else if (state is DetailTvSeriesError) {
-            return Center(
-              child: Text(state.message),
-            );
-          } else {
-            return Container();
-          }
-        },
+    return ScaffoldMessenger(
+      key: _scaffoldMessengerKey,
+      child: Scaffold(
+        body: BlocBuilder<DetailTvSeriesBloc, DetailTvSeriesState>(
+          builder: (_, state) {
+            if (state is DetailTvSeriesLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is DetailTvSeriesHasData) {
+              return SafeArea(
+                child: DetailContent(
+                  scaffoldMessengerKey: _scaffoldMessengerKey,
+                  tvSeriesDetail: state.result,
+                ),
+              );
+            } else if (state is DetailTvSeriesError) {
+              return Center(
+                child: Text(state.message),
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
       ),
     );
   }
@@ -62,8 +74,13 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
 
 class DetailContent extends StatelessWidget {
   final TvSeriesDetail tvSeriesDetail;
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey;
 
-  const DetailContent(this.tvSeriesDetail, {super.key});
+  const DetailContent({
+    super.key,
+    required this.tvSeriesDetail,
+    required this.scaffoldMessengerKey,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -117,13 +134,13 @@ class DetailContent extends StatelessWidget {
                                     state.message ==
                                         WatchlistStatusTvSeriesBloc
                                             .watchlistRemoveSuccessMessage) {
-                                  ScaffoldMessenger.of(context)
-                                      .hideCurrentSnackBar();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(state.message),
-                                    ),
-                                  );
+                                  scaffoldMessengerKey.currentState!
+                                    ..hideCurrentSnackBar()
+                                    ..showSnackBar(
+                                      SnackBar(
+                                        content: Text(state.message),
+                                      ),
+                                    );
                                 } else {
                                   showDialog(
                                     context: context,
@@ -235,11 +252,11 @@ class DetailContent extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     height: 150,
-                                    child: Center(
+                                    child: const Center(
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
-                                        children: const [
+                                        children: [
                                           Icon(Icons.tv_off),
                                           SizedBox(height: 2),
                                           Text('No Recommendations'),

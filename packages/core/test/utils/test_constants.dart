@@ -1,2 +1,4 @@
-const apiKey = 'api_key=3597c3452c08c649357f82941742287f';
+import 'package:core/env/env.dart';
+
+final apiKey = 'api_key=${Env.tmdbApiKey}';
 const baseUrl = 'https://api.themoviedb.org/3';

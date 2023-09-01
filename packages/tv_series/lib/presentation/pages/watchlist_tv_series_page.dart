@@ -1,5 +1,6 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/presentation/blocs/watchlist/watchlist_tv_series_bloc.dart';
 import 'package:tv_series/presentation/widgets/tv_series_card_list.dart';
@@ -57,10 +58,10 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
                 child: Text(state.message),
               );
             } else {
-              return Center(
+              return const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Icon(Icons.visibility_off, size: 32),
                     SizedBox(height: 2),
                     Text('Empty Watchlist'),

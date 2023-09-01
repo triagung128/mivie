@@ -1,5 +1,6 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/presentation/blocs/watchlist/watchlist_movies_bloc.dart';
 import 'package:movies/presentation/widgets/movie_card_list.dart';
@@ -56,10 +57,10 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
                 child: Text(state.message),
               );
             } else {
-              return Center(
+              return const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Icon(
                       Icons.visibility_off,
                       size: 32,

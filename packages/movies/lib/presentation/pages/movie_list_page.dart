@@ -1,29 +1,15 @@
+import 'package:flutter/material.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/movie.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/presentation/blocs/now_playing/now_playing_movies_bloc.dart';
 import 'package:movies/presentation/blocs/popular/popular_movies_bloc.dart';
 import 'package:movies/presentation/blocs/top_rated/top_rated_movies_bloc.dart';
 
-class MovieListPage extends StatefulWidget {
+class MovieListPage extends StatelessWidget {
   const MovieListPage({super.key});
-
-  @override
-  State<MovieListPage> createState() => _MovieListPageState();
-}
-
-class _MovieListPageState extends State<MovieListPage> {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() {
-      context.read<NowPlayingMoviesBloc>().add(const FetchNowPlayingMovies());
-      context.read<PopularMoviesBloc>().add(const FetchPopularMovies());
-      context.read<TopRatedMoviesBloc>().add(const FetchTopRatedMovies());
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +42,10 @@ class _MovieListPageState extends State<MovieListPage> {
                       child: CircularProgressIndicator(),
                     );
                   } else if (state is NowPlayingMoviesHasData) {
-                    return MovieList(state.result);
+                    return MovieList(
+                      state.result,
+                      key: const PageStorageKey<String>('listMovieNowPlaying'),
+                    );
                   } else if (state is NowPlayingMoviesError) {
                     return Center(
                       child: Text(state.message),
@@ -79,7 +68,10 @@ class _MovieListPageState extends State<MovieListPage> {
                       child: CircularProgressIndicator(),
                     );
                   } else if (state is PopularMoviesHasData) {
-                    return MovieList(state.result);
+                    return MovieList(
+                      state.result,
+                      key: const PageStorageKey<String>('listMoviePopular'),
+                    );
                   } else if (state is PopularMoviesError) {
                     return Center(
                       child: Text(state.message),
@@ -102,7 +94,10 @@ class _MovieListPageState extends State<MovieListPage> {
                       child: CircularProgressIndicator(),
                     );
                   } else if (state is TopRatedMoviesHasData) {
-                    return MovieList(state.result);
+                    return MovieList(
+                      state.result,
+                      key: const PageStorageKey<String>('listMovieTopRated'),
+                    );
                   } else if (state is TopRatedMoviesError) {
                     return Center(
                       child: Text(state.message),
@@ -134,10 +129,10 @@ class _MovieListPageState extends State<MovieListPage> {
         ),
         InkWell(
           onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Row(
-              children: const [
+              children: [
                 Text('See More'),
                 Icon(Icons.arrow_forward_ios),
               ],

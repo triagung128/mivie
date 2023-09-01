@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/presentation/blocs/top_rated/top_rated_tv_series_bloc.dart';
 import 'package:tv_series/presentation/widgets/tv_series_card_list.dart';

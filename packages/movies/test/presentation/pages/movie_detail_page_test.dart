@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/movie.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -205,5 +206,30 @@ void main() {
     await tester.pump();
 
     expect(textErrorBarFinder, findsOneWidget);
+  });
+
+  testWidgets('Back button when click back to home page',
+      (WidgetTester tester) async {
+    when(() => mockDetailMovieBloc.state).thenReturn(
+      DetailMovieState.initial().copyWith(
+        movieDetailState: RequestState.loaded,
+        movieDetail: testMovieDetail,
+        movieRecommendationsState: RequestState.loaded,
+        movieRecommendations: <Movie>[],
+        isAddedToWatchlist: false,
+      ),
+    );
+
+    final buttonBack = find.byKey(const Key('iconBack'));
+
+    await tester.pumpWidget(makeTestableWidget(const MovieDetailPage(id: tId)));
+    await tester.pump();
+
+    await tester.tap(buttonBack);
+    await tester.pump();
+
+    await tester.pump(const Duration(seconds: 5));
+
+    expect(buttonBack, findsNothing);
   });
 }

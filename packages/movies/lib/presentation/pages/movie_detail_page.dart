@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/genre.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/domain/entities/movie_detail.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movies/presentation/blocs/detail/detail_movie_bloc.dart';
@@ -17,6 +18,9 @@ class MovieDetailPage extends StatefulWidget {
 }
 
 class _MovieDetailPageState extends State<MovieDetailPage> {
+  final GlobalKey<ScaffoldMessengerState> _scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
+
   @override
   void initState() {
     super.initState();
@@ -28,54 +32,58 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocConsumer<DetailMovieBloc, DetailMovieState>(
-        listener: (context, state) {
-          final message = state.watchlistMessage;
-          if (message == DetailMovieBloc.watchlistAddSuccessMessage ||
-              message == DetailMovieBloc.watchlistRemoveSuccessMessage) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(message),
-              ),
-            );
-          } else {
-            showDialog(
-              context: context,
-              builder: (_) {
-                return AlertDialog(
+    return ScaffoldMessenger(
+      key: _scaffoldMessengerKey,
+      child: Scaffold(
+        key: GlobalKey<ScaffoldState>(),
+        body: BlocConsumer<DetailMovieBloc, DetailMovieState>(
+          listener: (context, state) {
+            final message = state.watchlistMessage;
+            if (message == DetailMovieBloc.watchlistAddSuccessMessage ||
+                message == DetailMovieBloc.watchlistRemoveSuccessMessage) {
+              _scaffoldMessengerKey.currentState!.showSnackBar(
+                SnackBar(
                   content: Text(message),
-                );
-              },
-            );
-          }
-        },
-        listenWhen: (oldState, newState) {
-          return oldState.watchlistMessage != newState.watchlistMessage &&
-              newState.watchlistMessage != '';
-        },
-        builder: (_, state) {
-          final movieDetailState = state.movieDetailState;
-          if (movieDetailState == RequestState.loading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (movieDetailState == RequestState.loaded) {
-            return SafeArea(
-              child: DetailContent(
-                state.movieDetail!,
-                state.movieRecommendations,
-                state.isAddedToWatchlist,
-              ),
-            );
-          } else if (movieDetailState == RequestState.error) {
-            return Center(
-              child: Text(state.message),
-            );
-          } else {
-            return Container();
-          }
-        },
+                ),
+              );
+            } else {
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return AlertDialog(
+                    content: Text(message),
+                  );
+                },
+              );
+            }
+          },
+          listenWhen: (oldState, newState) {
+            return oldState.watchlistMessage != newState.watchlistMessage &&
+                newState.watchlistMessage != '';
+          },
+          builder: (_, state) {
+            final movieDetailState = state.movieDetailState;
+            if (movieDetailState == RequestState.loading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (movieDetailState == RequestState.loaded) {
+              return SafeArea(
+                child: DetailContent(
+                  state.movieDetail!,
+                  state.movieRecommendations,
+                  state.isAddedToWatchlist,
+                ),
+              );
+            } else if (movieDetailState == RequestState.error) {
+              return Center(
+                child: Text(state.message),
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
       ),
     );
   }

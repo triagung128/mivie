@@ -1,10 +1,9 @@
+import 'package:flutter/material.dart';
+
 import 'package:about/about.dart';
 import 'package:core/core.dart';
 import 'package:core/presentation/pages/home_page.dart';
-import 'package:ditonton/firebase_options.dart';
-import 'package:ditonton/injection.dart' as di;
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/presentation/blocs/detail/detail_movie_bloc.dart';
 import 'package:movies/presentation/blocs/now_playing/now_playing_movies_bloc.dart';
@@ -33,6 +32,9 @@ import 'package:tv_series/presentation/pages/season_detail_page.dart';
 import 'package:tv_series/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/tv_series_detail_page.dart';
 
+import 'package:ditonton/firebase_options.dart';
+import 'package:ditonton/injection.dart' as di;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -53,13 +55,16 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         BlocProvider(
-          create: (_) => di.locator<NowPlayingMoviesBloc>(),
+          create: (_) => di.locator<NowPlayingMoviesBloc>()
+            ..add(const FetchNowPlayingMovies()),
         ),
         BlocProvider(
-          create: (_) => di.locator<PopularMoviesBloc>(),
+          create: (_) =>
+              di.locator<PopularMoviesBloc>()..add(const FetchPopularMovies()),
         ),
         BlocProvider(
-          create: (_) => di.locator<TopRatedMoviesBloc>(),
+          create: (_) => di.locator<TopRatedMoviesBloc>()
+            ..add(const FetchTopRatedMovies()),
         ),
         BlocProvider(
           create: (_) => di.locator<DetailMovieBloc>(),
@@ -71,13 +76,16 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<SearchMoviesBloc>(),
         ),
         BlocProvider(
-          create: (_) => di.locator<NowPlayingTvSeriesBloc>(),
+          create: (_) => di.locator<NowPlayingTvSeriesBloc>()
+            ..add(FetchNowPlayingTvSeries()),
         ),
         BlocProvider(
-          create: (_) => di.locator<PopularTvSeriesBloc>(),
+          create: (_) =>
+              di.locator<PopularTvSeriesBloc>()..add(FetchPopularTvSeries()),
         ),
         BlocProvider(
-          create: (_) => di.locator<TopRatedTvSeriesBloc>(),
+          create: (_) =>
+              di.locator<TopRatedTvSeriesBloc>()..add(FetchTopRatedTvSeries()),
         ),
         BlocProvider(
           create: (_) => di.locator<DetailTvSeriesBloc>(),

@@ -1,31 +1,15 @@
+import 'package:flutter/material.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/tv_series.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/presentation/blocs/now_playing/now_playing_tv_series_bloc.dart';
 import 'package:tv_series/presentation/blocs/popular/popular_tv_series_bloc.dart';
 import 'package:tv_series/presentation/blocs/top_rated/top_rated_tv_series_bloc.dart';
 
-class TvSeriesListPage extends StatefulWidget {
+class TvSeriesListPage extends StatelessWidget {
   const TvSeriesListPage({Key? key}) : super(key: key);
-
-  @override
-  State<TvSeriesListPage> createState() => _TvSeriesListPageState();
-}
-
-class _TvSeriesListPageState extends State<TvSeriesListPage> {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() {
-      context
-          .read<NowPlayingTvSeriesBloc>()
-          .add(const FetchNowPlayingTvSeries());
-      context.read<PopularTvSeriesBloc>().add(const FetchPopularTvSeries());
-      context.read<TopRatedTvSeriesBloc>().add(const FetchTopRatedTvSeries());
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +44,12 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
                       child: CircularProgressIndicator(),
                     );
                   } else if (state is NowPlayingTvSeriesHasData) {
-                    return TvSeriesList(state.result);
+                    return TvSeriesList(
+                      state.result,
+                      key: const PageStorageKey<String>(
+                        'listTvSeriesNowPlaying',
+                      ),
+                    );
                   } else if (state is NowPlayingTvSeriesError) {
                     return Center(
                       child: Text(state.message),
@@ -85,7 +74,12 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
                       child: CircularProgressIndicator(),
                     );
                   } else if (state is PopularTvSeriesHasData) {
-                    return TvSeriesList(state.result);
+                    return TvSeriesList(
+                      state.result,
+                      key: const PageStorageKey<String>(
+                        'listTvSeriesPopular',
+                      ),
+                    );
                   } else if (state is PopularTvSeriesError) {
                     return Center(
                       child: Text(state.message),
@@ -110,7 +104,12 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
                       child: CircularProgressIndicator(),
                     );
                   } else if (state is TopRatedTvSeriesHasData) {
-                    return TvSeriesList(state.result);
+                    return TvSeriesList(
+                      state.result,
+                      key: const PageStorageKey<String>(
+                        'listTvSeriesTopRated',
+                      ),
+                    );
                   } else if (state is TopRatedTvSeriesError) {
                     return Center(
                       child: Text(state.message),
@@ -139,10 +138,10 @@ class _TvSeriesListPageState extends State<TvSeriesListPage> {
         ),
         InkWell(
           onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Row(
-              children: const [
+              children: [
                 Text('See More'),
                 Icon(Icons.arrow_forward_ios),
               ],
