@@ -17,16 +17,16 @@
 - Season & Episode TV Series
 
 ## :hammer_and_wrench: Built With
-* [Flutter](https://flutter.dev/) - Framework.
-* [Bloc](https://pub.dev/packages/flutter_bloc) - State management.
-* [Cached Network Image](https://pub.dev/packages/cached_network_image) - A flutter library to show images from the internet and keep them in the cache directory.
-* [Dartz](https://pub.dev/packages/dartz) - A functional programming in Dart.
-* [Equatable](https://pub.dev/packages/equatable) - A Dart package that helps to implement value based equality without needing to explicitly override == and hashCode.
-* [Get It](https://pub.dev/packages/get_it) - A dependency injection.
-* [Firebase Analytics & Crashlytics](https://firebase.google.com/) - Reports uncaught errors to the Firebase console.
-* [Flutter Rating Bar](https://pub.dev/packages/flutter_rating_bar) - A simple yet fully customizable rating bar for flutter which also include a rating bar indicator, supporting any fraction of rating.
-* [HTTP](https://pub.dev/packages/http) - A composable, multi-platform, Future-based API for HTTP requests.
-* [SQFLITE](https://pub.dev/packages/sqflite) - Flutter plugin for SQLite, a self-contained, high-reliability, embedded, SQL database engine.
+* [Flutter](https://flutter.dev/).
+* [Bloc](https://pub.dev/packages/flutter_bloc).
+* [Cached Network Image](https://pub.dev/packages/cached_network_image).
+* [Dartz](https://pub.dev/packages/dartz).
+* [Equatable](https://pub.dev/packages/equatable).
+* [Get It](https://pub.dev/packages/get_it).
+* [Firebase Analytics & Crashlytics](https://firebase.google.com/).
+* [Flutter Rating Bar](https://pub.dev/packages/flutter_rating_bar).
+* [HTTP](https://pub.dev/packages/http).
+* [SQFLITE](https://pub.dev/packages/sqflite).
 * TDD Clean Architecture.
 * SSL Pinning Security.
 * Modularization.
