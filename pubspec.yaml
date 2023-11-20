@@ -1,7 +1,7 @@
 name: ditonton
 description: A new Flutter application.
 publish_to: 'none'
-version: 1.4.0+5
+version: 1.4.0+7
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -34,10 +34,11 @@ dev_dependencies:
   mockito: ^5.4.3
   mocktail: ^1.0.1
 
-flutter_icons:
-  android: true
+flutter_launcher_icons:
+  android: 'launcher_icon'
   ios: true
   image_path: 'assets/logo.png'
+  remove_alpha_ios: true
 
 flutter:
   uses-material-design: true

@@ -1,5 +1,6 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:core/core.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -15,7 +16,7 @@ class AboutPage extends StatelessWidget {
               child: Center(
                 child: Image.asset(
                   'assets/logo.png',
-                  width: 128,
+                  width: 210,
                 ),
               ),
             ),
