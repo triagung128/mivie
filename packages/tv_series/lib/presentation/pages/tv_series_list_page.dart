@@ -9,7 +9,7 @@ import 'package:tv_series/presentation/blocs/popular/popular_tv_series_bloc.dart
 import 'package:tv_series/presentation/blocs/top_rated/top_rated_tv_series_bloc.dart';
 
 class TvSeriesListPage extends StatelessWidget {
-  const TvSeriesListPage({Key? key}) : super(key: key);
+  const TvSeriesListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
