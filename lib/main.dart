@@ -109,7 +109,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Ditonton Yuk',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
+        theme: ThemeData.dark(useMaterial3: false).copyWith(
           colorScheme: kColorScheme,
           primaryColor: kRichBlack,
           scaffoldBackgroundColor: kRichBlack,
