@@ -32,8 +32,8 @@ import 'package:tv_series/presentation/pages/season_detail_page.dart';
 import 'package:tv_series/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/tv_series_detail_page.dart';
 
-import 'package:ditonton/firebase_options.dart';
-import 'package:ditonton/injection.dart' as di;
+import 'package:mivie/firebase_options.dart';
+import 'package:mivie/injection.dart' as di;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -107,7 +107,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Ditonton Yuk',
+        title: 'Mivie',
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(useMaterial3: false).copyWith(
           colorScheme: kColorScheme,

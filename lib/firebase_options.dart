@@ -50,20 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCHXAd1mVKrJjr7gVWBqt0jKgUUDg7UnOw',
-    appId: '1:342508318368:android:dd8555b7518f66efe4a3c5',
-    messagingSenderId: '342508318368',
-    projectId: 'ditonton-4c2ce',
-    storageBucket: 'ditonton-4c2ce.appspot.com',
+    apiKey: 'AIzaSyBaUmfd2ueFuqBY02c1rbECuwp4vDtUtps',
+    appId: '1:84881184154:android:d5f65a5c490587fd851623',
+    messagingSenderId: '84881184154',
+    projectId: 'mivie-7fe45',
+    storageBucket: 'mivie-7fe45.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD6GLTcsRCsALdoHkjwhD-h1MnyCLX-ItQ',
-    appId: '1:342508318368:ios:a983cec2c176051de4a3c5',
-    messagingSenderId: '342508318368',
-    projectId: 'ditonton-4c2ce',
-    storageBucket: 'ditonton-4c2ce.appspot.com',
-    iosClientId: '342508318368-gngmikpnhot7ln4htm88m8l540pkrpos.apps.googleusercontent.com',
-    iosBundleId: 'com.triagung.ditontonyuk',
+    apiKey: 'AIzaSyDLU2bu8LiCZ_F29Nw7tjL1ieRCX2875nM',
+    appId: '1:84881184154:ios:a3901c97292178f0851623',
+    messagingSenderId: '84881184154',
+    projectId: 'mivie-7fe45',
+    storageBucket: 'mivie-7fe45.appspot.com',
+    iosBundleId: 'com.triagung.mivie',
   );
 }

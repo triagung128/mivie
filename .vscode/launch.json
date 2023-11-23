@@ -5,18 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "ditonton",
+            "name": "mivie",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "ditonton (profile mode)",
+            "name": "mivie (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "ditonton (release mode)",
+            "name": "mivie (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

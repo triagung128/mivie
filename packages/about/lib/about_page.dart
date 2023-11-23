@@ -26,8 +26,8 @@ class AboutPage extends StatelessWidget {
               padding: const EdgeInsets.all(32.0),
               color: kMikadoYellow,
               child: const Text(
-                // 'Ditonton Yuk merupakan sebuah aplikasi katalog film yang dikembangkan oleh Dicoding Indonesia sebagai contoh proyek aplikasi untuk kelas Menjadi Flutter Developer Expert.',
-                'Ditonton Yuk is an application catalog of movies and tv series. This application was created as a submission final project the become a flutter developer expert by dicoding academy class.',
+                // 'Mivie merupakan sebuah aplikasi katalog film yang dikembangkan oleh Dicoding Indonesia sebagai contoh proyek aplikasi untuk kelas Menjadi Flutter Developer Expert.',
+                'Mivie is an application catalog of movies and tv series. This application was created as a submission final project the become a flutter developer expert by dicoding academy class.',
                 style: TextStyle(color: Colors.black87, fontSize: 16),
                 textAlign: TextAlign.justify,
               ),

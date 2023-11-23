@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:ditonton/main.dart' as app;
 import 'package:movies/presentation/widgets/movie_card_list.dart';
 import 'package:tv_series/presentation/widgets/tv_series_card_list.dart';
+
+import 'package:mivie/main.dart' as app;
 
 void main() {
   group('Testing App', () {

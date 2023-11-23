@@ -1,4 +1,4 @@
-package com.triagung.ditontonyuk
+package com.triagung.mivie
 
 import io.flutter.embedding.android.FlutterActivity
 

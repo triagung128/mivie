@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.triagung.ditontonyuk">
+    package="com.triagung.mivie">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="Ditonton Yuk"
+        android:label="Mivie"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
