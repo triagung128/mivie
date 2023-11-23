@@ -14,112 +14,149 @@ class TvSeriesListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('TV Series'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, searchTvSeriesRoute);
-            },
-            icon: const Icon(Icons.search),
-          )
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 36),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildSubHeading(
-                title: 'Now Playing',
+              Text(
+                'Find TV Series',
+                style: kHeading5.copyWith(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 20),
+              GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, nowPlayingTvSeriesRoute);
+                  Navigator.pushNamed(context, searchTvSeriesRoute);
                 },
-              ),
-              BlocBuilder<NowPlayingTvSeriesBloc, NowPlayingTvSeriesState>(
-                builder: (_, state) {
-                  if (state is NowPlayingTvSeriesLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is NowPlayingTvSeriesHasData) {
-                    return TvSeriesList(
-                      state.result,
-                      key: const PageStorageKey<String>(
-                        'listTvSeriesNowPlaying',
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF211F30),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16).copyWith(right: 20),
+                        child: const Icon(Icons.search),
                       ),
-                    );
-                  } else if (state is NowPlayingTvSeriesError) {
-                    return Center(
-                      child: Text(state.message),
-                    );
-                  } else {
-                    return const Center(
-                      child: Text('Failed'),
-                    );
-                  }
-                },
-              ),
-              _buildSubHeading(
-                title: 'Popular',
-                onTap: () {
-                  Navigator.pushNamed(context, popularTvSeriesRoute);
-                },
-              ),
-              BlocBuilder<PopularTvSeriesBloc, PopularTvSeriesState>(
-                builder: (_, state) {
-                  if (state is PopularTvSeriesLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is PopularTvSeriesHasData) {
-                    return TvSeriesList(
-                      state.result,
-                      key: const PageStorageKey<String>(
-                        'listTvSeriesPopular',
+                      Text(
+                        'One Piece',
+                        style: kBodyText.copyWith(
+                          fontSize: 14,
+                          color: const Color(0xFFBBBBBB),
+                        ),
                       ),
-                    );
-                  } else if (state is PopularTvSeriesError) {
-                    return Center(
-                      child: Text(state.message),
-                    );
-                  } else {
-                    return const Center(
-                      child: Text('Failed'),
-                    );
-                  }
-                },
+                    ],
+                  ),
+                ),
               ),
-              _buildSubHeading(
-                title: 'Top Rated',
-                onTap: () {
-                  Navigator.pushNamed(context, topRatedTvSeriesRoute);
-                },
-              ),
-              BlocBuilder<TopRatedTvSeriesBloc, TopRatedTvSeriesState>(
-                builder: (_, state) {
-                  if (state is TopRatedTvSeriesLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is TopRatedTvSeriesHasData) {
-                    return TvSeriesList(
-                      state.result,
-                      key: const PageStorageKey<String>(
-                        'listTvSeriesTopRated',
+              const SizedBox(height: 24),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildSubHeading(
+                        title: 'Now Playing',
+                        onTap: () {
+                          Navigator.pushNamed(context, nowPlayingTvSeriesRoute);
+                        },
                       ),
-                    );
-                  } else if (state is TopRatedTvSeriesError) {
-                    return Center(
-                      child: Text(state.message),
-                    );
-                  } else {
-                    return const Center(
-                      child: Text('Failed'),
-                    );
-                  }
-                },
+                      BlocBuilder<NowPlayingTvSeriesBloc,
+                          NowPlayingTvSeriesState>(
+                        builder: (_, state) {
+                          if (state is NowPlayingTvSeriesLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (state is NowPlayingTvSeriesHasData) {
+                            return TvSeriesList(
+                              state.result,
+                              key: const PageStorageKey<String>(
+                                'listTvSeriesNowPlaying',
+                              ),
+                            );
+                          } else if (state is NowPlayingTvSeriesError) {
+                            return Center(
+                              child: Text(state.message),
+                            );
+                          } else {
+                            return const Center(
+                              child: Text('Failed'),
+                            );
+                          }
+                        },
+                      ),
+                      _buildSubHeading(
+                        title: 'Popular',
+                        onTap: () {
+                          Navigator.pushNamed(context, popularTvSeriesRoute);
+                        },
+                      ),
+                      BlocBuilder<PopularTvSeriesBloc, PopularTvSeriesState>(
+                        builder: (_, state) {
+                          if (state is PopularTvSeriesLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (state is PopularTvSeriesHasData) {
+                            return TvSeriesList(
+                              state.result,
+                              key: const PageStorageKey<String>(
+                                'listTvSeriesPopular',
+                              ),
+                            );
+                          } else if (state is PopularTvSeriesError) {
+                            return Center(
+                              child: Text(state.message),
+                            );
+                          } else {
+                            return const Center(
+                              child: Text('Failed'),
+                            );
+                          }
+                        },
+                      ),
+                      _buildSubHeading(
+                        title: 'Top Rated',
+                        onTap: () {
+                          Navigator.pushNamed(context, topRatedTvSeriesRoute);
+                        },
+                      ),
+                      BlocBuilder<TopRatedTvSeriesBloc, TopRatedTvSeriesState>(
+                        builder: (_, state) {
+                          if (state is TopRatedTvSeriesLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (state is TopRatedTvSeriesHasData) {
+                            return TvSeriesList(
+                              state.result,
+                              key: const PageStorageKey<String>(
+                                'listTvSeriesTopRated',
+                              ),
+                            );
+                          } else if (state is TopRatedTvSeriesError) {
+                            return Center(
+                              child: Text(state.message),
+                            );
+                          } else {
+                            return const Center(
+                              child: Text('Failed'),
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
@@ -166,9 +203,10 @@ class TvSeriesList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final item = tvSeries[index];
+
           return Container(
             padding: const EdgeInsets.all(8),
-            child: InkWell(
+            child: GestureDetector(
               key: const Key('tvSeriesItem'),
               onTap: () {
                 Navigator.pushNamed(

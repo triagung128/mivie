@@ -6,7 +6,6 @@ import 'package:core/domain/entities/genre.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/domain/entities/movie_detail.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movies/presentation/blocs/detail/detail_movie_bloc.dart';
 
 class MovieDetailPage extends StatefulWidget {
@@ -131,60 +130,115 @@ class DetailContent extends StatelessWidget {
                 child: Stack(
                   children: [
                     Container(
+                      height: MediaQuery.of(context).size.height,
                       margin: const EdgeInsets.only(top: 16),
                       child: SingleChildScrollView(
                         controller: scrollController,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              movieDetail.title,
-                              style: kHeading5,
-                            ),
-                            ElevatedButton(
-                              key: const Key('watchlistButton'),
-                              onPressed: () {
-                                if (!isAddedWatchlist) {
-                                  context
-                                      .read<DetailMovieBloc>()
-                                      .add(AddWatchlistMovie(movieDetail));
-                                } else {
-                                  context
-                                      .read<DetailMovieBloc>()
-                                      .add(RemoveFromWatchlistMovie(
-                                        movieDetail,
-                                      ));
-                                }
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  isAddedWatchlist
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    movieDetail.title,
+                                    style: kHeading5.copyWith(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                                ElevatedButton.icon(
+                                  key: const Key('watchlistButton'),
+                                  onPressed: () {
+                                    if (!isAddedWatchlist) {
+                                      context
+                                          .read<DetailMovieBloc>()
+                                          .add(AddWatchlistMovie(movieDetail));
+                                    } else {
+                                      context
+                                          .read<DetailMovieBloc>()
+                                          .add(RemoveFromWatchlistMovie(
+                                            movieDetail,
+                                          ));
+                                    }
+                                  },
+                                  icon: isAddedWatchlist
                                       ? const Icon(Icons.check)
                                       : const Icon(Icons.add),
-                                  const Text('Watchlist'),
-                                ],
-                              ),
+                                  label: const Text('Watchlist'),
+                                ),
+                              ],
                             ),
-                            Text(
-                              _showGenres(movieDetail.genres),
-                            ),
-                            Text(
-                              _showDuration(movieDetail.runtime),
-                            ),
+                            const SizedBox(height: 12),
                             Row(
                               children: [
-                                RatingBarIndicator(
-                                  rating: movieDetail.voteAverage / 2,
-                                  itemCount: 5,
-                                  itemBuilder: (context, index) => const Icon(
-                                    Icons.star,
-                                    color: kMikadoYellow,
-                                  ),
-                                  itemSize: 24,
+                                Row(
+                                  children: [
+                                    const Icon(
+                                      Icons.watch_later_outlined,
+                                      size: 14,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Text(_showDuration(movieDetail.runtime)),
+                                  ],
                                 ),
-                                Text('${movieDetail.voteAverage}')
+                                const SizedBox(width: 16),
+                                Row(
+                                  children: [
+                                    const Icon(Icons.star, size: 14),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      '${movieDetail.voteAverage.toStringAsFixed(1)} (IMDb)',
+                                    ),
+                                  ],
+                                ),
                               ],
+                            ),
+                            const SizedBox(height: 16),
+                            const Divider(
+                              height: 0,
+                              thickness: 0.2,
+                              color: Color(0xFF515151),
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Release date',
+                                      style: kHeading6,
+                                    ),
+                                    Text(
+                                      _showReleaseDate(movieDetail.releaseDate),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(width: 47),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Genre',
+                                        style: kHeading6,
+                                      ),
+                                      Text(_showGenres(movieDetail.genres)),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            const Divider(
+                              height: 0,
+                              thickness: 0.2,
+                              color: Color(0xFF515151),
                             ),
                             const SizedBox(height: 16),
                             Text(
@@ -193,6 +247,12 @@ class DetailContent extends StatelessWidget {
                             ),
                             Text(
                               movieDetail.overview,
+                            ),
+                            const SizedBox(height: 16),
+                            const Divider(
+                              height: 0,
+                              thickness: 0.2,
+                              color: Color(0xFF515151),
                             ),
                             const SizedBox(height: 16),
                             Text(
@@ -216,9 +276,10 @@ class DetailContent extends StatelessWidget {
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
                                         final movie = recommendations[index];
+
                                         return Padding(
                                           padding: const EdgeInsets.all(4.0),
-                                          child: InkWell(
+                                          child: GestureDetector(
                                             onTap: () {
                                               Navigator.pushReplacementNamed(
                                                 context,
@@ -314,9 +375,62 @@ class DetailContent extends StatelessWidget {
     final int minutes = runtime % 60;
 
     if (hours > 0) {
-      return '${hours}h ${minutes}m';
+      return '$hours hours $minutes minutes';
     } else {
-      return '${minutes}m';
+      return '$minutes minutes';
     }
+  }
+
+  String _showReleaseDate(String releaseDate) {
+    List<String> dateSplit = releaseDate.split('-');
+
+    final String year = dateSplit[0];
+    final String month = dateSplit[1];
+    final String date = dateSplit[2];
+
+    var monthName = month;
+
+    switch (month) {
+      case '01':
+        monthName = 'January';
+        break;
+      case '02':
+        monthName = 'February';
+        break;
+      case '03':
+        monthName = 'March';
+        break;
+      case '04':
+        monthName = 'April';
+        break;
+      case '05':
+        monthName = 'May';
+        break;
+      case '06':
+        monthName = 'June';
+        break;
+      case '07':
+        monthName = 'July';
+        break;
+      case '08':
+        monthName = 'August';
+        break;
+      case '09':
+        monthName = 'September';
+        break;
+      case '10':
+        monthName = 'October';
+        break;
+      case '11':
+        monthName = 'November';
+        break;
+      case '12':
+        monthName = 'December';
+        break;
+      default:
+        monthName = '-';
+    }
+
+    return '$monthName $date, $year';
   }
 }

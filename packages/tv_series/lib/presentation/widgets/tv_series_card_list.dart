@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/tv_series.dart';
-import 'package:flutter/material.dart';
 
 class TvSeriesCardList extends StatelessWidget {
   final TvSeries tvSeries;
@@ -30,6 +31,7 @@ class TvSeriesCardList extends StatelessWidget {
                   left: 16 + 80 + 16,
                   bottom: 8,
                   right: 8,
+                  top: 8,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -36,6 +36,7 @@ class _NowPlayingTvSeriesPageState extends State<NowPlayingTvSeriesPage> {
               );
             } else if (state is NowPlayingTvSeriesHasData) {
               return ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 itemBuilder: (_, index) {
                   final tvSeries = state.result[index];
                   return TvSeriesCardList(tvSeries: tvSeries);

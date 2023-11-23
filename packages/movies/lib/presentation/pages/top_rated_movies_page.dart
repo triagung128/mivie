@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/presentation/blocs/top_rated/top_rated_movies_bloc.dart';
 import 'package:movies/presentation/widgets/movie_card_list.dart';
@@ -34,6 +35,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
               );
             } else if (state is TopRatedMoviesHasData) {
               return ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 itemBuilder: (_, index) {
                   final movie = state.result[index];
                   return MovieCardList(movie: movie);

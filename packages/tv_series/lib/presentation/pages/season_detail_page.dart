@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/episode.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/presentation/blocs/season_detail/season_detail_bloc.dart';
 
@@ -72,6 +73,7 @@ class _SeasonDetailPageState extends State<SeasonDetailPage> {
               );
             } else {
               return ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 itemCount: episodes.length,
                 itemBuilder: (_, index) {
                   final episode = episodes[index];

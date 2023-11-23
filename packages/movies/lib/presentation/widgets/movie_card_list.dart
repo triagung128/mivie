@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:core/domain/entities/movie.dart';
-import 'package:flutter/material.dart';
 
 class MovieCardList extends StatelessWidget {
   final Movie movie;
@@ -30,6 +31,7 @@ class MovieCardList extends StatelessWidget {
                   left: 16 + 80 + 16,
                   bottom: 8,
                   right: 8,
+                  top: 8,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +42,7 @@ class MovieCardList extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 12),
                     Text(
                       movie.overview ?? '-',
                       maxLines: 2,

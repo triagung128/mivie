@@ -1,5 +1,6 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/presentation/blocs/search/search_tv_series_bloc.dart';
 import 'package:tv_series/presentation/widgets/tv_series_card_list.dart';
@@ -17,11 +18,12 @@ class SearchTvSeriesPage extends StatelessWidget {
           title: const Text('Search TV Series'),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextField(
+                autofocus: true,
                 onChanged: (query) {
                   context
                       .read<SearchTvSeriesBloc>()
@@ -30,10 +32,13 @@ class SearchTvSeriesPage extends StatelessWidget {
                 decoration: const InputDecoration(
                   hintText: 'Search title',
                   prefixIcon: Icon(Icons.search),
-                  contentPadding: EdgeInsets.all(14),
+                  contentPadding: EdgeInsets.all(16),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderSide: BorderSide.none,
                   ),
+                  fillColor: Color(0xFF211F30),
+                  filled: true,
                 ),
                 textInputAction: TextInputAction.search,
               ),
@@ -63,12 +68,13 @@ class SearchTvSeriesPage extends StatelessWidget {
                       ),
                     );
                   } else if (state is SearchTvSeriesEmpty) {
-                    return Expanded(
+                    return Container(
+                      margin: const EdgeInsets.only(top: 32),
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Icon(Icons.search_off, size: 48),
+                            const Icon(Icons.search_off, size: 72),
                             const SizedBox(height: 2),
                             Text('Search Not Found', style: kSubtitle),
                           ],

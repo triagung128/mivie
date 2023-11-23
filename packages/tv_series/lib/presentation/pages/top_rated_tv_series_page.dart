@@ -36,6 +36,7 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
               );
             } else if (state is TopRatedTvSeriesHasData) {
               return ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
                 itemBuilder: (_, index) {
                   final tvSeries = state.result[index];
                   return TvSeriesCardList(tvSeries: tvSeries);

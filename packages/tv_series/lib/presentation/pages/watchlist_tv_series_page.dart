@@ -58,13 +58,13 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
                 child: Text(state.message),
               );
             } else {
-              return const Center(
+              return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.visibility_off, size: 32),
-                    SizedBox(height: 2),
-                    Text('Empty Watchlist'),
+                    const Icon(Icons.visibility_off, size: 72),
+                    const SizedBox(height: 2),
+                    Text('Empty Watchlist', style: kSubtitle),
                   ],
                 ),
               );

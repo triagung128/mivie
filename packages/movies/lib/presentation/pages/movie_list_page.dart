@@ -14,100 +14,141 @@ class MovieListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Movies'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, searchMoviesRoute);
-            },
-            icon: const Icon(Icons.search),
-          )
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 36),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Now Playing',
-                style: kHeading6,
+                'Find Movies',
+                style: kHeading5.copyWith(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              BlocBuilder<NowPlayingMoviesBloc, NowPlayingMoviesState>(
-                builder: (_, state) {
-                  if (state is NowPlayingMoviesLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is NowPlayingMoviesHasData) {
-                    return MovieList(
-                      state.result,
-                      key: const PageStorageKey<String>('listMovieNowPlaying'),
-                    );
-                  } else if (state is NowPlayingMoviesError) {
-                    return Center(
-                      child: Text(state.message),
-                    );
-                  } else {
-                    return const Center(
-                      child: Text('Failed'),
-                    );
-                  }
+              const SizedBox(height: 20),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, searchMoviesRoute);
                 },
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF211F30),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16).copyWith(right: 20),
+                        child: const Icon(Icons.search),
+                      ),
+                      Text(
+                        'Sherlock Holmes',
+                        style: kBodyText.copyWith(
+                          fontSize: 14,
+                          color: const Color(0xFFBBBBBB),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              _buildSubHeading(
-                title: 'Popular',
-                onTap: () => Navigator.pushNamed(context, popularMoviesRoute),
-              ),
-              BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
-                builder: (_, state) {
-                  if (state is PopularMoviesLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is PopularMoviesHasData) {
-                    return MovieList(
-                      state.result,
-                      key: const PageStorageKey<String>('listMoviePopular'),
-                    );
-                  } else if (state is PopularMoviesError) {
-                    return Center(
-                      child: Text(state.message),
-                    );
-                  } else {
-                    return const Center(
-                      child: Text('Failed'),
-                    );
-                  }
-                },
-              ),
-              _buildSubHeading(
-                title: 'Top Rated',
-                onTap: () => Navigator.pushNamed(context, topRatedMoviesRoute),
-              ),
-              BlocBuilder<TopRatedMoviesBloc, TopRatedMoviesState>(
-                builder: (_, state) {
-                  if (state is TopRatedMoviesLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (state is TopRatedMoviesHasData) {
-                    return MovieList(
-                      state.result,
-                      key: const PageStorageKey<String>('listMovieTopRated'),
-                    );
-                  } else if (state is TopRatedMoviesError) {
-                    return Center(
-                      child: Text(state.message),
-                    );
-                  } else {
-                    return const Center(
-                      child: Text('Failed'),
-                    );
-                  }
-                },
+              const SizedBox(height: 24),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Now Playing',
+                        style: kHeading6,
+                      ),
+                      BlocBuilder<NowPlayingMoviesBloc, NowPlayingMoviesState>(
+                        builder: (_, state) {
+                          if (state is NowPlayingMoviesLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (state is NowPlayingMoviesHasData) {
+                            return MovieList(
+                              state.result,
+                              key: const PageStorageKey<String>(
+                                  'listMovieNowPlaying'),
+                            );
+                          } else if (state is NowPlayingMoviesError) {
+                            return Center(
+                              child: Text(state.message),
+                            );
+                          } else {
+                            return const Center(
+                              child: Text('Failed'),
+                            );
+                          }
+                        },
+                      ),
+                      _buildSubHeading(
+                        title: 'Popular',
+                        onTap: () =>
+                            Navigator.pushNamed(context, popularMoviesRoute),
+                      ),
+                      BlocBuilder<PopularMoviesBloc, PopularMoviesState>(
+                        builder: (_, state) {
+                          if (state is PopularMoviesLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (state is PopularMoviesHasData) {
+                            return MovieList(
+                              state.result,
+                              key: const PageStorageKey<String>(
+                                  'listMoviePopular'),
+                            );
+                          } else if (state is PopularMoviesError) {
+                            return Center(
+                              child: Text(state.message),
+                            );
+                          } else {
+                            return const Center(
+                              child: Text('Failed'),
+                            );
+                          }
+                        },
+                      ),
+                      _buildSubHeading(
+                        title: 'Top Rated',
+                        onTap: () =>
+                            Navigator.pushNamed(context, topRatedMoviesRoute),
+                      ),
+                      BlocBuilder<TopRatedMoviesBloc, TopRatedMoviesState>(
+                        builder: (_, state) {
+                          if (state is TopRatedMoviesLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else if (state is TopRatedMoviesHasData) {
+                            return MovieList(
+                              state.result,
+                              key: const PageStorageKey<String>(
+                                  'listMovieTopRated'),
+                            );
+                          } else if (state is TopRatedMoviesError) {
+                            return Center(
+                              child: Text(state.message),
+                            );
+                          } else {
+                            return const Center(
+                              child: Text('Failed'),
+                            );
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ],
           ),
@@ -157,9 +198,10 @@ class MovieList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final movie = movies[index];
+
           return Container(
             padding: const EdgeInsets.all(8),
-            child: InkWell(
+            child: GestureDetector(
               key: const Key('movieItem'),
               onTap: () {
                 Navigator.pushNamed(
