@@ -1,4 +1,4 @@
-# :clapper: Ditonton Yuk
+# :clapper: Mivie
 
 [![Codemagic build status](https://api.codemagic.io/apps/638e16eda3ed08844d390c98/638e16eda3ed08844d390c97/status_badge.svg)](https://codemagic.io/apps/638e16eda3ed08844d390c98/638e16eda3ed08844d390c97/latest_build)
 
@@ -6,7 +6,7 @@
 ![Thumbnail 2](https://github.com/triagung128/ditonton-yuk/blob/master/assets/banners/2.png)
 
 ## :iphone: Download App
-<a href='https://play.google.com/store/apps/details?id=com.triagung.ditontonyuk&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width=200 /></a>
+<a href='https://play.google.com/store/apps/details?id=com.triagung.mivie&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width=200 /></a>
 
 ## :tada: Features App
 - Catalog List Movies & TV Series 
