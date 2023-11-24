@@ -15,8 +15,6 @@ class _WatchlistPageState extends State<WatchlistPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  int activeTabIndex = 0;
-
   @override
   void initState() {
     super.initState();
@@ -24,11 +22,7 @@ class _WatchlistPageState extends State<WatchlistPage>
       length: _listTabs.length,
       vsync: this,
       initialIndex: 0,
-    )..addListener(() {
-        setState(() {
-          activeTabIndex = _tabController.index;
-        });
-      });
+    );
   }
 
   final List<Widget> _listTabs = [
@@ -74,15 +68,7 @@ class _WatchlistPageState extends State<WatchlistPage>
                   controller: _tabController,
                   indicator: BoxDecoration(
                     color: const Color(0xFF211F30),
-                    borderRadius: activeTabIndex == 0
-                        ? const BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            bottomLeft: Radius.circular(16),
-                          )
-                        : const BorderRadius.only(
-                            topRight: Radius.circular(16),
-                            bottomRight: Radius.circular(16),
-                          ),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                   labelStyle: kBodyText.copyWith(fontWeight: FontWeight.w700),
                   labelColor: Colors.white,
